@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/thruster.ogg-11c4577d695fc27c740f8be1c497ad3b.oggstr"
+
+[deps]
+
+source_file="res://Assets/thruster.ogg"
+dest_files=[ "res://.import/thruster.ogg-11c4577d695fc27c740f8be1c497ad3b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

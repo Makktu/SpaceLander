@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Abandon Babylon by Chris Zabriskie (2021) (Full Album).mp3" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/Global.gd" type="Script" id=2]
+
+[node name="Global" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = -20.0
+autoplay = true

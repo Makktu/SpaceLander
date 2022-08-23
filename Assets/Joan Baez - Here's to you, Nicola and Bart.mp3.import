@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Joan Baez - Here's to you, Nicola and Bart.mp3-330fca8e1d273ecb1858dc22fe15d98e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Joan Baez - Here's to you, Nicola and Bart.mp3"
+dest_files=[ "res://.import/Joan Baez - Here's to you, Nicola and Bart.mp3-330fca8e1d273ecb1858dc22fe15d98e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

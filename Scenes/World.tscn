@@ -1,0 +1,231 @@
+[gd_scene load_steps=53 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Assets/thruster.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/World.gd" type="Script" id=4]
+[ext_resource path="res://Assets/ground_2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Starfield7.png" type="Texture" id=6]
+[ext_resource path="res://Assets/city.png" type="Texture" id=7]
+[ext_resource path="res://Assets/explosion.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/exhaust.png" type="Texture" id=9]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00004.png" type="Texture" id=10]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00005.png" type="Texture" id=11]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00006.png" type="Texture" id=12]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00007.png" type="Texture" id=13]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00008.png" type="Texture" id=14]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00002.png" type="Texture" id=15]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00001.png" type="Texture" id=16]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00003.png" type="Texture" id=17]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00046.png" type="Texture" id=18]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00041.png" type="Texture" id=19]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00043.png" type="Texture" id=20]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00040.png" type="Texture" id=21]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00038.png" type="Texture" id=22]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00045.png" type="Texture" id=23]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00044.png" type="Texture" id=24]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00039.png" type="Texture" id=25]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00042.png" type="Texture" id=26]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00013.png" type="Texture" id=27]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00014.png" type="Texture" id=28]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00032.png" type="Texture" id=29]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00009.png" type="Texture" id=30]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00019.png" type="Texture" id=31]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00035.png" type="Texture" id=32]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00037.png" type="Texture" id=33]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00011.png" type="Texture" id=34]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00015.png" type="Texture" id=35]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00036.png" type="Texture" id=36]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00010.png" type="Texture" id=37]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00033.png" type="Texture" id=38]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00012.png" type="Texture" id=39]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00034.png" type="Texture" id=40]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00016.png" type="Texture" id=41]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00017.png" type="Texture" id=42]
+[ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00018.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Platform.png" type="Texture" id=44]
+[ext_resource path="res://Assets/pill.png" type="Texture" id=45]
+[ext_resource path="res://Scripts/Pickup.gd" type="Script" id=46]
+[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=47]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 30 ), ExtResource( 37 ), ExtResource( 34 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 35 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 31 ) ],
+"loop": true,
+"name": "exhaustmiddle",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 30 ) ],
+"loop": false,
+"name": "exhauststart",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 29 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 32 ), ExtResource( 36 ), ExtResource( 33 ), ExtResource( 22 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 19 ), ExtResource( 26 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 18 ), null ],
+"loop": false,
+"name": "exhaustend",
+"speed": 40.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 17 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), null, null ],
+"loop": true,
+"name": "rightThrust",
+"speed": 40.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13.0959, 1.23077 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 36.0945, 12.1724 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 53.2541
+
+[node name="World" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="City" type="Sprite" parent="."]
+position = Vector2( 23, 431 )
+z_index = -2
+texture = ExtResource( 7 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 119 )
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+
+[node name="Exhaust" type="Sprite" parent="Player"]
+visible = false
+position = Vector2( 1, 69 )
+rotation = 1.56824
+scale = Vector2( 0.310585, 0.306338 )
+texture = ExtResource( 9 )
+
+[node name="Thrusters" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 3 )
+volume_db = -15.0
+
+[node name="ThrustersOther" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 3 )
+volume_db = -20.0
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( -1, 0 )
+stream = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+visible = false
+position = Vector2( -2, 61 )
+rotation = -1.57317
+scale = Vector2( 0.25, 0.25 )
+z_index = 7
+frames = SubResource( 1 )
+animation = "exhauststart"
+frame = 8
+
+[node name="RightThrusters" type="AnimatedSprite" parent="Player"]
+visible = false
+position = Vector2( -52, -6 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 3 )
+animation = "rightThrust"
+
+[node name="TopThrusters" type="AnimatedSprite" parent="Player"]
+visible = false
+position = Vector2( -2, -59 )
+rotation = 1.5708
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 3 )
+animation = "rightThrust"
+
+[node name="LeftThrusters" type="AnimatedSprite" parent="Player"]
+visible = false
+position = Vector2( 49, -5 )
+rotation = 3.14159
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 3 )
+animation = "rightThrust"
+
+[node name="Button" type="Button" parent="Player"]
+margin_left = 363.0
+margin_top = 239.0
+margin_right = 473.0
+margin_bottom = 259.0
+text = "TOGGLE MUSIC"
+
+[node name="GUI" parent="Player" instance=ExtResource( 47 )]
+position = Vector2( -314, -154 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Platform" type="Sprite" parent="StaticBody2D"]
+position = Vector2( -255, 458 )
+scale = Vector2( 9.125, 8.9375 )
+texture = ExtResource( 44 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -260.5, 499 )
+scale = Vector2( 9.125, 8.9375 )
+shape = SubResource( 2 )
+
+[node name="TheGround" type="Area2D" parent="."]
+
+[node name="Ground" type="Sprite" parent="TheGround"]
+position = Vector2( 394, 621 )
+scale = Vector2( 38.3438, 1.8125 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TheGround"]
+position = Vector2( 84, 617.063 )
+scale = Vector2( 38.3438, 1.8125 )
+shape = SubResource( 4 )
+
+[node name="Pickup" type="Area2D" parent="."]
+position = Vector2( -267, 473 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 46 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Timer" type="Timer" parent="Pickup"]
+one_shot = true
+autostart = true
+
+[node name="Sprite" type="Sprite" parent="Pickup"]
+texture = ExtResource( 45 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="Pickup"]
+margin_left = -16.0
+margin_top = -312.0
+margin_right = 66.0
+margin_bottom = -298.0
+rect_scale = Vector2( 15.8667, 25.0265 )
+text = "COLLECTABLE"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 0.5, 0.5 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1024, 1024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 4, 489 )
+texture = ExtResource( 6 )
+centered = false
+offset = Vector2( 0, -820 )
+
+[connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
+[connection signal="pressed" from="Player/Button" to="." method="_on_Button_pressed"]
+[connection signal="body_entered" from="TheGround" to="Player" method="_on_TheGround_body_entered"]
+[connection signal="body_entered" from="Pickup" to="Player" method="_on_Pickup_body_entered"]
+[connection signal="body_entered" from="Pickup" to="Pickup" method="_on_Pickup_body_entered"]
+[connection signal="timeout" from="Pickup/Timer" to="Pickup" method="_on_Timer_timeout"]

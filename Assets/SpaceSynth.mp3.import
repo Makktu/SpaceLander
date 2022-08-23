@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SpaceSynth.mp3-4845c3cef977fb9336de4538b802933a.mp3str"
+
+[deps]
+
+source_file="res://Assets/SpaceSynth.mp3"
+dest_files=[ "res://.import/SpaceSynth.mp3-4845c3cef977fb9336de4538b802933a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

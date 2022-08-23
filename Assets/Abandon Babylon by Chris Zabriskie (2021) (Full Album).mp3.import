@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Abandon Babylon by Chris Zabriskie (2021) (Full Album).mp3-c133cb43d1e47763bff415c97fdd00f5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Abandon Babylon by Chris Zabriskie (2021) (Full Album).mp3"
+dest_files=[ "res://.import/Abandon Babylon by Chris Zabriskie (2021) (Full Album).mp3-c133cb43d1e47763bff415c97fdd00f5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
