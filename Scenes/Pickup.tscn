@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Pickup.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/pill.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 53.2541
+
+[sub_resource type="DynamicFont" id=23]
+size = 18
+extra_spacing_char = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "embiggen"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.5, 0.5 ), Vector2( 0.25, 0.25 ) ]
+}
+
+[node name="Pickup" type="Area2D"]
+position = Vector2( 965, 385 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -16.0
+margin_top = -312.0
+margin_right = 66.0
+margin_bottom = -298.0
+rect_scale = Vector2( 15.8667, 25.0265 )
+custom_colors/font_color = Color( 0.0196078, 0.913725, 0.129412, 1 )
+custom_fonts/font = SubResource( 23 )
+text = "  < FUEL POD"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 27 )
+anims/embiggen = SubResource( 28 )
+
+[node name="Sprite" type="Sprite" parent="AnimationPlayer"]
+position = Vector2( 976, 374 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_Pickup_body_entered"]
