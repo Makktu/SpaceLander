@@ -151,9 +151,9 @@ func get_input():
 	if Input.is_action_pressed("ui_down"):
 		if !first_press:
 			first_press = true
-		constant_press += constant_speed
-		if constant_press >= max_speed:
-			constant_press = max_speed
+#		constant_press += constant_speed
+#		if constant_press >= max_speed:
+#			constant_press = max_speed
 		speed += constant_speed
 		if speed > max_speed:
 			speed = max_speed
