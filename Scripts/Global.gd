@@ -1,7 +1,8 @@
 extends Node2D
 
 onready var BGMusic = $BGMusic
-onready var BGplaying = true
+onready var BGplaying = false
 
 func _ready() -> void:
-	BGMusic.play()
+#	BGMusic.play()
+	pass

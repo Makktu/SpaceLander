@@ -14,7 +14,7 @@ var gameOver = false
 var middleOn = false
 var no_fuel = false
 var speed = 0
-var max_speed = 100
+var max_speed = 150
 #var jump_speed = -1800
 var gravity = 0
 var velocity = Vector2.ZERO
@@ -27,7 +27,7 @@ var last_constant_press = 0
 var first_press = false
 
 var constant_press = 0
-var constant_speed = 0.03
+var constant_speed = 3
 
 var last_input_dir = 0
 
@@ -88,24 +88,23 @@ func get_input():
 	
 # UI LEFT
 	if Input.is_action_pressed("ui_left"):
-		print(last_press)
 		if !first_press:
 			first_press = true
 		# fake semi-realistic spacecraft movement
-		if last_press == "left":
-			constant_press = last_constant_press 
-			last_press = "none"
-			speed = last_constant_press
-			input_dir = dir_dir
-		constant_press += constant_speed
-		if constant_press >= max_speed:
-			constant_press = max_speed
-		speed += constant_press
+#		if last_press == "left":
+#			constant_press = last_constant_press 
+#			last_press = "none"
+#			speed = last_constant_press
+#			input_dir = dir_dir
+#		constant_press += constant_speed
+#		if constant_press >= max_speed:
+#			constant_press = max_speed
+		speed += constant_speed
 		input_dir += side_thrust
 		dir_dir = input_dir
 		print(speed, constant_press, input_dir)
 
-		FUEL -= 25
+		FUEL -= 2
 		$GUI/Fuel.adjust(FUEL)
 		$RightThrusters.visible = true
 		$RightThrusters.play()
@@ -113,10 +112,10 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_left"):
-		last_press = "left"
+#		last_press = "left"
 #		speed = 0
-		last_constant_press = constant_press
-		last_input_dir = input_dir
+#		last_constant_press = constant_press
+#		last_input_dir = input_dir
 		$ThrustersOther.stop()
 		$RightThrusters.stop()
 		$RightThrusters.visible = false
@@ -127,12 +126,12 @@ func get_input():
 	if Input.is_action_pressed("ui_right"):
 		if !first_press:
 			first_press = true
-		constant_press += constant_speed
-		if constant_press >= max_speed:
-			constant_press = max_speed
-		speed += constant_press
+#		constant_press += constant_speed
+#		if constant_press >= max_speed:
+#			constant_press = max_speed
+		speed += constant_speed
 		input_dir -= side_thrust
-		FUEL -= 50
+		FUEL -= 1
 		$GUI/Fuel.adjust(FUEL)	
 		$LeftThrusters.visible = true
 		$LeftThrusters.play()
@@ -140,8 +139,8 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_right"):
-		speed = -constant_press
-		constant_press = 0
+#		speed = -constant_press
+#		constant_press = 0
 		$ThrustersOther.stop()
 		$LeftThrusters.stop()
 		$LeftThrusters.visible = false
@@ -155,10 +154,12 @@ func get_input():
 		constant_press += constant_speed
 		if constant_press >= max_speed:
 			constant_press = max_speed
-		speed += constant_press
+		speed += constant_speed
+		if speed > max_speed:
+			speed = max_speed
 		y_input_dir -= bottom_thrust
 		$AnimatedSprite.visible = true
-		FUEL -= 100
+		FUEL -= 3
 		$GUI/Fuel.adjust(FUEL)
 
 		if !$Thrusters.playing:
@@ -171,8 +172,8 @@ func get_input():
 			middleOn = true
 			
 	if Input.is_action_just_released("ui_down"):
-		speed = 50 - constant_press
-		constant_press = 0
+#		speed = 50 - constant_press
+#		constant_press = 0
 		$AnimatedSprite.play("exhaustend")
 		# always turn OFF Thruster sound
 		$Thrusters.playing = false
@@ -185,12 +186,12 @@ func get_input():
 	if Input.is_action_pressed("ui_up"):
 		if !first_press:
 			first_press = true
-		constant_press += constant_speed
-		if constant_press >= max_speed:
-			constant_press = max_speed
-		speed += constant_press
+#		constant_press += constant_speed
+#		if constant_press >= max_speed:
+#			constant_press = max_speed
+		speed += constant_speed
 		y_input_dir += top_thrust
-		FUEL -= 50
+		FUEL -= 1
 		$GUI/Fuel.adjust(FUEL)
 		$TopThrusters.visible = true
 		$TopThrusters.play()
@@ -198,9 +199,9 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_up"):
-		last_press = "up"
-		speed = 50 - constant_press
-		constant_press = 0
+#		last_press = "up"
+#		speed = 50 - constant_press
+#		constant_press = 0
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
 		$TopThrusters.visible = false
