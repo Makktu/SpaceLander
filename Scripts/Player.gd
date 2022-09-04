@@ -31,9 +31,9 @@ var constant_speed = 0.03
 
 var last_input_dir = 0
 
-var side_thrust = 0.35
+var side_thrust = 0.4
 var bottom_thrust = 1
-var top_thrust = 0.4
+var top_thrust = 0.45
 var dir_dir = 0
 
 

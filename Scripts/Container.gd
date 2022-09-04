@@ -5,7 +5,6 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-#	position.x += random_x
 	position.y -= 5
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().change_scene("res://Scenes/World.tscn")
