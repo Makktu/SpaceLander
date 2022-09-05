@@ -91,7 +91,7 @@ script = ExtResource( 66 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "portal"
-frame = 3
+frame = 34
 playing = true
 
 [node name="NearingPortal" type="AudioStreamPlayer2D" parent="."]
