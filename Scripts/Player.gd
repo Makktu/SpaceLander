@@ -253,15 +253,14 @@ func _physics_process(delta):
 func _on_LaserBarrier_body_entered(body):
 	game_over()
 
-
 func _on_LaserBarrier2_body_entered(body):
 	game_over()
 	
-#############################
-#############################
-#############################
-#############################
+func _on_LaserBarrier5_body_entered(body: Node) -> void:
+	game_over()
 
+func _on_LaserBarrier6_body_entered(body: Node) -> void:
+	game_over()
 
-
-
+func _on_LaserBarrier7_body_entered(body: Node) -> void:
+	game_over()

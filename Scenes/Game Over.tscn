@@ -66,15 +66,15 @@ animations = [ {
 "name": "exhaustend",
 "speed": 40.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 36 ) ],
-"loop": false,
-"name": "exhauststart",
-"speed": 15.0
-}, {
 "frames": [ ExtResource( 36 ), ExtResource( 30 ), ExtResource( 37 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 18 ), ExtResource( 25 ), ExtResource( 15 ), ExtResource( 34 ), ExtResource( 26 ), ExtResource( 23 ) ],
 "loop": true,
 "name": "exhaustmiddle",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 36 ) ],
+"loop": false,
+"name": "exhauststart",
+"speed": 15.0
 } ]
 
 [node name="Game Over" type="Node2D"]
