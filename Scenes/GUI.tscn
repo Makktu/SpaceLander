@@ -31,4 +31,4 @@ text = "60000"
 
 [node name="Alert" type="AudioStreamPlayer" parent="Fuel"]
 stream = ExtResource( 3 )
-volume_db = -10.05
+volume_db = -20.0

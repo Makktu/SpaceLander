@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/TexturedSpaceStation/SS1-normal.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TexturedSpaceStation/SS1.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Station1.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Station1.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -54,6 +54,7 @@
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=52]
 [ext_resource path="res://Scenes/Portal.tscn" type="PackedScene" id=53]
 [ext_resource path="res://Scenes/Station1.tscn" type="PackedScene" id=54]
+[ext_resource path="res://Scenes/GlowingSun.tscn" type="PackedScene" id=55]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -384,6 +385,7 @@ animation = "kaboom"
 frame = 2
 
 [node name="PlatformGreen" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 977, -34 )
 z_index = -10
 __meta__ = {
@@ -391,11 +393,13 @@ __meta__ = {
 }
 
 [node name="Platform" type="Sprite" parent="PlatformGreen"]
+visible = false
 position = Vector2( 21, 424 )
 scale = Vector2( 9.125, 8.9375 )
 texture = ExtResource( 44 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformGreen"]
+visible = false
 position = Vector2( 18, 463 )
 scale = Vector2( 9.125, 8.9375 )
 shape = SubResource( 2 )
@@ -429,9 +433,11 @@ z_index = -5
 texture = ExtResource( 45 )
 
 [node name="Pickup" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 986, 377.625 )
 
 [node name="Pickup2" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 3603, 3518 )
 
 [node name="AnimationPlayer" parent="Pickup2" index="2"]
@@ -442,6 +448,7 @@ anims/embiggen = SubResource( 27 )
 position = Vector2( 3604, 3518.63 )
 
 [node name="Pickup3" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 986, 377.625 )
 
 [node name="CollisionShape2D" parent="Pickup3" index="0"]
@@ -503,6 +510,12 @@ __meta__ = {
 
 [node name="Sprite" parent="Station1/AnimationPlayer" index="0"]
 position = Vector2( 2721, 3287 )
+
+[node name="GlowingSun" parent="." instance=ExtResource( 55 )]
+modulate = Color( 0.894118, 0.45098, 0.054902, 1 )
+position = Vector2( 601, 1739 )
+scale = Vector2( 12, 12 )
+z_index = -100
 
 [connection signal="pressed" from="Player/Camera2D/Pause" to="Player/Camera2D/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
