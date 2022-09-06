@@ -97,11 +97,14 @@ extents = Vector2( 21, 217.5 )
 
 [node name="LaserBarrier" type="Area2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "laser_column"
-frame = 8
+frame = 2
 speed_scale = 5.0
 playing = true
 

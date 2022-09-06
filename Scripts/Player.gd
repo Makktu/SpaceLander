@@ -244,23 +244,23 @@ func _physics_process(delta):
 		print(collision.collider.name)
 		if collision.collider.name == "TileMap":
 			Collision_Sound.play()
-			SHIELDS -= 1
-			print(SHIELDS)
-			if SHIELDS <= 0:
-				game_over()
+#			SHIELDS -= 1
+#			print(SHIELDS)
+#			if SHIELDS <= 0:
+			game_over()
 
 
-func _on_LaserBarrier_body_entered(body):
-	game_over()
-
-func _on_LaserBarrier2_body_entered(body):
-	game_over()
-	
-func _on_LaserBarrier5_body_entered(body: Node) -> void:
-	game_over()
-
-func _on_LaserBarrier6_body_entered(body: Node) -> void:
-	game_over()
-
-func _on_LaserBarrier7_body_entered(body: Node) -> void:
-	game_over()
+#func _on_LaserBarrier_body_entered(body):
+#	game_over()
+#
+#func _on_LaserBarrier2_body_entered(body):
+#	game_over()
+#
+#func _on_LaserBarrier5_body_entered(body: Node) -> void:
+#	game_over()
+#
+#func _on_LaserBarrier6_body_entered(body: Node) -> void:
+#	game_over()
+#
+#func _on_LaserBarrier7_body_entered(body: Node) -> void:
+#	game_over()
