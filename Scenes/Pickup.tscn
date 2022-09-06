@@ -49,7 +49,7 @@ position = Vector2( 965, 385 )
 scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+flag_disable_z = true
+direction = Vector3( 30, 0, 0 )
+spread = 91.7
+gravity = Vector3( 0, -98, 0 )
+angular_velocity = 319.14
+angular_velocity_random = 0.51
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 0.6
+scale = 10.0
+color = Color( 0.917647, 0.0313726, 0.0313726, 1 )
+hue_variation = 0.17
+hue_variation_random = 0.08
+anim_speed = 12.45
+
+[node name="Particles" type="Node2D"]
+position = Vector2( 325, 590 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+process_material = SubResource( 1 )
