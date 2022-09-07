@@ -27,7 +27,7 @@ margin_right = 276.0
 margin_bottom = 72.0
 custom_colors/font_color = Color( 0.894118, 0.921569, 0.890196, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "60000"
+text = "1000"
 
 [node name="Alert" type="AudioStreamPlayer" parent="Fuel"]
 stream = ExtResource( 3 )

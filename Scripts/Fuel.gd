@@ -1,8 +1,8 @@
 extends Label
 
-export (int) var paddingLength = 5
+export (int) var paddingLength = 3
 
-var value = 50000
+var value = 3000
 
 func _ready() -> void:
 	update()
@@ -23,5 +23,5 @@ func update():
 		get_node("Value").add_color_override("red", Color(1,0,0,1))
 		return
 	$Value.text = ("%0*d" % [paddingLength, value])
-	if value <= 1000:
-		$Alert.play()
+#	if value <= 1000:
+#		$Alert.play()

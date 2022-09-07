@@ -2,13 +2,16 @@ extends KinematicBody2D
 
 
 onready var Collision_Sound = $AudioStreamPlayer2D
+onready var fuel_alert_beep = get_node("%Alert")
 
 var input_dir = 0
 var y_input_dir = 0
 
-var SHIELDS = 100000
-var FUEL = 10000
+#var SHIELDS = 100000
+var FUEL = 2000
 var FUEL_POD = 5000
+var fuel_base_usage = 8
+var fuel_alarm_threshold = 100
 #var PLAYER_SPEED = 200
 var gameOver = false
 var middleOn = false
@@ -49,6 +52,12 @@ func game_over():
 	$RightThrusters.visible = false
 	$AnimatedSprite.stop()
 	$AnimatedSprite.visible = false
+	
+	if FUEL <= 0:
+		# if reason for game over is fuel loss, permit drifting for short time...
+		
+		yield(get_tree().create_timer(0.5), "timeout")
+		
 	$Boom.play()
 	$Kaboom.visible = true
 	$Kaboom.play()
@@ -64,15 +73,6 @@ func _on_LaserBarrier_area_entered(area: Area2D) -> void:
 func _on_Boom_finished() -> void:
 	get_tree().change_scene("res://Scenes/Game Over.tscn")
 
-
-func _on_Pickup_body_entered(body):
-	update_GUI()
-	
-func _on_Pickup3_body_entered(body: Node) -> void:
-	update_GUI()
-
-func _on_Pickup2_body_entered(body: Node) -> void:
-	update_GUI()
 
 func update_GUI():
 	FUEL += FUEL_POD
@@ -104,7 +104,7 @@ func get_input():
 		dir_dir = input_dir
 		print(speed, constant_press, input_dir)
 
-		FUEL -= 2
+		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)
 		$RightThrusters.visible = true
 		$RightThrusters.play()
@@ -131,7 +131,7 @@ func get_input():
 #			constant_press = max_speed
 		speed += constant_speed
 		input_dir -= side_thrust
-		FUEL -= 1
+		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)	
 		$LeftThrusters.visible = true
 		$LeftThrusters.play()
@@ -159,7 +159,7 @@ func get_input():
 			speed = max_speed
 		y_input_dir -= bottom_thrust
 		$AnimatedSprite.visible = true
-		FUEL -= 3
+		FUEL -= fuel_base_usage
 		$GUI/Fuel.adjust(FUEL)
 
 		if !$Thrusters.playing:
@@ -191,7 +191,7 @@ func get_input():
 #			constant_press = max_speed
 		speed += constant_speed
 		y_input_dir += top_thrust
-		FUEL -= 1
+		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)
 		$TopThrusters.visible = true
 		$TopThrusters.play()
@@ -226,6 +226,13 @@ func _physics_process(delta):
 		position.y += 2
 	if gameOver:
 		return
+		
+	if FUEL <= fuel_alarm_threshold:
+		fuel_alert_beep.play_alert()
+		
+	if FUEL <= 0:
+		 game_over()
+		
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
