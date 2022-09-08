@@ -8,10 +8,11 @@ var input_dir = 0
 var y_input_dir = 0
 
 #var SHIELDS = 100000
-var FUEL = 2000
+var FUEL = 2500
 var FUEL_POD = 5000
 var fuel_base_usage = 8
-var fuel_alarm_threshold = 100
+var fuel_alarm_threshold = FUEL / 10
+var fuel_alert_played = false
 #var PLAYER_SPEED = 200
 var gameOver = false
 var middleOn = false
@@ -227,8 +228,10 @@ func _physics_process(delta):
 	if gameOver:
 		return
 		
-	if FUEL <= fuel_alarm_threshold:
+	if FUEL <= fuel_alarm_threshold && !fuel_alert_played:
 		fuel_alert_beep.play_alert()
+		$GUI/Fuel/Value.low_fuel()		 
+		fuel_alert_played = true
 		
 	if FUEL <= 0:
 		 game_over()
@@ -255,19 +258,14 @@ func _physics_process(delta):
 #			print(SHIELDS)
 #			if SHIELDS <= 0:
 			game_over()
+			
+
+func _on_LaserBarrier_body_entered(body: Node) -> void:
+	game_over()
 
 
-#func _on_LaserBarrier_body_entered(body):
-#	game_over()
-#
-#func _on_LaserBarrier2_body_entered(body):
-#	game_over()
-#
-#func _on_LaserBarrier5_body_entered(body: Node) -> void:
-#	game_over()
-#
-#func _on_LaserBarrier6_body_entered(body: Node) -> void:
-#	game_over()
-#
-#func _on_LaserBarrier7_body_entered(body: Node) -> void:
-#	game_over()
+func _on_RefuellingStation_body_entered(body: Node) -> void:
+	FUEL += 2000
+	$GUI/Fuel/Value.pickup_fuel()
+	fuel_alert_played = false
+#	$Global.destroy_scene("RefuellingStation")

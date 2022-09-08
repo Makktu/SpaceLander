@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00016.png" type="Texture" id=41]
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00017.png" type="Texture" id=42]
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00018.png" type="Texture" id=43]
+[ext_resource path="res://Scenes/RefuellingStation.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Assets/DeadWorld.png" type="Texture" id=45]
 [ext_resource path="res://Scenes/LaserBarrier.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=47]
@@ -332,7 +333,7 @@ position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 659, -484 )
+position = Vector2( 3233, 2730 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -449,14 +450,6 @@ scale = Vector2( 0.7, 0.7 )
 z_index = -5
 texture = ExtResource( 45 )
 
-[node name="LaserBarrier" parent="." instance=ExtResource( 46 )]
-position = Vector2( 2372, 1119 )
-
-[node name="LaserBarrier2" parent="." instance=ExtResource( 46 )]
-position = Vector2( 667, 487 )
-rotation = 1.5708
-scale = Vector2( 1, 0.53 )
-
 [node name="Refuel" type="Label" parent="."]
 margin_left = 3253.0
 margin_top = 3215.0
@@ -467,21 +460,9 @@ custom_colors/font_color = Color( 0.141176, 0.94902, 0.0313726, 1 )
 custom_fonts/font = SubResource( 30 )
 text = "FUEL"
 
-[node name="LaserBarrier5" parent="." instance=ExtResource( 46 )]
-position = Vector2( 1191, 1017 )
-scale = Vector2( 1, 0.359995 )
-
-[node name="LaserBarrier6" parent="." instance=ExtResource( 46 )]
-position = Vector2( 827, 1019 )
-scale = Vector2( 1, 0.359995 )
-
-[node name="LaserBarrier7" parent="." instance=ExtResource( 46 )]
-position = Vector2( 934, 1018 )
-scale = Vector2( 1, 0.359995 )
-
 [node name="GlowingSun" parent="." instance=ExtResource( 55 )]
 modulate = Color( 0.894118, 0.45098, 0.054902, 1 )
-position = Vector2( 295, -127 )
+position = Vector2( 345, -58 )
 scale = Vector2( 10, 10 )
 z_index = -100
 
@@ -496,12 +477,37 @@ scale = Vector2( 2, 2 )
 [node name="Alert" parent="." instance=ExtResource( 7 )]
 unique_name_in_owner = true
 
+[node name="LaserBarrier" parent="." instance=ExtResource( 46 )]
+position = Vector2( 630, 759 )
+rotation = 1.5708
+scale = Vector2( 0.6, 0.6 )
+
+[node name="LaserBarrier2" parent="." instance=ExtResource( 46 )]
+position = Vector2( 2120, 996 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="LaserBarrier5" parent="." instance=ExtResource( 46 )]
+position = Vector2( 828, 1039 )
+scale = Vector2( 0.5, 0.23 )
+
+[node name="LaserBarrier6" parent="." instance=ExtResource( 46 )]
+position = Vector2( 1194, 1040 )
+scale = Vector2( 0.5, 0.23 )
+
+[node name="LaserBarrier7" parent="." instance=ExtResource( 46 )]
+position = Vector2( 934, 1040 )
+scale = Vector2( 0.5, 0.23 )
+
+[node name="RefuellingStation" parent="." instance=ExtResource( 44 )]
+position = Vector2( 3247, 3173 )
+
 [connection signal="pressed" from="Player/Camera2D/Pause" to="Player/Camera2D/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
-[connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier2_body_entered"]
-[connection signal="body_entered" from="LaserBarrier5" to="Player" method="_on_LaserBarrier5_body_entered"]
-[connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier6_body_entered"]
-[connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier7_body_entered"]
+[connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier_body_entered"]
+[connection signal="body_entered" from="LaserBarrier5" to="Player" method="_on_LaserBarrier_body_entered"]
+[connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier_body_entered"]
+[connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier_body_entered"]
+[connection signal="body_entered" from="RefuellingStation" to="Player" method="_on_RefuellingStation_body_entered"]
 
 [editable path="Station1"]
