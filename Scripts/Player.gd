@@ -8,7 +8,7 @@ var input_dir = 0
 var y_input_dir = 0
 
 #var SHIELDS = 100000
-var FUEL = 2500
+var FUEL = 2000
 var FUEL_POD = 5000
 var fuel_base_usage = 8
 var fuel_alarm_threshold = FUEL / 10
@@ -264,8 +264,7 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 	game_over()
 
 
-func _on_RefuellingStation_body_entered(body: Node) -> void:
+func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += 2000
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
-#	$Global.destroy_scene("RefuellingStation")

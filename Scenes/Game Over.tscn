@@ -104,12 +104,20 @@ custom_fonts/font = SubResource( 4 )
 text = "SpaceLander"
 
 [node name="AuthorTag" type="Label" parent="Container"]
-margin_left = 408.0
+margin_left = 420.0
 margin_top = 817.0
-margin_right = 638.0
+margin_right = 650.0
 margin_bottom = 857.0
 custom_fonts/font = SubResource( 5 )
-text = "A GAME BY MAKKTU"
+text = "GAME BY MAKKTU"
+
+[node name="MusicTag2" type="Label" parent="Container"]
+margin_left = 427.0
+margin_top = 849.0
+margin_right = 657.0
+margin_bottom = 889.0
+custom_fonts/font = SubResource( 5 )
+text = "MUSIC BY dmed"
 
 [node name="Camera2D" type="Camera2D" parent="Container"]
 position = Vector2( 507, 298 )

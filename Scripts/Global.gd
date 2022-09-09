@@ -6,7 +6,3 @@ onready var BGplaying = true
 
 func _ready() -> void:
 	BGMusic.play()
-
-
-func destroy_scene(scene):
-	pass
