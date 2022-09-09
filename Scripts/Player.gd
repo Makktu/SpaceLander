@@ -6,6 +6,7 @@ onready var fuel_alert_beep = get_node("%Alert")
 
 var input_dir = 0
 var y_input_dir = 0
+var swipe_dir = ""
 
 #var SHIELDS = 100000
 var FUEL = 2000
@@ -80,7 +81,7 @@ func update_GUI():
 	$GUI/Fuel.adjust(FUEL)
 	
 
-func get_input():
+func get_input(swipe_dir):
 	if gameOver:
 		return
 
@@ -88,7 +89,7 @@ func get_input():
 	y_input_dir = 0
 	
 # UI LEFT
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left") || swipe_dir == "left":
 		if !first_press:
 			first_press = true
 		# fake semi-realistic spacecraft movement
@@ -223,6 +224,7 @@ func get_input():
 
 
 func _physics_process(delta):
+	swipe_dir = ""
 	if !first_press:
 		position.y += 2
 	if gameOver:
@@ -236,7 +238,7 @@ func _physics_process(delta):
 	if FUEL <= 0:
 		 game_over()
 		
-	get_input()
+	get_input(null)
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	# my noob collision detection with surfaces	
@@ -268,3 +270,16 @@ func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += 2000
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
+
+
+func _on_MobileControls_swiped(direction):
+
+	if (direction.x == 1):
+		swipe_dir = "left"
+	if (direction.y == 1):
+		swipe_dir = "up"
+	if (direction.x == -1):
+		swipe_dir = "right"
+	if (direction.y == -1):
+		swipe_dir = "down"
+	get_input(swipe_dir)
