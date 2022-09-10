@@ -353,6 +353,9 @@ __meta__ = {
 [node name="PauseScreen" parent="Player/Camera2D" instance=ExtResource( 50 )]
 position = Vector2( -351, -638 )
 
+[node name="MobileControls" parent="Player/Camera2D" instance=ExtResource( 52 )]
+position = Vector2( -573, -909 )
+
 [node name="Exhaust" type="Sprite" parent="Player"]
 visible = false
 position = Vector2( 1, 69 )
@@ -494,9 +497,8 @@ scale = Vector2( 1, 0.9 )
 [node name="FuelPickup" parent="." instance=ExtResource( 44 )]
 position = Vector2( 3572, 4507 )
 
-[node name="MobileControls" parent="." instance=ExtResource( 52 )]
-
 [connection signal="pressed" from="Player/Camera2D/Pause" to="Player/Camera2D/PauseScreen" method="_on_Pause_pressed"]
+[connection signal="swipe" from="Player/Camera2D/MobileControls" to="Player" method="_on_MobileControls_swipe"]
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier_body_entered"]
@@ -504,6 +506,5 @@ position = Vector2( 3572, 4507 )
 [connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
-[connection signal="swiped" from="MobileControls" to="Player" method="_on_MobileControls_swiped"]
 
 [editable path="Station1"]

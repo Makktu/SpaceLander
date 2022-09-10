@@ -272,14 +272,18 @@ func _on_FuelPickup_body_entered(body: Node) -> void:
 	fuel_alert_played = false
 
 
-func _on_MobileControls_swiped(direction):
+#func _on_MobileControls_swiped(direction):
+#
+#	if (direction.x == 1):
+#		swipe_dir = "left"
+#	if (direction.y == 1):
+#		swipe_dir = "up"
+#	if (direction.x == -1):
+#		swipe_dir = "right"
+#	if (direction.y == -1):
+#		swipe_dir = "down"
+#	get_input(swipe_dir)
 
-	if (direction.x == 1):
-		swipe_dir = "left"
-	if (direction.y == 1):
-		swipe_dir = "up"
-	if (direction.x == -1):
-		swipe_dir = "right"
-	if (direction.y == -1):
-		swipe_dir = "down"
-	get_input(swipe_dir)
+
+func _on_MobileControls_swipe(swipe) -> void:
+	print(swipe)
