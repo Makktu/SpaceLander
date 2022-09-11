@@ -3,9 +3,10 @@ extends KinematicBody2D
 
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
-
 onready var Swipe = $Camera2D/SwipeScreenButton
 
+
+# initialise swipe control variables
 var swipe_up = false
 var swipe_down = false
 var swipe_left = false
@@ -15,14 +16,13 @@ var swipe_down_released = false
 var swipe_up_released = false
 var swipe_left_released = false
 var swipe_right_released = false
+#####################################
 
 var input_dir = 0
 var y_input_dir = 0
-var swipe_dir = ""
-
 #var SHIELDS = 100000
-var FUEL = 2000
-var FUEL_POD = 5000
+var FUEL = 10000
+var FUEL_POD = 10000
 var fuel_base_usage = 8
 var fuel_alarm_threshold = FUEL / 10
 var fuel_alert_played = false
@@ -31,27 +31,27 @@ var gameOver = false
 var middleOn = false
 var no_fuel = false
 var speed = 0
-var max_speed = 150
+
 #var jump_speed = -1800
+var first_press = false
+var last_press = ""
+var constant_press = 0
+var constant_speed = 30
+
+
+# THRUSTER VALUES:
+var side_thrust = 10
+var bottom_thrust = 20
+var top_thrust = 10
+
+# GLOBAL PHYSICS VALUES:
+var acceleration = 5
 var gravity = 0
 var velocity = Vector2.ZERO
 var friction = 0.0
-var acceleration = 0.2
+var max_speed = 500
 
-var last_press = "none"
-var last_constant_press = 0
 
-var first_press = false
-
-var constant_press = 0
-var constant_speed = 3
-
-var last_input_dir = 0
-
-var side_thrust = 0.4
-var bottom_thrust = 1
-var top_thrust = 0.45
-var dir_dir = 0
 
 
 func game_over():
@@ -94,7 +94,7 @@ func update_GUI():
 	$GUI/Fuel.adjust(FUEL)
 	
 
-func get_input(swipe_dir):
+func get_input():
 	if gameOver:
 		return
 
@@ -105,20 +105,9 @@ func get_input(swipe_dir):
 	if Input.is_action_pressed("ui_left") || swipe_right:
 		if !first_press:
 			first_press = true
-		# fake semi-realistic spacecraft movement
-#		if last_press == "left":
-#			constant_press = last_constant_press 
-#			last_press = "none"
-#			speed = last_constant_press
-#			input_dir = dir_dir
-#		constant_press += constant_speed
-#		if constant_press >= max_speed:
-#			constant_press = max_speed
-		speed += constant_speed
 		input_dir += side_thrust
-		dir_dir = input_dir
-		print(speed, constant_press, input_dir)
-
+		if input_dir >= max_speed:
+			input_dir = max_speed
 		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)
 		$RightThrusters.visible = true
@@ -127,10 +116,6 @@ func get_input(swipe_dir):
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_left") || swipe_right_released:
-#		last_press = "left"
-#		speed = 0
-#		last_constant_press = constant_press
-#		last_input_dir = input_dir
 		swipe_right_released = false
 		$ThrustersOther.stop()
 		$RightThrusters.stop()
@@ -141,12 +126,9 @@ func get_input(swipe_dir):
 	
 	if Input.is_action_pressed("ui_right") || swipe_left:
 		if !first_press:
-			first_press = true
-#		constant_press += constant_speed
-#		if constant_press >= max_speed:
-#			constant_press = max_speed
-		speed += constant_speed
+			first_press = true		
 		input_dir -= side_thrust
+
 		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)	
 		$LeftThrusters.visible = true
@@ -155,8 +137,6 @@ func get_input(swipe_dir):
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_right") || swipe_left_released:
-#		speed = -constant_press
-#		constant_press = 0
 		swipe_left_released = false
 		$ThrustersOther.stop()
 		$LeftThrusters.stop()
@@ -168,9 +148,6 @@ func get_input(swipe_dir):
 	if Input.is_action_pressed("ui_down") || swipe_up:
 		if !first_press:
 			first_press = true
-#		constant_press += constant_speed
-#		if constant_press >= max_speed:
-#			constant_press = max_speed
 		speed += constant_speed
 		if speed > max_speed:
 			speed = max_speed
@@ -189,10 +166,8 @@ func get_input(swipe_dir):
 			middleOn = true
 			
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
-#		speed = 50 - constant_press
-#		constant_press = 0
 		$AnimatedSprite.play("exhaustend")
-		# always turn OFF Thruster sound
+		# turn OFF Thruster sound
 		$Thrusters.playing = false
 		middleOn = false
 		swipe_up_released = false
@@ -204,9 +179,6 @@ func get_input(swipe_dir):
 	if Input.is_action_pressed("ui_up") || swipe_down:
 		if !first_press:
 			first_press = true
-#		constant_press += constant_speed
-#		if constant_press >= max_speed:
-#			constant_press = max_speed
 		speed += constant_speed
 		y_input_dir += top_thrust
 		FUEL -= fuel_base_usage / 2
@@ -217,9 +189,6 @@ func get_input(swipe_dir):
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_up") || swipe_down_released:
-#		last_press = "up"
-#		speed = 50 - constant_press
-#		constant_press = 0
 		swipe_down_released = false
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
@@ -230,20 +199,19 @@ func get_input(swipe_dir):
 	if input_dir != 0 || y_input_dir != 0:
 		# accelerate when there's input
 		if input_dir != 0:
-			velocity.x = lerp(velocity.x, input_dir * speed, acceleration)
+			velocity.x = move_toward(velocity.x, input_dir * speed, acceleration)
 		if y_input_dir != 0:
-			velocity.y = lerp(velocity.y, y_input_dir * speed, acceleration)			
+			velocity.y = move_toward(velocity.y, y_input_dir * speed, acceleration)			
 	else:
-		# slow down when there's no input
-		velocity.x = lerp(velocity.x, 0, friction)
-		velocity.y = lerp(velocity.y, 0, friction)
+		# slow down when there's no input (not applicable in zero-g)
+		velocity.x = move_toward(velocity.x, 0, friction)
+		velocity.y = move_toward(velocity.y, 0, friction)
 		
 
 
 func _physics_process(delta):
-	swipe_dir = ""
 	if !first_press:
-		position.y += 2
+		position.y += 4
 	if gameOver:
 		return
 		
@@ -255,13 +223,17 @@ func _physics_process(delta):
 	if FUEL <= 0 && !$"/root/Global".test_mode:
 		 game_over()
 		
-	get_input(null)
+	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	# my noob collision detection with surfaces	
-
+#
 	var input = Vector2()
-
+	
+#	yawDesired = yawInput * yawSpeed
+#	yawFinal = yawFinal.move_towards(yawDesired, inertiaFactor)
+#	rotate_y(yawFinal)
+#
 	input.x += float(Input.is_action_pressed('ui_left'))
 	input.x -= float(Input.is_action_pressed('ui_right'))
 	input.y += float(Input.is_action_pressed('ui_up'))
