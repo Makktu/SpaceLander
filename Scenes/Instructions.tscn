@@ -27,3 +27,15 @@ text = "THRUST:
 ARROW KEYS"
 align = 1
 valign = 1
+
+[node name="Label2" type="Label" parent="ColorRect"]
+margin_left = 3.0
+margin_top = 275.0
+margin_right = 716.0
+margin_bottom = 406.0
+custom_colors/font_color = Color( 0.0156863, 0.894118, 0.756863, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "OR
+SWIPE ANYWHERE"
+align = 1
+valign = 1

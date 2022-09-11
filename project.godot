@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "TouchScreenButton",
+"class": "SwipeScreenButton",
+"language": "GDScript",
+"path": "res://TouchControls.gd"
+} ]
+_global_script_class_icons={
+"SwipeScreenButton": ""
+}
+
 [application]
 
 config/name="New Game Project"

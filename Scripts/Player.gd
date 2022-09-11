@@ -4,6 +4,18 @@ extends KinematicBody2D
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
 
+onready var Swipe = $Camera2D/SwipeScreenButton
+
+var swipe_up = false
+var swipe_down = false
+var swipe_left = false
+var swipe_right = false
+
+var swipe_down_released = false
+var swipe_up_released = false
+var swipe_left_released = false
+var swipe_right_released = false
+
 var input_dir = 0
 var y_input_dir = 0
 var swipe_dir = ""
@@ -69,7 +81,8 @@ func game_over():
 				
 
 func _on_LaserBarrier_area_entered(area: Area2D) -> void:
-	game_over()
+	if !$"/root/Global".test_mode:
+		game_over()
 
 
 func _on_Boom_finished() -> void:
@@ -89,7 +102,7 @@ func get_input(swipe_dir):
 	y_input_dir = 0
 	
 # UI LEFT
-	if Input.is_action_pressed("ui_left") || swipe_dir == "left":
+	if Input.is_action_pressed("ui_left") || swipe_right:
 		if !first_press:
 			first_press = true
 		# fake semi-realistic spacecraft movement
@@ -113,11 +126,12 @@ func get_input(swipe_dir):
 		if !$ThrustersOther.playing:
 			$ThrustersOther.play()
 
-	if Input.is_action_just_released("ui_left"):
+	if Input.is_action_just_released("ui_left") || swipe_right_released:
 #		last_press = "left"
 #		speed = 0
 #		last_constant_press = constant_press
 #		last_input_dir = input_dir
+		swipe_right_released = false
 		$ThrustersOther.stop()
 		$RightThrusters.stop()
 		$RightThrusters.visible = false
@@ -125,7 +139,7 @@ func get_input(swipe_dir):
 
 ################## UI RIGHT #
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right") || swipe_left:
 		if !first_press:
 			first_press = true
 #		constant_press += constant_speed
@@ -140,9 +154,10 @@ func get_input(swipe_dir):
 		if !$ThrustersOther.playing:
 			$ThrustersOther.play()
 
-	if Input.is_action_just_released("ui_right"):
+	if Input.is_action_just_released("ui_right") || swipe_left_released:
 #		speed = -constant_press
 #		constant_press = 0
+		swipe_left_released = false
 		$ThrustersOther.stop()
 		$LeftThrusters.stop()
 		$LeftThrusters.visible = false
@@ -150,7 +165,7 @@ func get_input(swipe_dir):
 	
 ###################### UI DOWN #	
 	
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down") || swipe_up:
 		if !first_press:
 			first_press = true
 #		constant_press += constant_speed
@@ -173,19 +188,20 @@ func get_input(swipe_dir):
 			$AnimatedSprite.play("exhaustend", true)
 			middleOn = true
 			
-	if Input.is_action_just_released("ui_down"):
+	if Input.is_action_just_released("ui_down") || swipe_up_released:
 #		speed = 50 - constant_press
 #		constant_press = 0
 		$AnimatedSprite.play("exhaustend")
 		# always turn OFF Thruster sound
 		$Thrusters.playing = false
 		middleOn = false
+		swipe_up_released = false
 		if !$AnimatedSprite.is_playing():
 			$AnimatedSprite.visible = false
 #########################################################			
 			
 ######################### UI UP #########################
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up") || swipe_down:
 		if !first_press:
 			first_press = true
 #		constant_press += constant_speed
@@ -200,10 +216,11 @@ func get_input(swipe_dir):
 		if !$ThrustersOther.playing:
 			$ThrustersOther.play()
 
-	if Input.is_action_just_released("ui_up"):
+	if Input.is_action_just_released("ui_up") || swipe_down_released:
 #		last_press = "up"
 #		speed = 50 - constant_press
 #		constant_press = 0
+		swipe_down_released = false
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
 		$TopThrusters.visible = false
@@ -235,7 +252,7 @@ func _physics_process(delta):
 		$GUI/Fuel/Value.low_fuel()		 
 		fuel_alert_played = true
 		
-	if FUEL <= 0:
+	if FUEL <= 0 && !$"/root/Global".test_mode:
 		 game_over()
 		
 	get_input(null)
@@ -254,7 +271,7 @@ func _physics_process(delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		print(collision.collider.name)
-		if collision.collider.name == "TileMap":
+		if collision.collider.name == "TileMap" && !$"/root/Global".test_mode:
 			Collision_Sound.play()
 #			SHIELDS -= 1
 #			print(SHIELDS)
@@ -263,7 +280,8 @@ func _physics_process(delta):
 			
 
 func _on_LaserBarrier_body_entered(body: Node) -> void:
-	game_over()
+	if !$"/root/Global".test_mode:
+		game_over()
 
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
@@ -272,18 +290,26 @@ func _on_FuelPickup_body_entered(body: Node) -> void:
 	fuel_alert_played = false
 
 
-#func _on_MobileControls_swiped(direction):
-#
-#	if (direction.x == 1):
-#		swipe_dir = "left"
-#	if (direction.y == 1):
-#		swipe_dir = "up"
-#	if (direction.x == -1):
-#		swipe_dir = "right"
-#	if (direction.y == -1):
-#		swipe_dir = "down"
-#	get_input(swipe_dir)
-
-
-func _on_MobileControls_swipe(swipe) -> void:
-	print(swipe)
+func _input(event):
+	if event is InputEventScreenDrag:
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.UP:
+			swipe_down = true
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.DOWN:
+			swipe_up = true
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
+			swipe_right = true
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
+			swipe_left = true
+			
+	if Swipe.on_area == false && swipe_down == true:
+		swipe_down_released = true
+		swipe_down = false
+	if Swipe.on_area == false && swipe_up == true:
+		swipe_up_released = true
+		swipe_up = false
+	if Swipe.on_area == false && swipe_left == true:
+		swipe_left_released = true
+		swipe_left = false
+	if Swipe.on_area == false && swipe_right == true:
+		swipe_right_released = true
+		swipe_right = false	
