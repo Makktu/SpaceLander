@@ -3,6 +3,7 @@ extends Node2D
 onready var BGMusic = $BGMusic
 onready var BGplaying = true
 onready var test_mode = false
+#onready var camera = $"/root/World/Player/Camera2D"
 
 var user_OS = OS.get_name()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -56,6 +56,8 @@
 [ext_resource path="res://Scenes/Station1.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/GlowingSun.tscn" type="PackedScene" id=55]
 [ext_resource path="res://Scenes/Instructions.tscn" type="PackedScene" id=56]
+[ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=57]
+[ext_resource path="res://Scenes/ZoomCameraDetection.tscn" type="PackedScene" id=58]
 
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 360, 579 )
@@ -348,13 +350,14 @@ position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 828, -1172 )
+position = Vector2( 3204, 2897 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 limit_smoothed = true
 smoothing_enabled = true
+script = ExtResource( 57 )
 
 [node name="Pause" type="Button" parent="Player/Camera2D"]
 unique_name_in_owner = true
@@ -518,6 +521,10 @@ scale = Vector2( 1, 0.9 )
 [node name="FuelPickup" parent="." instance=ExtResource( 44 )]
 position = Vector2( 3572, 4507 )
 
+[node name="ZoomCameraDetection" parent="." instance=ExtResource( 58 )]
+position = Vector2( 2345, 2599 )
+scale = Vector2( 2, 2 )
+
 [connection signal="pressed" from="Player/Camera2D/Pause" to="Player/Camera2D/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
@@ -526,5 +533,6 @@ position = Vector2( 3572, 4507 )
 [connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
+[connection signal="area_entered" from="ZoomCameraDetection" to="Player/Camera2D" method="_on_ZoomCameraDetection_area_entered"]
 
 [editable path="Station1"]

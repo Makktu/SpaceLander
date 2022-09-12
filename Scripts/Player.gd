@@ -274,3 +274,7 @@ func _input(event):
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		swipe_right = false	
+
+
+func _on_ZoomCameraDetection_body_entered(body):
+	pass # Replace with function body.
