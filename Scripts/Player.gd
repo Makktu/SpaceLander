@@ -21,9 +21,9 @@ var swipe_right_released = false
 var input_dir = 0
 var y_input_dir = 0
 #var SHIELDS = 100000
-var FUEL = 10000
-var FUEL_POD = 10000
-var fuel_base_usage = 8
+var FUEL = 3000
+var FUEL_POD = 1000
+var fuel_base_usage = 4
 var fuel_alarm_threshold = FUEL / 10
 var fuel_alert_played = false
 #var PLAYER_SPEED = 200
@@ -33,23 +33,22 @@ var no_fuel = false
 var speed = 0
 
 #var jump_speed = -1800
-var first_press = false
 var last_press = ""
 var constant_press = 0
 var constant_speed = 30
 
 
 # THRUSTER VALUES:
-var side_thrust = 10
-var bottom_thrust = 20
-var top_thrust = 10
+var side_thrust = 5 # Sunday val: 10
+var bottom_thrust = 10 # Sunday val: 20
+var top_thrust = 3 # Sunday val: 10
 
 # GLOBAL PHYSICS VALUES:
-var acceleration = 5
+var acceleration = 2 # Sunday val: 5
 var gravity = 0
 var velocity = Vector2.ZERO
 var friction = 0.0
-var max_speed = 500
+var max_speed = 100
 
 
 
@@ -103,8 +102,6 @@ func get_input():
 	
 # UI LEFT
 	if Input.is_action_pressed("ui_left") || swipe_right:
-		if !first_press:
-			first_press = true
 		input_dir += side_thrust
 		if input_dir >= max_speed:
 			input_dir = max_speed
@@ -124,9 +121,7 @@ func get_input():
 
 ################## UI RIGHT #
 	
-	if Input.is_action_pressed("ui_right") || swipe_left:
-		if !first_press:
-			first_press = true		
+	if Input.is_action_pressed("ui_right") || swipe_left:		
 		input_dir -= side_thrust
 
 		FUEL -= fuel_base_usage / 2
@@ -146,8 +141,6 @@ func get_input():
 ###################### UI DOWN #	
 	
 	if Input.is_action_pressed("ui_down") || swipe_up:
-		if !first_press:
-			first_press = true
 		speed += constant_speed
 		if speed > max_speed:
 			speed = max_speed
@@ -177,8 +170,6 @@ func get_input():
 			
 ######################### UI UP #########################
 	if Input.is_action_pressed("ui_up") || swipe_down:
-		if !first_press:
-			first_press = true
 		speed += constant_speed
 		y_input_dir += top_thrust
 		FUEL -= fuel_base_usage / 2
@@ -210,8 +201,6 @@ func get_input():
 
 
 func _physics_process(delta):
-	if !first_press:
-		position.y += 4
 	if gameOver:
 		return
 		

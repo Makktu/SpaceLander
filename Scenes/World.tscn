@@ -328,17 +328,32 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
+6/name = "tileset.png 6"
+6/texture = ExtResource( 49 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 896, 352, 96, 96 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
 
 [node name="World" type="Node2D"]
 position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 637, -689 )
+position = Vector2( 828, -1172 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+limit_smoothed = true
 smoothing_enabled = true
 
 [node name="Pause" type="Button" parent="Player/Camera2D"]
@@ -497,7 +512,7 @@ scale = Vector2( 0.5, 0.23 )
 
 [node name="Instructions" parent="." instance=ExtResource( 56 )]
 modulate = Color( 0.937255, 0.929412, 0.203922, 1 )
-position = Vector2( 512, -717 )
+position = Vector2( 640, -883 )
 scale = Vector2( 1, 0.9 )
 
 [node name="FuelPickup" parent="." instance=ExtResource( 44 )]
