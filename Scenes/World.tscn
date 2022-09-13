@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -58,6 +58,7 @@
 [ext_resource path="res://Scenes/Instructions.tscn" type="PackedScene" id=56]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=57]
 [ext_resource path="res://Scenes/ZoomCameraDetection.tscn" type="PackedScene" id=58]
+[ext_resource path="res://Scenes/ZoomOutCameraDetection.tscn" type="PackedScene" id=59]
 
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 360, 579 )
@@ -350,7 +351,7 @@ position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 647, -354 )
+position = Vector2( 2577, 2022 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -529,6 +530,10 @@ scale = Vector2( 3.27639, 3.34792 )
 position = Vector2( 598, 800 )
 scale = Vector2( 3, 3 )
 
+[node name="ZoomCameraDetection3" parent="." instance=ExtResource( 59 )]
+position = Vector2( 449, 1765 )
+scale = Vector2( 10.7041, 2.57648 )
+
 [connection signal="pressed" from="Player/Camera2D/Pause" to="Player/Camera2D/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
@@ -541,5 +546,6 @@ scale = Vector2( 3, 3 )
 [connection signal="body_exited" from="ZoomCameraDetection" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
 [connection signal="body_entered" from="ZoomCameraDetection2" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
 [connection signal="body_exited" from="ZoomCameraDetection2" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
+[connection signal="body_entered" from="ZoomCameraDetection3" to="Player/Camera2D" method="_on_ZoomCameraDetection3_body_entered"]
 
 [editable path="Station1"]
