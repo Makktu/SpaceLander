@@ -21,9 +21,9 @@ var swipe_right_released = false
 var input_dir = 0
 var y_input_dir = 0
 #var SHIELDS = 100000
-var FUEL = 3000
-var FUEL_POD = 1000
-var fuel_base_usage = 4
+var FUEL = 2500
+var FUEL_POD = 1500
+var fuel_base_usage = 5
 var fuel_alarm_threshold = FUEL / 10
 var fuel_alert_played = false
 #var PLAYER_SPEED = 200
@@ -39,9 +39,9 @@ var constant_speed = 30
 
 
 # THRUSTER VALUES:
-var side_thrust = 5 # Sunday val: 10
-var bottom_thrust = 10 # Sunday val: 20
-var top_thrust = 3 # Sunday val: 10
+var side_thrust = 10 # Sunday val: 10
+var bottom_thrust = 20 # Sunday val: 20
+var top_thrust = 10 # Sunday val: 10
 
 # GLOBAL PHYSICS VALUES:
 var acceleration = 2 # Sunday val: 5
@@ -75,7 +75,7 @@ func game_over():
 	$Kaboom.visible = true
 	$Kaboom.play()
 	$Sprite.visible = false
-	$GUI/Fuel.text = "LANDER DESTROYED!"
+	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
 				
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/lander0.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/LANDER_DUB3.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Global.gd" type="Script" id=2]
 
 [node name="Global" type="Node2D"]

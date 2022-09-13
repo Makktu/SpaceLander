@@ -26,10 +26,12 @@ margin_right = 714.0
 margin_bottom = 268.0
 custom_colors/font_color = Color( 0.894118, 0.780392, 0.0156863, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "SWIPE DOWN
-ANYWHERE
-to
-TAKE OFF!"
+text = "************
+THRUSTERS:
+USE ARROW KEYS
+UP / DOWN / LEFT / RIGHT
+***************************
+"
 align = 1
 valign = 1
 
@@ -41,8 +43,10 @@ margin_right = 717.0
 margin_bottom = 318.0
 custom_colors/font_color = Color( 0.0156863, 0.894118, 0.756863, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "THRUST:
+text = "**************
+THRUSTERS:
 SWIPE ANYWHERE
-ON SCREEN"
+UP / DOWN / LEFT / RIGHT
+****************************"
 align = 1
 valign = 1

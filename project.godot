@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "TouchScreenButton",
 "class": "SwipeScreenButton",
 "language": "GDScript",
-"path": "res://TouchControls.gd"
+"path": "res://Scripts/TouchControls.gd"
 } ]
 _global_script_class_icons={
 "SwipeScreenButton": ""

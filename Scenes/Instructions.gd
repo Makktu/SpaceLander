@@ -1,8 +1,8 @@
 extends Node2D
 
 func _ready() -> void:
-	if $"/root/Global".user_OS == "Android" or $"/root/Global".user_OS == "iOS":
-		$ColorRect/MobileNotice.visible = true
+	if $"/root/Global".user_OS == "Windows" || $"/root/Global".user_OS == "OSX":
+		$ColorRect/DesktopNotice.visible = true
 	else:
-		$ColorRect/DesktopNotice.visible = true 
+		$ColorRect/MobileNotice.visible = true 
 
