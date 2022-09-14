@@ -12,3 +12,5 @@ extends Node2D
 #	else:
 #		$"/root/Global/BGMusic".play()
 #		musicOn = true
+
+#export(Vector2) var player_spawn_location = Vector2()

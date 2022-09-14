@@ -8,6 +8,7 @@ func _on_Resume_pressed() -> void:
 	pause_button.show()
 
 func _on_Pause_pressed() -> void:
+	print("HERE!")
 	self.show()
 	pause_button.hide()
 	get_tree().paused = true

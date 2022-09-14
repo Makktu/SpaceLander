@@ -4,7 +4,7 @@ export (int) var paddingLength = 3
 
 
 
-var value = 2500
+var value = 3000
 
 func _ready() -> void:
 	update()

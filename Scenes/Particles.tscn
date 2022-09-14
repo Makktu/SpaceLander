@@ -1,24 +1,35 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="ParticlesMaterial" id=1]
-lifetime_randomness = 1.0
+[ext_resource path="res://Assets/Flame.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0854093, 0.928826, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.77926, 0.760415, 0.710163, 0.686275, 0.861291, 0.806729, 0.804013, 0.756863, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
-direction = Vector3( 30, 0, 0 )
-spread = 91.7
-gravity = Vector3( 0, -98, 0 )
-angular_velocity = 319.14
-angular_velocity_random = 0.51
+direction = Vector3( 0, -1, 0 )
+spread = 24.97
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 195.05
+initial_velocity_random = 0.75
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-angle_random = 0.6
-scale = 10.0
-color = Color( 0.917647, 0.0313726, 0.0313726, 1 )
-hue_variation = 0.17
-hue_variation_random = 0.08
-anim_speed = 12.45
+color_ramp = SubResource( 3 )
 
-[node name="Particles" type="Node2D"]
+[node name="Fizzles" type="Node2D"]
 position = Vector2( 325, 590 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-process_material = SubResource( 1 )
+material = SubResource( 1 )
+speed_scale = 5.35
+explosiveness = 0.35
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )
