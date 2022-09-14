@@ -4,6 +4,7 @@ extends KinematicBody2D
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
 onready var Swipe = $Camera2D/SwipeScreenButton
+onready var lander_wobble = $AnimationPlayer
 
 
 # initialise swipe control variables
@@ -38,6 +39,7 @@ var constant_press = 0
 var constant_speed = 30
 
 
+
 # THRUSTER VALUES:
 var side_thrust = 10 # Sunday val: 10
 var bottom_thrust = 20 # Sunday val: 20
@@ -50,6 +52,29 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 100
 
+#var rng = RandomNumberGenerator.new()
+#var button_released = false
+#var lander_has_wobbled = false
+
+
+#func lander_wobble():	
+#	rng.randomize()
+#	var random_wobbly = rng.randf_range(1, 10)
+#	var random_degrees = rng.randf_range(0.1, 0.10)
+#	for n in random_wobbly:
+#		random_degrees = rng.randf_range(0.5, 4)
+#		rotation_degrees += random_degrees
+#		yield(get_tree().create_timer(0.1), "timeout")
+#		rotation_degrees = 0
+#		yield(get_tree().create_timer(0.1), "timeout")
+#		rotation_degrees -= random_degrees
+#		yield(get_tree().create_timer(0.1), "timeout")
+#		rotation_degrees = 0
+#		if button_released == true:
+#			button_released = false
+#			return
+#
+#	lander_has_wobbled = true
 
 
 
@@ -141,6 +166,13 @@ func get_input():
 ###################### UI DOWN #	
 	
 	if Input.is_action_pressed("ui_down") || swipe_up:
+#		if not lander_has_wobbled:
+#			lander_wobble()
+#		rng.randomize()
+#		var random_wobbly = rng.randf_range(1, 10000)
+#		if random_wobbly > 7000:
+#			lander_wobble.playback_speed = 5
+#			lander_wobble.play("wobble")
 		speed += constant_speed
 		if speed > max_speed:
 			speed = max_speed
@@ -159,6 +191,8 @@ func get_input():
 			middleOn = true
 			
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
+#		lander_has_wobbled = false
+#		button_released = true
 		$AnimatedSprite.play("exhaustend")
 		# turn OFF Thruster sound
 		$Thrusters.playing = false
@@ -246,7 +280,7 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
-	FUEL += 2000
+	FUEL += FUEL_POD
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
 
