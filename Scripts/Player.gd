@@ -4,7 +4,9 @@ extends KinematicBody2D
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
 onready var Swipe = $Camera2D/SwipeScreenButton
-onready var lander_wobble = $AnimationPlayer
+#onready var lander_wobble = $AnimationPlayer
+
+var just_starting = true
 
 
 # initialise swipe control variables
@@ -127,6 +129,8 @@ func get_input():
 	
 # UI LEFT
 	if Input.is_action_pressed("ui_left") || swipe_right:
+		if just_starting:
+			just_starting = false
 		input_dir += side_thrust
 		if input_dir >= max_speed:
 			input_dir = max_speed
@@ -146,9 +150,10 @@ func get_input():
 
 ################## UI RIGHT #
 	
-	if Input.is_action_pressed("ui_right") || swipe_left:		
+	if Input.is_action_pressed("ui_right") || swipe_left:	
+		if just_starting:
+			just_starting = false	
 		input_dir -= side_thrust
-
 		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)	
 		$LeftThrusters.visible = true
@@ -173,6 +178,9 @@ func get_input():
 #		if random_wobbly > 7000:
 #			lander_wobble.playback_speed = 5
 #			lander_wobble.play("wobble")
+#		$Camera2D.shake_camera()
+		if just_starting:
+			just_starting = false
 		speed += constant_speed
 		if speed > max_speed:
 			speed = max_speed
@@ -193,6 +201,7 @@ func get_input():
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
 #		lander_has_wobbled = false
 #		button_released = true
+#		$Camera2D.stop_shaking_camera()
 		$AnimatedSprite.play("exhaustend")
 		# turn OFF Thruster sound
 		$Thrusters.playing = false
@@ -204,6 +213,8 @@ func get_input():
 			
 ######################### UI UP #########################
 	if Input.is_action_pressed("ui_up") || swipe_down:
+		if just_starting:
+			just_starting = false
 		speed += constant_speed
 		y_input_dir += top_thrust
 		FUEL -= fuel_base_usage / 2
@@ -220,6 +231,8 @@ func get_input():
 		$TopThrusters.visible = false
 #########################################################		
 
+	if just_starting:
+		velocity.y = move_toward(150, 0, friction)
 		
 	if input_dir != 0 || y_input_dir != 0:
 		# accelerate when there's input
@@ -256,11 +269,13 @@ func _physics_process(delta):
 #	yawDesired = yawInput * yawSpeed
 #	yawFinal = yawFinal.move_towards(yawDesired, inertiaFactor)
 #	rotate_y(yawFinal)
-#
+
 	input.x += float(Input.is_action_pressed('ui_left'))
 	input.x -= float(Input.is_action_pressed('ui_right'))
 	input.y += float(Input.is_action_pressed('ui_up'))
 	input.y -= float(Input.is_action_pressed('ui_down'))	
+	
+	print(delta, speed)
 
 	move_and_slide(input * speed * delta)
 	for i in get_slide_count():
@@ -308,7 +323,6 @@ func _input(event):
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		swipe_right = false	
-
-
-func _on_ZoomCameraDetection_body_entered(body):
-	pass # Replace with function body.
+		
+func _ready():
+	$Camera2D.starting_camera_zoom()

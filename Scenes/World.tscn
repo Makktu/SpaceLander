@@ -356,11 +356,12 @@ position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 648, -823 )
+position = Vector2( 642, -1213 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 2, 2 )
 smoothing_enabled = true
 smoothing_speed = 2.0
 script = ExtResource( 57 )
@@ -492,17 +493,17 @@ scale = Vector2( 1, 0.9 )
 [node name="FuelPickup" parent="." instance=ExtResource( 44 )]
 position = Vector2( 3572, 4507 )
 
-[node name="ZoomCameraDetection" parent="." instance=ExtResource( 58 )]
+[node name="1stCameraZoom" parent="." instance=ExtResource( 59 )]
+position = Vector2( 449, 1765 )
+scale = Vector2( 10.7041, 2.57648 )
+
+[node name="2ndCameraZoom" parent="." instance=ExtResource( 58 )]
 position = Vector2( 2226, 2473 )
 scale = Vector2( 3.27639, 3.34792 )
 
-[node name="ZoomCameraDetection2" parent="." instance=ExtResource( 58 )]
+[node name="3rdCameraZoom" parent="." instance=ExtResource( 58 )]
 position = Vector2( 598, 800 )
 scale = Vector2( 3, 3 )
-
-[node name="ZoomCameraDetection3" parent="." instance=ExtResource( 59 )]
-position = Vector2( 449, 1765 )
-scale = Vector2( 10.7041, 2.57648 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
@@ -546,11 +547,11 @@ scale = Vector2( 0.5, 0.23 )
 
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
-[connection signal="body_entered" from="ZoomCameraDetection" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
-[connection signal="body_exited" from="ZoomCameraDetection" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
-[connection signal="body_entered" from="ZoomCameraDetection2" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
-[connection signal="body_exited" from="ZoomCameraDetection2" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
-[connection signal="body_entered" from="ZoomCameraDetection3" to="Player/Camera2D" method="_on_ZoomCameraDetection3_body_entered"]
+[connection signal="body_entered" from="1stCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection3_body_entered"]
+[connection signal="body_entered" from="2ndCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
+[connection signal="body_exited" from="2ndCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
+[connection signal="body_entered" from="3rdCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
+[connection signal="body_exited" from="3rdCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
 [connection signal="pressed" from="CanvasLayer/Pause" to="CanvasLayer/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
 [connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier_body_entered"]

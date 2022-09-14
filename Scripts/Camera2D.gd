@@ -3,6 +3,20 @@ extends Camera2D
 var zoom_start = 1
 var new_zoom = 0.001
 
+func starting_camera_zoom():
+	yield(get_tree().create_timer(0.5), "timeout")
+	var starting_zoom = 2
+#	zoom = Vector2(starting_zoom, starting_zoom)
+#	yield(get_tree().create_timer(2.0), "timeout")
+#	zoom = Vector2(starting_zoom - 0.5, starting_zoom - 0.5)
+#	yield(get_tree().create_timer(2.0), "timeout")
+	for n in 100: 			
+		zoom = Vector2(starting_zoom, starting_zoom)
+		starting_zoom -= 0.01
+		yield(get_tree().create_timer(0.0001), "timeout")
+	zoom = Vector2(1,1)
+	
+
 func _on_ZoomCameraDetection_body_entered(body):
 	# zooms in at Bottleneck1 (at start)
 	if body.name == "Player":
@@ -29,3 +43,19 @@ func _on_ZoomCameraDetection3_body_entered(body: Node) -> void:
 				zoom = Vector2(zoom_start,zoom_start)
 				zoom_start += new_zoom
 				yield(get_tree().create_timer(0.02), "timeout")
+				
+#func shake_camera():
+#	offset.x = 5
+#	offset.y = 5
+#	yield(get_tree().create_timer(0.01), "timeout")
+#	offset.x = -5
+#	offset.y = -5
+#	yield(get_tree().create_timer(0.01), "timeout")
+#	offset.x = 0
+#	offset.y = 0
+#	yield(get_tree().create_timer(0.01), "timeout")
+#
+#func stop_shaking_camera():
+#	offset.x = 0
+#	offset.y = 0
+	
