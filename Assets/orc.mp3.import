@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/orc.mp3-adadb8ccecb3aba13a22860c51c04d53.mp3str"
+
+[deps]
+
+source_file="res://Assets/orc.mp3"
+dest_files=[ "res://.import/orc.mp3-adadb8ccecb3aba13a22860c51c04d53.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

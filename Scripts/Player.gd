@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 
+onready var black_smoke = $BlackSmoke
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
 onready var Swipe = $Camera2D/SwipeScreenButton
@@ -251,10 +252,17 @@ func _physics_process(delta):
 	if gameOver:
 		return
 		
+	print(FUEL)
+		
+	if FUEL < 800:
+		black_smoke.show()
+
+		
 	if FUEL <= fuel_alarm_threshold && !fuel_alert_played:
 		fuel_alert_beep.play_alert()
 		$GUI/Fuel/Value.low_fuel()		 
 		fuel_alert_played = true
+
 		
 	if FUEL <= 0 && !$"/root/Global".test_mode:
 		 game_over()
@@ -274,13 +282,10 @@ func _physics_process(delta):
 	input.x -= float(Input.is_action_pressed('ui_right'))
 	input.y += float(Input.is_action_pressed('ui_up'))
 	input.y -= float(Input.is_action_pressed('ui_down'))	
-	
-	print(delta, speed)
 
 	move_and_slide(input * speed * delta)
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		print(collision.collider.name)
 		if collision.collider.name == "TileMap" && !$"/root/Global".test_mode:
 			Collision_Sound.play()
 #			SHIELDS -= 1
@@ -326,3 +331,4 @@ func _input(event):
 		
 func _ready():
 	$Camera2D.starting_camera_zoom()
+	pass

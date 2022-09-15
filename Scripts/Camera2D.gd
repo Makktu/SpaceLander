@@ -4,7 +4,7 @@ var zoom_start = 1
 var new_zoom = 0.001
 
 func starting_camera_zoom():
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(2), "timeout")
 	var starting_zoom = 2
 #	zoom = Vector2(starting_zoom, starting_zoom)
 #	yield(get_tree().create_timer(2.0), "timeout")
@@ -58,4 +58,3 @@ func _on_ZoomCameraDetection3_body_entered(body: Node) -> void:
 #func stop_shaking_camera():
 #	offset.x = 0
 #	offset.y = 0
-	
