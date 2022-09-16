@@ -27,7 +27,7 @@
 [ext_resource path="res://Assets/Black smoke/blackSmoke24.png" type="Texture" id=25]
 [ext_resource path="res://Scenes/BlackSmoke.gd" type="Script" id=26]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=46]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 7 ), ExtResource( 24 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 1 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 23 ), ExtResource( 11 ), ExtResource( 18 ), ExtResource( 12 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 25 ) ],
 "loop": true,
@@ -39,7 +39,7 @@ animations = [ {
 script = ExtResource( 26 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 46 )
 animation = "chugging"
-frame = 23
+frame = 19
 playing = true

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Starfield7.png-b52f522fd0ea1e744eb742d543616dc4.stex"
+path="res://.import/Blue Nebula 5 - 1024x1024.png-af9b69c4e4c356a4e09ee3c1c693b045.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Starfield7.png"
-dest_files=[ "res://.import/Starfield7.png-b52f522fd0ea1e744eb742d543616dc4.stex" ]
+source_file="res://Assets/Blue Nebula 5 - 1024x1024.png"
+dest_files=[ "res://.import/Blue Nebula 5 - 1024x1024.png-af9b69c4e4c356a4e09ee3c1c693b045.stex" ]
 
 [params]
 

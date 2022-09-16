@@ -258,7 +258,7 @@ func _physics_process(delta):
 		black_smoke.show()
 
 		
-	if FUEL <= fuel_alarm_threshold && !fuel_alert_played:
+	if FUEL < fuel_alarm_threshold && !fuel_alert_played:
 		fuel_alert_beep.play_alert()
 		$GUI/Fuel/Value.low_fuel()		 
 		fuel_alert_played = true
@@ -301,6 +301,7 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
+	black_smoke.stop()
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
 

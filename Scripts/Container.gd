@@ -5,7 +5,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-#	position.y -= 5
+	position.y -= 2
 	if Input.is_action_just_pressed("ui_accept"):
 #		$Global.dev_test_mode = false
 		get_tree().change_scene("res://Scenes/World.tscn")
