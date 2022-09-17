@@ -1,13 +1,17 @@
 extends KinematicBody2D
 
-
-onready var black_smoke = $BlackSmoke
+onready var black_smoke = $BlackSmoke/AnimatedSprite
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var fuel_alert_beep = get_node("%Alert")
 onready var Swipe = $Camera2D/SwipeScreenButton
 #onready var lander_wobble = $AnimationPlayer
 
 var just_starting = true
+
+var shake_amount = 1
+var down_thrust = 0
+
+var camera_shake_toggle = true
 
 
 # initialise swipe control variables
@@ -55,31 +59,6 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 100
 
-#var rng = RandomNumberGenerator.new()
-#var button_released = false
-#var lander_has_wobbled = false
-
-
-#func lander_wobble():	
-#	rng.randomize()
-#	var random_wobbly = rng.randf_range(1, 10)
-#	var random_degrees = rng.randf_range(0.1, 0.10)
-#	for n in random_wobbly:
-#		random_degrees = rng.randf_range(0.5, 4)
-#		rotation_degrees += random_degrees
-#		yield(get_tree().create_timer(0.1), "timeout")
-#		rotation_degrees = 0
-#		yield(get_tree().create_timer(0.1), "timeout")
-#		rotation_degrees -= random_degrees
-#		yield(get_tree().create_timer(0.1), "timeout")
-#		rotation_degrees = 0
-#		if button_released == true:
-#			button_released = false
-#			return
-#
-#	lander_has_wobbled = true
-
-
 
 func game_over():
 	gameOver = true
@@ -93,10 +72,10 @@ func game_over():
 	$RightThrusters.visible = false
 	$AnimatedSprite.stop()
 	$AnimatedSprite.visible = false
+	black_smoke.visible = false
 	
 	if FUEL <= 0:
-		# if reason for game over is fuel loss, permit drifting for short time...
-		
+		# if reason for game over is total fuel loss, drift for half a second		
 		yield(get_tree().create_timer(0.5), "timeout")
 		
 	$Boom.play()
@@ -119,6 +98,12 @@ func _on_Boom_finished() -> void:
 func update_GUI():
 	FUEL += FUEL_POD
 	$GUI/Fuel.adjust(FUEL)
+	
+func camera_shake():
+	 $Camera2D.set_offset(Vector2( \
+		rand_range(-3.0, 3.0) * shake_amount, \
+		rand_range(-3.0, 3.0) * shake_amount \
+	))
 	
 
 func get_input():
@@ -147,11 +132,10 @@ func get_input():
 		$ThrustersOther.stop()
 		$RightThrusters.stop()
 		$RightThrusters.visible = false
-#############################
 
 ################## UI RIGHT #
 	
-	if Input.is_action_pressed("ui_right") || swipe_left:	
+	if Input.is_action_pressed("ui_right") || swipe_left:
 		if just_starting:
 			just_starting = false	
 		input_dir -= side_thrust
@@ -167,19 +151,13 @@ func get_input():
 		$ThrustersOther.stop()
 		$LeftThrusters.stop()
 		$LeftThrusters.visible = false
-#############################
 	
 ###################### UI DOWN #	
 	
 	if Input.is_action_pressed("ui_down") || swipe_up:
-#		if not lander_has_wobbled:
-#			lander_wobble()
-#		rng.randomize()
-#		var random_wobbly = rng.randf_range(1, 10000)
-#		if random_wobbly > 7000:
-#			lander_wobble.playback_speed = 5
-#			lander_wobble.play("wobble")
-#		$Camera2D.shake_camera()
+		down_thrust += 1
+		if down_thrust > 45 and down_thrust < 165 and camera_shake_toggle == true:
+			camera_shake()
 		if just_starting:
 			just_starting = false
 		speed += constant_speed
@@ -200,19 +178,17 @@ func get_input():
 			middleOn = true
 			
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
-#		lander_has_wobbled = false
-#		button_released = true
-#		$Camera2D.stop_shaking_camera()
 		$AnimatedSprite.play("exhaustend")
-		# turn OFF Thruster sound
+		down_thrust = 0
 		$Thrusters.playing = false
 		middleOn = false
 		swipe_up_released = false
 		if !$AnimatedSprite.is_playing():
 			$AnimatedSprite.visible = false
-#########################################################			
+
 			
-######################### UI UP #########################
+######################### UI UP
+
 	if Input.is_action_pressed("ui_up") || swipe_down:
 		if just_starting:
 			just_starting = false
@@ -230,8 +206,12 @@ func get_input():
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
 		$TopThrusters.visible = false
+		
 #########################################################		
-
+#########################################################
+#########################################################
+	
+	# initial Lander movement at start of level
 	if just_starting:
 		velocity.y = move_toward(150, 0, friction)
 		
@@ -255,7 +235,7 @@ func _physics_process(delta):
 	print(FUEL)
 		
 	if FUEL < 800:
-		black_smoke.show()
+		black_smoke.visible = true
 
 		
 	if FUEL < fuel_alarm_threshold && !fuel_alert_played:
@@ -271,12 +251,8 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	# my noob collision detection with surfaces	
-#
+
 	var input = Vector2()
-	
-#	yawDesired = yawInput * yawSpeed
-#	yawFinal = yawFinal.move_towards(yawDesired, inertiaFactor)
-#	rotate_y(yawFinal)
 
 	input.x += float(Input.is_action_pressed('ui_left'))
 	input.x -= float(Input.is_action_pressed('ui_right'))
@@ -288,9 +264,6 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "TileMap" && !$"/root/Global".test_mode:
 			Collision_Sound.play()
-#			SHIELDS -= 1
-#			print(SHIELDS)
-#			if SHIELDS <= 0:
 			game_over()
 			
 
@@ -301,7 +274,7 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
-	black_smoke.stop()
+	black_smoke.visible = false
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
 
