@@ -638,13 +638,13 @@ script = ExtResource( 70 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player/BlackSmoke"]
 visible = false
-modulate = Color( 1, 1, 1, 0.592157 )
+show_behind_parent = true
 position = Vector2( -4, -121 )
 scale = Vector2( 3, 2 )
 z_index = -1
 frames = SubResource( 46 )
 animation = "fireball"
-frame = 146
+frame = 182
 playing = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

@@ -72,10 +72,10 @@ func game_over():
 	$RightThrusters.visible = false
 	$AnimatedSprite.stop()
 	$AnimatedSprite.visible = false
-	black_smoke.visible = false
+#	black_smoke.visible = false
 	
 	if FUEL <= 0:
-		# if reason for game over is total fuel loss, drift for half a second		
+		# if reason for game over is total fuel loss, pause for half a second		
 		yield(get_tree().create_timer(0.5), "timeout")
 		
 	$Boom.play()
@@ -99,7 +99,7 @@ func update_GUI():
 	FUEL += FUEL_POD
 	$GUI/Fuel.adjust(FUEL)
 	
-func camera_shake():
+func camera_shake(shake_amount):
 	 $Camera2D.set_offset(Vector2( \
 		rand_range(-3.0, 3.0) * shake_amount, \
 		rand_range(-3.0, 3.0) * shake_amount \
@@ -115,6 +115,9 @@ func get_input():
 	
 # UI LEFT
 	if Input.is_action_pressed("ui_left") || swipe_right:
+		down_thrust += 1
+		if down_thrust > 60 and down_thrust < 110 and camera_shake_toggle == true and FUEL < 500:
+			camera_shake(shake_amount)
 		if just_starting:
 			just_starting = false
 		input_dir += side_thrust
@@ -128,6 +131,7 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_left") || swipe_right_released:
+		down_thrust = 0
 		swipe_right_released = false
 		$ThrustersOther.stop()
 		$RightThrusters.stop()
@@ -136,6 +140,9 @@ func get_input():
 ################## UI RIGHT #
 	
 	if Input.is_action_pressed("ui_right") || swipe_left:
+		down_thrust += 1
+		if down_thrust > 60 and down_thrust < 110 and camera_shake_toggle == true and FUEL < 500:
+			camera_shake(shake_amount)
 		if just_starting:
 			just_starting = false	
 		input_dir -= side_thrust
@@ -147,6 +154,7 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_right") || swipe_left_released:
+		down_thrust = 0
 		swipe_left_released = false
 		$ThrustersOther.stop()
 		$LeftThrusters.stop()
@@ -157,7 +165,7 @@ func get_input():
 	if Input.is_action_pressed("ui_down") || swipe_up:
 		down_thrust += 1
 		if down_thrust > 45 and down_thrust < 165 and camera_shake_toggle == true:
-			camera_shake()
+			camera_shake(shake_amount)
 		if just_starting:
 			just_starting = false
 		speed += constant_speed
@@ -190,6 +198,9 @@ func get_input():
 ######################### UI UP
 
 	if Input.is_action_pressed("ui_up") || swipe_down:
+		down_thrust += 1
+		if down_thrust > 60 and down_thrust < 110 and camera_shake_toggle == true and FUEL < 500:
+			camera_shake(shake_amount)
 		if just_starting:
 			just_starting = false
 		speed += constant_speed
@@ -202,6 +213,7 @@ func get_input():
 			$ThrustersOther.play()
 
 	if Input.is_action_just_released("ui_up") || swipe_down_released:
+		down_thrust = 0
 		swipe_down_released = false
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
@@ -234,8 +246,8 @@ func _physics_process(delta):
 		
 	print(FUEL)
 		
-	if FUEL < 800:
-		black_smoke.visible = true
+#	if FUEL < 800:
+#		black_smoke.visible = true
 
 		
 	if FUEL < fuel_alarm_threshold && !fuel_alert_played:
@@ -274,7 +286,7 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
-	black_smoke.visible = false
+#	black_smoke.visible = false
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
 
