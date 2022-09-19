@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 onready var black_smoke = $BlackSmoke/AnimatedSprite
 onready var Collision_Sound = $AudioStreamPlayer2D
-onready var fuel_alert_beep = get_node("%Alert")
 onready var Swipe = $Camera2D/SwipeScreenButton
-#onready var lander_wobble = $AnimationPlayer
+
+# working local?
 
 var just_starting = true
 
@@ -32,7 +32,7 @@ var y_input_dir = 0
 var FUEL = 3000
 var FUEL_POD = 3000
 var fuel_base_usage = 5
-var fuel_alarm_threshold = FUEL / 10
+var fuel_alarm_threshold = 500
 var fuel_alert_played = false
 #var PLAYER_SPEED = 200
 var gameOver = false
@@ -104,6 +104,13 @@ func camera_shake(shake_amount):
 		rand_range(-3.0, 3.0) * shake_amount, \
 		rand_range(-3.0, 3.0) * shake_amount \
 	))
+	
+func fuel_alert_beep():
+	for n in 7:
+		yield(get_tree().create_timer(0.25), "timeout")
+		$AlertBeep.play()
+
+
 	
 
 func get_input():
@@ -244,17 +251,8 @@ func _physics_process(delta):
 	if gameOver:
 		return
 		
-	print(FUEL)
-		
 #	if FUEL < 800:
 #		black_smoke.visible = true
-
-		
-	if FUEL < fuel_alarm_threshold && !fuel_alert_played:
-		fuel_alert_beep.play_alert()
-		$GUI/Fuel/Value.low_fuel()		 
-		fuel_alert_played = true
-
 		
 	if FUEL <= 0 && !$"/root/Global".test_mode:
 		 game_over()
@@ -278,6 +276,11 @@ func _physics_process(delta):
 			Collision_Sound.play()
 			game_over()
 			
+	if FUEL < fuel_alarm_threshold:
+		if !fuel_alert_played:
+			$GUI/Fuel/Value.low_fuel()		 
+			fuel_alert_played = true
+			fuel_alert_beep()		
 
 func _on_LaserBarrier_body_entered(body: Node) -> void:
 	if !$"/root/Global".test_mode:
@@ -318,3 +321,23 @@ func _input(event):
 func _ready():
 	$Camera2D.starting_camera_zoom()
 	pass
+
+
+func _on_LaserBarrier2_body_entered(body: Node) -> void:
+	if !$"/root/Global".test_mode:
+		game_over()
+
+
+func _on_LaserBarrier5_body_entered(body: Node) -> void:
+	if !$"/root/Global".test_mode:
+		game_over()
+
+
+func _on_LaserBarrier6_body_entered(body: Node) -> void:
+	if !$"/root/Global".test_mode:
+		game_over()
+
+
+func _on_LaserBarrier7_body_entered(body: Node) -> void:
+	if !$"/root/Global".test_mode:
+		game_over()

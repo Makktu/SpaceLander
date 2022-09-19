@@ -12,4 +12,5 @@ func _on_CentreOfPortal_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
+#	$"/root/Global".player.get_parent().remove_child(player)
 	get_tree().change_scene("res://Scenes/Won.tscn")

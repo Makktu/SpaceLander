@@ -6,7 +6,6 @@
 [ext_resource path="res://Scripts/World.gd" type="Script" id=4]
 [ext_resource path="res://Assets/RockTilesBackGround.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Starfield7.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/Alert.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/explosion.wav" type="AudioStream" id=8]
 [ext_resource path="res://Assets/exhaust.png" type="Texture" id=9]
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00004.png" type="Texture" id=10]
@@ -253,11 +252,12 @@
 [ext_resource path="res://Assets/fireball-all/0138.png" type="Texture" id=251]
 [ext_resource path="res://Assets/fireball-all/0134.png" type="Texture" id=252]
 [ext_resource path="res://Assets/fireball-all/0133.png" type="Texture" id=253]
+[ext_resource path="res://Assets/alert.wav" type="AudioStream" id=254]
 
-[sub_resource type="RectangleShape2D" id=38]
+[sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 360, 579 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=47]
 animations = [ {
 "frames": [ ExtResource( 29 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 32 ), ExtResource( 36 ), ExtResource( 33 ), ExtResource( 22 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 19 ), ExtResource( 26 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 18 ), null ],
 "loop": false,
@@ -275,7 +275,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=48]
 animations = [ {
 "frames": [ ExtResource( 17 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), null, null ],
 "loop": true,
@@ -363,7 +363,7 @@ flags = 4
 atlas = ExtResource( 48 )
 region = Rect2( 192, 192, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=22]
+[sub_resource type="SpriteFrames" id=49]
 animations = [ {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": false,
@@ -371,7 +371,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="SpriteFrames" id=46]
+[sub_resource type="SpriteFrames" id=50]
 animations = [ {
 "frames": [ ExtResource( 131 ), ExtResource( 143 ), ExtResource( 138 ), ExtResource( 146 ), ExtResource( 133 ), ExtResource( 126 ), ExtResource( 134 ), ExtResource( 129 ), ExtResource( 147 ), ExtResource( 130 ), ExtResource( 152 ), ExtResource( 139 ), ExtResource( 151 ), ExtResource( 149 ), ExtResource( 153 ), ExtResource( 136 ), ExtResource( 148 ), ExtResource( 144 ), ExtResource( 154 ), ExtResource( 132 ), ExtResource( 155 ), ExtResource( 127 ), ExtResource( 150 ), ExtResource( 135 ), ExtResource( 145 ), ExtResource( 137 ), ExtResource( 128 ), ExtResource( 140 ), ExtResource( 141 ), ExtResource( 142 ), ExtResource( 161 ), ExtResource( 157 ), ExtResource( 158 ), ExtResource( 159 ), ExtResource( 156 ), ExtResource( 160 ), ExtResource( 168 ), ExtResource( 171 ), ExtResource( 176 ), ExtResource( 173 ), ExtResource( 167 ), ExtResource( 170 ), ExtResource( 172 ), ExtResource( 174 ), ExtResource( 175 ), ExtResource( 169 ), ExtResource( 178 ), ExtResource( 179 ), ExtResource( 180 ), ExtResource( 181 ), ExtResource( 182 ), ExtResource( 183 ), ExtResource( 166 ), ExtResource( 165 ), ExtResource( 164 ), ExtResource( 162 ), ExtResource( 163 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 61 ), ExtResource( 177 ), ExtResource( 187 ), ExtResource( 218 ), ExtResource( 231 ), ExtResource( 185 ), ExtResource( 209 ), ExtResource( 230 ), ExtResource( 223 ), ExtResource( 190 ), ExtResource( 202 ), ExtResource( 192 ), ExtResource( 247 ), ExtResource( 242 ), ExtResource( 199 ), ExtResource( 186 ), ExtResource( 213 ), ExtResource( 234 ), ExtResource( 207 ), ExtResource( 224 ), ExtResource( 225 ), ExtResource( 226 ), ExtResource( 193 ), ExtResource( 237 ), ExtResource( 232 ), ExtResource( 212 ), ExtResource( 189 ), ExtResource( 208 ), ExtResource( 233 ), ExtResource( 243 ), ExtResource( 244 ), ExtResource( 184 ), ExtResource( 200 ), ExtResource( 201 ), ExtResource( 214 ), ExtResource( 188 ), ExtResource( 191 ), ExtResource( 246 ), ExtResource( 240 ), ExtResource( 194 ), ExtResource( 210 ), ExtResource( 219 ), ExtResource( 195 ), ExtResource( 229 ), ExtResource( 245 ), ExtResource( 198 ), ExtResource( 196 ), ExtResource( 197 ), ExtResource( 235 ), ExtResource( 203 ), ExtResource( 220 ), ExtResource( 236 ), ExtResource( 204 ), ExtResource( 206 ), ExtResource( 238 ), ExtResource( 239 ), ExtResource( 241 ), ExtResource( 205 ), ExtResource( 211 ), ExtResource( 215 ), ExtResource( 216 ), ExtResource( 217 ), ExtResource( 221 ), ExtResource( 222 ), ExtResource( 227 ), ExtResource( 228 ), ExtResource( 253 ), ExtResource( 252 ), ExtResource( 248 ), ExtResource( 249 ), ExtResource( 250 ), ExtResource( 251 ), ExtResource( 84 ), ExtResource( 100 ), ExtResource( 121 ), ExtResource( 105 ), ExtResource( 125 ), ExtResource( 85 ), ExtResource( 64 ), ExtResource( 111 ), ExtResource( 103 ), ExtResource( 122 ), ExtResource( 101 ), ExtResource( 65 ), ExtResource( 88 ), ExtResource( 107 ), ExtResource( 91 ), ExtResource( 80 ), ExtResource( 86 ), ExtResource( 72 ), ExtResource( 69 ), ExtResource( 106 ), ExtResource( 68 ), ExtResource( 112 ), ExtResource( 108 ), ExtResource( 73 ), ExtResource( 113 ), ExtResource( 116 ), ExtResource( 99 ), ExtResource( 102 ), ExtResource( 110 ), ExtResource( 89 ), ExtResource( 109 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 95 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 81 ), ExtResource( 82 ), ExtResource( 92 ), ExtResource( 79 ), ExtResource( 124 ), ExtResource( 77 ), ExtResource( 83 ), ExtResource( 114 ), ExtResource( 123 ), ExtResource( 87 ), ExtResource( 78 ), ExtResource( 115 ), ExtResource( 96 ), ExtResource( 118 ), ExtResource( 104 ), ExtResource( 66 ), ExtResource( 90 ), ExtResource( 67 ), ExtResource( 93 ), ExtResource( 117 ), ExtResource( 94 ), ExtResource( 97 ), ExtResource( 119 ), ExtResource( 98 ), ExtResource( 120 ) ],
 "loop": true,
@@ -566,7 +566,7 @@ script = ExtResource( 57 )
 
 [node name="SwipeScreenButton" type="TouchScreenButton" parent="Player/Camera2D"]
 position = Vector2( -363, -528 )
-shape = SubResource( 38 )
+shape = SubResource( 46 )
 shape_visible = false
 script = ExtResource( 52 )
 
@@ -595,7 +595,7 @@ position = Vector2( -2, 61 )
 rotation = -1.57317
 scale = Vector2( 0.25, 0.25 )
 z_index = 7
-frames = SubResource( 1 )
+frames = SubResource( 47 )
 animation = "exhauststart"
 frame = 8
 
@@ -603,7 +603,7 @@ frame = 8
 visible = false
 position = Vector2( -52, -6 )
 scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 3 )
+frames = SubResource( 48 )
 animation = "rightThrust"
 
 [node name="TopThrusters" type="AnimatedSprite" parent="Player"]
@@ -611,7 +611,7 @@ visible = false
 position = Vector2( -2, -59 )
 rotation = 1.5708
 scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 3 )
+frames = SubResource( 48 )
 animation = "rightThrust"
 
 [node name="LeftThrusters" type="AnimatedSprite" parent="Player"]
@@ -619,7 +619,7 @@ visible = false
 position = Vector2( 49, -5 )
 rotation = 3.14159
 scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 3 )
+frames = SubResource( 48 )
 animation = "rightThrust"
 
 [node name="GUI" parent="Player" instance=ExtResource( 47 )]
@@ -629,7 +629,7 @@ position = Vector2( -213, -144 )
 visible = false
 position = Vector2( 4, -4.5 )
 scale = Vector2( 3.375, 3.48438 )
-frames = SubResource( 22 )
+frames = SubResource( 49 )
 animation = "kaboom"
 frame = 2
 
@@ -642,10 +642,14 @@ show_behind_parent = true
 position = Vector2( -4, -121 )
 scale = Vector2( 3, 2 )
 z_index = -1
-frames = SubResource( 46 )
+frames = SubResource( 50 )
 animation = "fireball"
-frame = 182
+frame = 62
 playing = true
+
+[node name="AlertBeep" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 254 )
+pitch_scale = 1.52
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -695,9 +699,6 @@ scale = Vector2( 1, 1 )
 [node name="Sprite" parent="Station1/AnimationPlayer" index="0"]
 position = Vector2( 2321, 2823 )
 scale = Vector2( 2, 2 )
-
-[node name="Alert" parent="." instance=ExtResource( 7 )]
-unique_name_in_owner = true
 
 [node name="Instructions" parent="." instance=ExtResource( 56 )]
 modulate = Color( 0.937255, 0.929412, 0.203922, 1 )
@@ -761,16 +762,16 @@ scale = Vector2( 0.5, 0.23 )
 
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
-[connection signal="body_entered" from="1stCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection3_body_entered"]
-[connection signal="body_entered" from="2ndCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
-[connection signal="body_exited" from="2ndCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
-[connection signal="body_entered" from="3rdCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_entered"]
-[connection signal="body_exited" from="3rdCameraZoom" to="Player/Camera2D" method="_on_ZoomCameraDetection_body_exited"]
+[connection signal="body_entered" from="1stCameraZoom" to="Player/Camera2D" method="_on_1stCameraZoom_body_entered"]
+[connection signal="body_entered" from="2ndCameraZoom" to="Player/Camera2D" method="_on_2ndCameraZoom_body_entered"]
+[connection signal="body_exited" from="2ndCameraZoom" to="Player/Camera2D" method="_on_2ndCameraZoom_body_exited"]
+[connection signal="body_entered" from="3rdCameraZoom" to="Player/Camera2D" method="_on_3rdCameraZoom_body_entered"]
+[connection signal="body_exited" from="3rdCameraZoom" to="Player/Camera2D" method="_on_3rdCameraZoom_body_exited"]
 [connection signal="pressed" from="CanvasLayer/Pause" to="CanvasLayer/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="body_entered" from="LaserBarrier" to="Player" method="_on_LaserBarrier_body_entered"]
-[connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier_body_entered"]
-[connection signal="body_entered" from="LaserBarrier5" to="Player" method="_on_LaserBarrier_body_entered"]
-[connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier_body_entered"]
-[connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier_body_entered"]
+[connection signal="body_entered" from="LaserBarrier2" to="Player" method="_on_LaserBarrier2_body_entered"]
+[connection signal="body_entered" from="LaserBarrier5" to="Player" method="_on_LaserBarrier5_body_entered"]
+[connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier6_body_entered"]
+[connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier7_body_entered"]
 
 [editable path="Station1"]
