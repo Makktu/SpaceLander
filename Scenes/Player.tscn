@@ -1,10 +1,70 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/eyelander.png" type="Texture" id=1]
 [ext_resource path="res://Assets/alert.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 26.5 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.25, 2.25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fadein"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fadeout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 53, 147 )
@@ -25,3 +85,18 @@ region_filter_clip = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 volume_db = -30.0
+
+[node name="FadeOut" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/fadein = SubResource( 4 )
+anims/fadeout = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+show_behind_parent = true
+z_index = -10
+texture = ExtResource( 3 )
+offset = Vector2( 30, 30 )
+texture_scale = 4.0
+range_z_min = -90
+shadow_enabled = true
+shadow_color = Color( 1, 1, 1, 0 )

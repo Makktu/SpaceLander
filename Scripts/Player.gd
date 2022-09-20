@@ -4,7 +4,7 @@ onready var black_smoke = $BlackSmoke/AnimatedSprite
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var Swipe = $Camera2D/SwipeScreenButton
 
-# working local?
+# working local? HOW ABOUT NOW?!?!  AND NOW?
 
 var just_starting = true
 
@@ -232,7 +232,10 @@ func get_input():
 	
 	# initial Lander movement at start of level
 	if just_starting:
-		velocity.y = move_toward(150, 0, friction)
+		if get_tree().get_current_scene().get_name() == "World":
+			velocity.y = move_toward(150, 0, friction)
+		if get_tree().get_current_scene().get_name() == "LevelOne":
+			velocity.x = move_toward(-150, 0, friction)
 		
 	if input_dir != 0 || y_input_dir != 0:
 		# accelerate when there's input

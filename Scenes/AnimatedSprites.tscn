@@ -55,6 +55,5 @@ script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "fireball"
 frame = 157
 playing = true

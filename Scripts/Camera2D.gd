@@ -8,7 +8,7 @@ func starting_camera_zoom():
 	for n in 200: 			
 		zoom = Vector2(starting_zoom, starting_zoom)
 		starting_zoom -= 0.01
-		yield(get_tree().create_timer(0.000001), "timeout")
+		yield(get_tree().create_timer(0.0000001), "timeout")
 	zoom = Vector2(1,1)
 				
 #func _ready() -> void:
@@ -21,7 +21,7 @@ func _on_1stCameraZoom_body_entered(body: Node) -> void:
 		for n in 650: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
-			yield(get_tree().create_timer(0.02), "timeout")
+			yield(get_tree().create_timer(0.2), "timeout")
 #		zoom = Vector2(1,1)
 
 func _on_3rdCameraZoom_body_entered(body: Node) -> void:
@@ -31,7 +31,7 @@ func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start -= new_zoom
 			yield(get_tree().create_timer(0.02), "timeout")
-#		zoom = Vector2(1,1)
+
 
 func _on_2ndCameraZoom_body_entered(body: Node) -> void:
 	# zooms in at Bottleneck2 (near the end)
@@ -40,7 +40,7 @@ func _on_2ndCameraZoom_body_entered(body: Node) -> void:
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start -= new_zoom
 			yield(get_tree().create_timer(0.02), "timeout")
-		zoom = Vector2(1,1)
+
 
 
 func _on_2ndCameraZoom_body_exited(body: Node) -> void:
@@ -49,7 +49,7 @@ func _on_2ndCameraZoom_body_exited(body: Node) -> void:
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.02), "timeout")
-		zoom = Vector2(1,1)
+
 
 
 func _on_3rdCameraZoom_body_exited(body: Node) -> void:
@@ -58,4 +58,4 @@ func _on_3rdCameraZoom_body_exited(body: Node) -> void:
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.02), "timeout")
-		zoom = Vector2(1,1)
+#		zoom = Vector2(1,1)
