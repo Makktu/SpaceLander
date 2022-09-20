@@ -17,6 +17,6 @@ var user_OS = OS.get_name()
 
 
 func _ready() -> void:
-	BGMusic.play()
+#	BGMusic.play()
 	print(user_OS)
 
