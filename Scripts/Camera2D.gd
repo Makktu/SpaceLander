@@ -15,15 +15,6 @@ func starting_camera_zoom():
 #	self.make_current()
 
 
-func _on_1stCameraZoom_body_entered(body: Node) -> void:
-	# Zooms OUT at the approach to the portal (at end)
-	if body.name == "Player":
-		for n in 650: 			
-			zoom = Vector2(zoom_start,zoom_start)
-			zoom_start += new_zoom
-			yield(get_tree().create_timer(0.2), "timeout")
-#		zoom = Vector2(1,1)
-
 func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 	# zooms in at Bottleneck1 (at start)
 	if body.name == "Player":
@@ -59,3 +50,20 @@ func _on_3rdCameraZoom_body_exited(body: Node) -> void:
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.02), "timeout")
 #		zoom = Vector2(1,1)
+
+
+func _on_PortalZoom_body_entered(body: Node) -> void:
+	# Zooms OUT at the approach to the portal (at end)
+	if body.name == "Player":
+		for n in 1650: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start += new_zoom
+			yield(get_tree().create_timer(0.002), "timeout")
+
+
+func _on_PortalZoom_body_exited(body: Node) -> void:
+	if body.name == "Player":
+		for n in 1650: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start -= new_zoom
+			yield(get_tree().create_timer(0.1), "timeout")

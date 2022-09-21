@@ -14,6 +14,7 @@ var down_thrust = 0
 var camera_shake_toggle = true
 
 
+
 # initialise swipe control variables
 var swipe_up = false
 var swipe_down = false
@@ -100,7 +101,7 @@ func update_GUI():
 	$GUI/Fuel.adjust(FUEL)
 	
 func camera_shake(shake_amount):
-	 $Camera2D.set_offset(Vector2( \
+	$Camera2D.set_offset(Vector2( \
 		rand_range(-3.0, 3.0) * shake_amount, \
 		rand_range(-3.0, 3.0) * shake_amount \
 	))
@@ -344,3 +345,9 @@ func _on_LaserBarrier6_body_entered(body: Node) -> void:
 func _on_LaserBarrier7_body_entered(body: Node) -> void:
 	if !$"/root/Global".test_mode:
 		game_over()
+
+
+func _on_FuelPickup2_body_entered(body: Node) -> void:
+	FUEL += FUEL_POD / 2
+	$GUI/Fuel/Value.pickup_fuel()
+	fuel_alert_played = false

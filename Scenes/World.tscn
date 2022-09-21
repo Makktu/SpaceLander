@@ -1,4 +1,4 @@
-[gd_scene load_steps=276 format=2]
+[gd_scene load_steps=277 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -43,7 +43,6 @@
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00017.png" type="Texture" id=42]
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00018.png" type="Texture" id=43]
 [ext_resource path="res://Scenes/FuelPickup.tscn" type="PackedScene" id=44]
-[ext_resource path="res://Assets/DeadWorld.png" type="Texture" id=45]
 [ext_resource path="res://Scenes/LaserBarrier.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Assets/explosion.png" type="Texture" id=48]
@@ -378,6 +377,9 @@ animations = [ {
 "speed": 20.0
 } ]
 
+[sub_resource type="OccluderPolygon2D" id=51]
+polygon = PoolVector2Array( 90.25, 93.25, 3.25, 95.25, 2.25, 6.25, 89.25, 5.25 )
+
 [sub_resource type="TileSet" id=24]
 0/name = "RockTilesBackGround.png 0"
 0/texture = ExtResource( 5 )
@@ -400,6 +402,7 @@ animations = [ {
 1/region = Rect2( 416, 224, 96, 96 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
+1/occluder = SubResource( 51 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -412,13 +415,16 @@ animations = [ {
 size = 40
 font_data = ExtResource( 60 )
 
+[sub_resource type="RectangleShape2D" id=52]
+extents = Vector2( 183.786, 74.9286 )
+
 [node name="World" type="Node2D"]
 position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
-color = Color( 0.105882, 0.101961, 0.0980392, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 self_modulate = Color( 1, 1, 1, 0.95 )
@@ -513,7 +519,7 @@ scale = Vector2( 3, 2 )
 z_index = -1
 frames = SubResource( 50 )
 animation = "fireball"
-frame = 143
+frame = 186
 playing = true
 
 [node name="AlertBeep" type="AudioStreamPlayer2D" parent="Player"]
@@ -545,7 +551,7 @@ cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 1376311, 0, 0, 1441810, 0, 0, 1572919, 0, 0, 1638418, 0, 0, 1769525, 0, 0, 1835024, 0, 0, 1966134, 0, 0, 2031633, 0, 0, 2031645, 1, 0, 2031665, 1, 0, 2162742, 0, 0, 2162773, 15, 0, 2228241, 0, 0, 2359325, 1, 0, 2359350, 0, 0, 2424849, 0, 0, 2424881, 1, 0, 2555956, 0, 0, 2555989, 15, 0, 2621455, 0, 0, 2752542, 1, 0, 2752565, 0, 0, 2818064, 0, 0, 2818097, 1, 0, 2949175, 0, 0, 2949190, 0, 0, 2949205, 15, 0, 3014674, 0, 0, 3145783, 0, 0, 3145798, 0, 0, 3211282, 0, 0, 3342389, 0, 0, 3342404, 0, 0, 3342421, 15, 0, 3407888, 0, 0, 3538998, 0, 0, 3539013, 0, 0, 3604497, 0, 0, 3801107, 0, 0, 3997715, 0, 0, 4194321, 0, 0, 4390930, 0, 0, 4587533, 0, 0, 4587564, 0, 0, 4718656, 4, 0, 4718661, 4, 0, 4784141, 0, 0, 4784172, 0, 0, 4784192, 4, 0, 4784197, 4, 0, 4849728, 4, 0, 4849733, 4, 0, 4849734, 4, 0, 4915264, 4, 0, 4915270, 4, 0, 4980747, 0, 0, 4980778, 0, 0, 4980800, 4, 0, 4980805, 4, 0, 4980806, 4, 0, 5046336, 4, 0, 5046341, 4, 0, 5046342, 4, 0, 5111873, 4, 0, 5111875, 4, 0, 5111876, 4, 0, 5111878, 4, 0, 5177356, 0, 0, 5177387, 0, 0, 5177409, 4, 0, 5177411, 4, 0, 5177412, 4, 0, 5177413, 4, 0, 5242946, 4, 0, 5242947, 4, 0, 5242948, 4, 0, 5242949, 4, 0, 5242950, 4, 0, 5373974, 0, 0, 5373988, 0, 0, 5570582, 0, 0, 5570596, 0, 0, 5767188, 0, 0, 5767202, 0, 0, 5963797, 0, 0, 5963811, 0, 0 )
+tile_data = PoolIntArray( 1376311, 0, 0, 1441810, 0, 0, 1572919, 0, 0, 1638418, 0, 0, 1769525, 0, 0, 1835024, 0, 0, 1966134, 0, 0, 2031633, 0, 0, 2031645, 1, 0, 2031665, 1, 0, 2162742, 0, 0, 2162773, 15, 0, 2228241, 0, 0, 2359325, 1, 0, 2359350, 0, 0, 2424849, 0, 0, 2424881, 1, 0, 2555956, 0, 0, 2555989, 15, 0, 2621455, 0, 0, 2752542, 1, 0, 2752565, 0, 0, 2818064, 0, 0, 2818097, 1, 0, 2883712, 0, 0, 2883725, -1610612736, 0, 2949175, 0, 0, 2949190, 0, 0, 2949205, 15, 0, 3014674, 0, 0, 3014770, 0, 0, 3080292, 0, 0, 3145783, 0, 0, 3145798, 0, 0, 3145813, 0, 0, 3211282, 0, 0, 3342389, 0, 0, 3342404, 0, 0, 3342419, 0, 0, 3342421, 15, 0, 3407888, 0, 0, 3408017, 0, 0, 3538998, 0, 0, 3539013, 0, 0, 3539028, 0, 0, 3604497, 0, 0, 3604623, 0, 0, 3604638, 0, 0, 3801107, 0, 0, 3801229, 0, 0, 3801243, 0, 0, 3932270, 0, 0, 3997715, 0, 0, 4128875, 0, 0, 4128882, 0, 0, 4194321, 0, 0, 4259944, 0, 0, 4325489, 0, 0, 4390930, 0, 0, 4456551, 0, 0, 4456561, 0, 0, 4456587, 0, 0, 4456602, 0, 0, 4522151, 0, 0, 4522165, 0, 0, 4587533, 0, 0, 4587564, 0, 0, 4587579, 0, 0, 4587594, 0, 0, 4653158, 0, 0, 4653170, 0, 0, 4718656, 4, 0, 4718661, 4, 0, 4718679, 0, 0, 4718759, 0, 0, 4718773, 0, 0, 4784141, 0, 0, 4784172, 0, 0, 4784192, 4, 0, 4784197, 4, 0, 4849728, 4, 0, 4849733, 4, 0, 4849734, 4, 0, 4849765, 0, 0, 4849778, 0, 0, 4915264, 4, 0, 4915270, 4, 0, 4915365, 0, 0, 4915379, 0, 0, 4915395, 0, 0, 4915409, 0, 0, 4980747, 0, 0, 4980778, 0, 0, 4980800, 4, 0, 4980805, 4, 0, 4980806, 4, 0, 5046336, 4, 0, 5046341, 4, 0, 5046342, 4, 0, 5111873, 4, 0, 5111875, 4, 0, 5111876, 4, 0, 5111878, 4, 0, 5111974, 0, 0, 5111988, 0, 0, 5112003, 0, 0, 5112017, 0, 0, 5177356, 0, 0, 5177387, 0, 0, 5177409, 4, 0, 5177411, 4, 0, 5177412, 4, 0, 5177413, 4, 0, 5242946, 4, 0, 5242947, 4, 0, 5242948, 4, 0, 5242949, 4, 0, 5242950, 4, 0, 5308609, 0, 0, 5308623, 0, 0, 5373974, 0, 0, 5373988, 0, 0, 5374175, -1610612736, 0, 5505218, 0, 0, 5505232, 0, 0, 5570582, 0, 0, 5570594, 0, 0, 5570596, 0, 0, 5767188, 0, 0, 5767202, 0, 0, 5832766, -1610612736, 0, 5963797, 0, 0, 5963811, 0, 0, 6029376, 0, 0, 6094896, -1610612736, 0, 6160462, 0, 0, 6160490, 0, 0, 6225982, -1610612736, 0, 6226040, -1610612736, 0, 6291547, 0, 0, 6357215, -1610612736, 0, 7077935, -1610612736, 0, 7143488, -1610612736, 0, 7143545, -1610612736, 0, 7274721, -1610612736, 0, 8060974, -1610612736, 0, 8061050, -1610612736, 0, 8257764, -1610612736, 0, 8847482, 0, 0, 8978476, -1610612736, 0, 9044102, 0, 0, 9240722, 0, 0, 9240807, -1610612736, 0, 9371808, 0, 0, 9568297, -1610612736, 0, 9830598, 0, 0, 9830612, -1610612736, 0, 9896119, 0, 0, 10223849, -1610612736, 0, 10420226, 0, 0, 10420251, 0, 0, 10551271, 0, 0, 10551284, 0, 0, 10485774, 0, 0, 10616833, 0, 0, 10616862, 0, 0, 10617041, -1610612736, 0, 10747876, 0, 0, 10747891, 0, 0, 10682383, 0, 0, 10813443, 0, 0, 10813468, 0, 0, 10944488, 0, 0, 10944501, 0, 0, 10878991, 0, 0, 11010050, 0, 0, 11010079, 0, 0, 11141093, 0, 0, 11141108, 0, 0, 11075600, 0, 0, 11206887, -1610612736, 0, 11469007, -1610612736, 0, 12124390, -1610612736, 0, 12255460, -1610612736, 0, 12386510, -1610612736, 0, 12386530, -1610612736, 0, 13238482, 0, 0, 13238507, 0, 0, 13303991, 0, 0, 13304004, 0, 0, 13304030, 0, 0, 13435089, 0, 0, 13435118, 0, 0, 13500596, 0, 0, 13500611, 0, 0, 13500639, 0, 0, 25624799, 0, 0, 25624824, 0, 0, 25690308, 0, 0, 25690321, 0, 0, 25690347, 0, 0, 25821406, 0, 0, 25821435, 0, 0, 25886913, 0, 0, 25886928, 0, 0, 25886956, 0, 0, 26083536, 0, 0, 26083561, 0, 0, 26149045, 0, 0, 26149058, 0, 0, 26149084, 0, 0, 26280143, 0, 0, 26280172, 0, 0, 26345650, 0, 0, 26345665, 0, 0, 26345693, 0, 0, 26411186, 0, 0, 26411211, 0, 0, 26476695, 0, 0, 26476708, 0, 0, 26476734, 0, 0, 26607793, 0, 0, 26607822, 0, 0, 26673300, 0, 0, 26673315, 0, 0, 26673343, 0, 0, 26869911, 0, 0, 26869936, 0, 0, 26935420, 0, 0, 26935433, 0, 0, 26935459, 0, 0, 27066381, 0, 0, 27066406, 0, 0, 27066518, 0, 0, 27066547, 0, 0, 27197426, 0, 0, 27197439, 0, 0, 27131929, 0, 0, 27132025, 0, 0, 27132040, 0, 0, 27132068, 0, 0, 27197524, 0, 0, 27197549, 0, 0, 27262988, 0, 0, 27263017, 0, 0, 27263033, 0, 0, 27263046, 0, 0, 27263072, 0, 0, 27394031, 0, 0, 27394046, 0, 0, 27328538, 0, 0, 27394131, 0, 0, 27394160, 0, 0, 27459638, 0, 0, 27459653, 0, 0, 27459681, 0, 0 )
 
 [node name="Instructions" parent="." instance=ExtResource( 56 )]
 modulate = Color( 0.937255, 0.929412, 0.203922, 1 )
@@ -553,19 +559,19 @@ position = Vector2( 496, -950 )
 scale = Vector2( 1, 0.9 )
 
 [node name="FuelPickup" parent="." instance=ExtResource( 44 )]
-position = Vector2( 3494, 3951 )
+position = Vector2( 3480, 3105 )
 
 [node name="ZoomOut" parent="." instance=ExtResource( 59 )]
-position = Vector2( 1549, 1756 )
+position = Vector2( 1565, 1724 )
 scale = Vector2( 1.76448, 2.75165 )
 
 [node name="2ndCameraZoom" parent="." instance=ExtResource( 58 )]
-position = Vector2( 2226, 2473 )
+position = Vector2( 2190, 2437 )
 scale = Vector2( 3.27639, 3.34792 )
 
 [node name="3rdCameraZoom" parent="." instance=ExtResource( 58 )]
-position = Vector2( 598, 800 )
-scale = Vector2( 3, 3 )
+position = Vector2( 692, 931 )
+scale = Vector2( 4.07395, 2.14002 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
@@ -616,13 +622,16 @@ position = Vector2( 2321, 2823 )
 scale = Vector2( 2, 2 )
 
 [node name="Portal" parent="." instance=ExtResource( 53 )]
-position = Vector2( 557, 1878 )
+position = Vector2( 661, 5395 )
+scale = Vector2( 7, 7 )
 
-[node name="DeadWorld" type="Sprite" parent="."]
-position = Vector2( 552, 1877 )
-scale = Vector2( 0.7, 0.7 )
-z_index = -5
-texture = ExtResource( 45 )
+[node name="PortalZoom" type="Area2D" parent="Portal"]
+position = Vector2( 38, -118.571 )
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal/PortalZoom"]
+position = Vector2( 33.2858, -114.857 )
+shape = SubResource( 52 )
 
 [node name="GlowingSun" parent="." instance=ExtResource( 55 )]
 modulate = Color( 0.894118, 0.45098, 0.054902, 1 )
@@ -631,6 +640,10 @@ position = Vector2( 345, -58 )
 scale = Vector2( 8, 8 )
 z_index = -100
 z_as_relative = false
+
+[node name="FuelPickup2" parent="." instance=ExtResource( 44 )]
+position = Vector2( 526, 1225 )
+scale = Vector2( 0.5, 0.5 )
 
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
@@ -645,5 +658,8 @@ z_as_relative = false
 [connection signal="body_entered" from="LaserBarrier5" to="Player" method="_on_LaserBarrier5_body_entered"]
 [connection signal="body_entered" from="LaserBarrier6" to="Player" method="_on_LaserBarrier6_body_entered"]
 [connection signal="body_entered" from="LaserBarrier7" to="Player" method="_on_LaserBarrier7_body_entered"]
+[connection signal="body_entered" from="Portal/PortalZoom" to="Player/Camera2D" method="_on_PortalZoom_body_entered"]
+[connection signal="body_exited" from="Portal/PortalZoom" to="Player/Camera2D" method="_on_PortalZoom_body_exited"]
+[connection signal="body_entered" from="FuelPickup2" to="Player" method="_on_FuelPickup2_body_entered"]
 
 [editable path="Station1"]
