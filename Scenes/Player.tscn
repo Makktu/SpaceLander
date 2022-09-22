@@ -97,6 +97,7 @@ z_index = -10
 texture = ExtResource( 3 )
 offset = Vector2( 30, 30 )
 texture_scale = 4.0
+energy = 1.25
 range_z_min = -90
 shadow_enabled = true
 shadow_color = Color( 1, 1, 1, 0 )

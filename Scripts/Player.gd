@@ -85,6 +85,8 @@ func game_over():
 	$Sprite.visible = false
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
+	$Camera2D.game_over_zoom_out()
+	yield(get_tree().create_timer(0.5), "timeout")
 				
 
 func _on_LaserBarrier_area_entered(area: Area2D) -> void:
@@ -351,3 +353,8 @@ func _on_FuelPickup2_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD / 2
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
+
+
+func _on_OutOfBounds_body_entered(body):
+	if !$"/root/Global".test_mode:
+		game_over()
