@@ -28,7 +28,7 @@ func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 		for n in 200: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start -= new_zoom
-			yield(get_tree().create_timer(0.02), "timeout")
+			yield(get_tree().create_timer(0.03), "timeout")
 
 
 func _on_2ndCameraZoom_body_entered(body: Node) -> void:

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Aggressor2.mp3-7ad3763afbcceae9a0b52e4394f462be.mp3str"
+
+[deps]
+
+source_file="res://Assets/Aggressor2.mp3"
+dest_files=[ "res://.import/Aggressor2.mp3-7ad3763afbcceae9a0b52e4394f462be.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -86,7 +86,7 @@ func game_over():
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
 	$Camera2D.game_over_zoom_out()
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 				
 
 func _on_LaserBarrier_area_entered(area: Area2D) -> void:

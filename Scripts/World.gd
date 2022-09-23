@@ -1,8 +1,5 @@
 extends Node2D
 
-#func _ready() -> void:
-#	add_child(Global.player)
-
 
 func _on_PortalZoom_body_entered(body):
 	if body.name == "Player":
@@ -12,3 +9,4 @@ func _on_PortalZoom_body_entered(body):
 func _on_PortalZoom_body_exited(body):
 	if body.name == "Player":
 		$CanvasModulate.visible = true
+		$CanvasModulate.color = "red"
