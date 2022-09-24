@@ -74,3 +74,11 @@ func _on_PortalZoom_body_exited(body: Node) -> void:
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start -= new_zoom
 			yield(get_tree().create_timer(0.1), "timeout")
+
+
+func _on_ZoomOut_body_entered(body):
+	if body.name == "Player":
+		for n in 1650: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start += new_zoom
+			yield(get_tree().create_timer(0.002), "timeout")
