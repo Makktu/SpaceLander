@@ -618,7 +618,7 @@ color = Color( 0.101961, 0.0980392, 0.0980392, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 self_modulate = Color( 1, 1, 1, 0.95 )
-position = Vector2( 667, -1192 )
+position = Vector2( 665, -790 )
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -709,7 +709,7 @@ scale = Vector2( 3, 2 )
 z_index = -1
 frames = SubResource( 50 )
 animation = "fireball"
-frame = 79
+frame = 15
 playing = true
 
 [node name="AlertBeep" type="AudioStreamPlayer2D" parent="Player"]
@@ -755,6 +755,14 @@ position = Vector2( 3480, 3105 )
 [node name="ZoomOut" parent="." instance=ExtResource( 59 )]
 position = Vector2( 817, 1983 )
 scale = Vector2( 1.76448, 2.75165 )
+
+[node name="ZoomOutMiddle" parent="." instance=ExtResource( 59 )]
+position = Vector2( 2924, 1921 )
+scale = Vector2( 2.55748, 2.68033 )
+
+[node name="ZoomBackInMiddle2" parent="." instance=ExtResource( 59 )]
+position = Vector2( 1978, 1352 )
+scale = Vector2( 1.30251, 1.64082 )
 
 [node name="2ndCameraZoom" parent="." instance=ExtResource( 58 )]
 position = Vector2( 3376, 2512 )
@@ -901,6 +909,8 @@ scale = Vector2( 2, 2 )
 [connection signal="finished" from="Player/Boom" to="Player" method="_on_Boom_finished"]
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
 [connection signal="body_entered" from="ZoomOut" to="Player/Camera2D" method="_on_ZoomOut_body_entered"]
+[connection signal="body_entered" from="ZoomOutMiddle" to="Player/Camera2D" method="_on_ZoomOutMiddle_body_entered"]
+[connection signal="body_entered" from="ZoomBackInMiddle2" to="Player/Camera2D" method="_on_ZoomBackInMiddle2_body_entered"]
 [connection signal="body_entered" from="2ndCameraZoom" to="Player/Camera2D" method="_on_2ndCameraZoom_body_entered"]
 [connection signal="body_exited" from="2ndCameraZoom" to="Player/Camera2D" method="_on_2ndCameraZoom_body_exited"]
 [connection signal="body_entered" from="3rdCameraZoom" to="Player/Camera2D" method="_on_3rdCameraZoom_body_entered"]

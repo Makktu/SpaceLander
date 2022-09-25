@@ -3,6 +3,9 @@ extends Camera2D
 var zoom_start = 1
 var new_zoom = 0.001
 
+var passed_through_middle_1 = false
+var passed_through_middle_2 = false
+
 func game_over_zoom_out():
 	for n in 1000: 			
 		zoom = Vector2(zoom_start,zoom_start)
@@ -82,3 +85,21 @@ func _on_ZoomOut_body_entered(body):
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.002), "timeout")
+
+
+func _on_ZoomOutMiddle_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_through_middle_1 == false:
+		for n in 800: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start += new_zoom
+			yield(get_tree().create_timer(0.002), "timeout")
+		passed_through_middle_1 = true
+
+
+func _on_ZoomBackInMiddle2_body_entered(body: Node) -> void:	
+	if body.name == "Player" and passed_through_middle_2 == false:
+		for n in 800: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start -= new_zoom
+			yield(get_tree().create_timer(0.01), "timeout")
+		passed_through_middle_2 = true

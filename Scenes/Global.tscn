@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://Assets/LANDER_DUB3.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Global.gd" type="Script" id=2]
 [ext_resource path="res://Assets/lander0.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/lander_march.mp3" type="AudioStream" id=4]
@@ -10,7 +11,7 @@
 script = ExtResource( 2 )
 
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 1 )
 volume_db = -15.0
 max_distance = 200000.0
 
