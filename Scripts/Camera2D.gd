@@ -55,17 +55,17 @@ func _on_2ndCameraZoom_body_exited(body: Node) -> void:
 
 func _on_3rdCameraZoom_body_exited(body: Node) -> void:
 	if body.name == "Player":
-		for n in 200: 			
+		for n in 100: 			
 			zoom = Vector2(zoom_start,zoom_start)
-			zoom_start += new_zoom
-			yield(get_tree().create_timer(0.02), "timeout")
+			zoom_start -= new_zoom
+			yield(get_tree().create_timer(0.10), "timeout")
 #		zoom = Vector2(1,1)
 
 
 func _on_PortalZoom_body_entered(body: Node) -> void:
 	# Zooms OUT at the approach to the portal (at end)
 	if body.name == "Player":
-		for n in 1650: 			
+		for n in 1450: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.002), "timeout")
@@ -81,7 +81,7 @@ func _on_PortalZoom_body_exited(body: Node) -> void:
 
 func _on_ZoomOut_body_entered(body):
 	if body.name == "Player":
-		for n in 1650: 			
+		for n in 1450: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.002), "timeout")
@@ -89,7 +89,7 @@ func _on_ZoomOut_body_entered(body):
 
 func _on_ZoomOutMiddle_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_through_middle_1 == false:
-		for n in 800: 			
+		for n in 400: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start += new_zoom
 			yield(get_tree().create_timer(0.002), "timeout")
@@ -98,8 +98,16 @@ func _on_ZoomOutMiddle_body_entered(body: Node) -> void:
 
 func _on_ZoomBackInMiddle2_body_entered(body: Node) -> void:	
 	if body.name == "Player" and passed_through_middle_2 == false:
-		for n in 800: 			
+		for n in 500: 			
 			zoom = Vector2(zoom_start,zoom_start)
 			zoom_start -= new_zoom
 			yield(get_tree().create_timer(0.01), "timeout")
 		passed_through_middle_2 = true
+
+
+func _on_ZoomOutCanyon_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		for n in 300: 			
+			zoom = Vector2(zoom_start,zoom_start)
+			zoom_start += new_zoom
+			yield(get_tree().create_timer(0.001), "timeout")

@@ -12,6 +12,7 @@ var shake_amount = 1
 var down_thrust = 0
 
 var camera_shake_toggle = true
+var rocket_whoosh = false
 
 
 
@@ -31,7 +32,7 @@ var input_dir = 0
 var y_input_dir = 0
 #var SHIELDS = 100000
 var FUEL = 3000
-var FUEL_POD = 3000
+var FUEL_POD = 3300
 var fuel_base_usage = 5
 var fuel_alarm_threshold = 500
 var fuel_alert_played = false
@@ -175,7 +176,13 @@ func get_input():
 	if Input.is_action_pressed("ui_down") || swipe_up:
 		down_thrust += 1
 		if down_thrust > 45 and down_thrust < 165 and camera_shake_toggle == true:
-			camera_shake(shake_amount)
+			if down_thrust > 60 and rocket_whoosh == false:
+				$RocketWhoosh.play()
+				$AnimatedSprite.scale.x = 0.255
+				$AnimatedSprite.scale.y = 0.3
+				fuel_base_usage = 10
+				rocket_whoosh = true
+			camera_shake(shake_amount)	
 		if just_starting:
 			just_starting = false
 		speed += constant_speed
@@ -198,6 +205,10 @@ func get_input():
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
 		$AnimatedSprite.play("exhaustend")
 		down_thrust = 0
+		rocket_whoosh = false
+		$AnimatedSprite.scale.y = 0.25
+		$AnimatedSprite.scale.x = 0.25
+		fuel_base_usage = 5
 		$Thrusters.playing = false
 		middleOn = false
 		swipe_up_released = false

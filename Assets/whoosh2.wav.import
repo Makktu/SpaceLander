@@ -2,11 +2,13 @@
 
 importer="wav"
 type="AudioStreamSample"
-valid=false
+path="res://.import/whoosh2.wav-d15100c5ff8927e8781d3889e7947717.sample"
 
 [deps]
 
-source_file="res://Assets/rocketwhoosh.wav"
+source_file="res://Assets/whoosh2.wav"
+dest_files=[ "res://.import/whoosh2.wav-d15100c5ff8927e8781d3889e7947717.sample" ]
+
 [params]
 
 force/8_bit=false
