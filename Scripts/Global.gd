@@ -7,6 +7,7 @@ onready var BGMusic4 = $BGMusic4
 onready var BGMusic5 = $BGMusic5
 onready var BGplaying = true
 onready var test_mode = false
+onready var the_player
 #onready var player = ""
 
 #onready var camera = $"/root/World/Player/Camera2D"
@@ -19,4 +20,11 @@ var user_OS = OS.get_name()
 func _ready() -> void:
 	BGMusic.play()
 	print(user_OS)
+	
+func store_player(player):
+	the_player = player
+	
+func get_player():
+	return the_player
+
 

@@ -4,17 +4,12 @@ onready var black_smoke = $BlackSmoke/AnimatedSprite
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var Swipe = $Camera2D/SwipeScreenButton
 
-# working local? HOW ABOUT NOW?!?!  AND NOW?
 
 var just_starting = true
-
 var shake_amount = 1
 var down_thrust = 0
-
 var camera_shake_toggle = true
 var rocket_whoosh = false
-
-
 
 # initialise swipe control variables
 var swipe_up = false
@@ -30,36 +25,30 @@ var swipe_right_released = false
 
 var input_dir = 0
 var y_input_dir = 0
-#var SHIELDS = 100000
+
 var FUEL = 3000
 var FUEL_POD = 3300
 var fuel_base_usage = 5
 var fuel_alarm_threshold = 500
 var fuel_alert_played = false
-#var PLAYER_SPEED = 200
+
 var gameOver = false
 var middleOn = false
 var no_fuel = false
 var speed = 0
-
-#var jump_speed = -1800
-var last_press = ""
-var constant_press = 0
-var constant_speed = 30
-
-
+var constant_speed = 10
 
 # THRUSTER VALUES:
-var side_thrust = 10 # Sunday val: 10
-var bottom_thrust = 20 # Sunday val: 20
-var top_thrust = 10 # Sunday val: 10
+var side_thrust = 10
+var bottom_thrust = 20
+var top_thrust = 10
 
 # GLOBAL PHYSICS VALUES:
-var acceleration = 2 # Sunday val: 5
+var acceleration = 1
 var gravity = 0
 var velocity = Vector2.ZERO
 var friction = 0.0
-var max_speed = 100
+var max_speed = 50
 
 
 func game_over():
@@ -74,11 +63,10 @@ func game_over():
 	$RightThrusters.visible = false
 	$AnimatedSprite.stop()
 	$AnimatedSprite.visible = false
-#	black_smoke.visible = false
 	
-	if FUEL <= 0:
-		# if reason for game over is total fuel loss, pause for half a second		
-		yield(get_tree().create_timer(0.5), "timeout")
+#	if FUEL <= 0:
+#		# if reason for game over is total fuel loss, pause for half a second		
+#		yield(get_tree().create_timer(0.5), "timeout")
 		
 	$Boom.play()
 	$Kaboom.visible = true
@@ -86,6 +74,7 @@ func game_over():
 	$Sprite.visible = false
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
+	yield(get_tree().create_timer(0.5), "timeout")
 	$Camera2D.game_over_zoom_out()
 	yield(get_tree().create_timer(1.5), "timeout")
 				
@@ -113,8 +102,6 @@ func fuel_alert_beep():
 	for n in 7:
 		yield(get_tree().create_timer(0.25), "timeout")
 		$AlertBeep.play()
-
-
 	
 
 func get_input():
@@ -131,6 +118,9 @@ func get_input():
 			camera_shake(shake_amount)
 		if just_starting:
 			just_starting = false
+		speed += constant_speed
+		if speed > max_speed:
+			speed = max_speed
 		input_dir += side_thrust
 		if input_dir >= max_speed:
 			input_dir = max_speed
@@ -155,7 +145,10 @@ func get_input():
 		if down_thrust > 60 and down_thrust < 110 and camera_shake_toggle == true and FUEL < 500:
 			camera_shake(shake_amount)
 		if just_starting:
-			just_starting = false	
+			just_starting = false
+		speed += constant_speed
+		if speed > max_speed:
+			speed = max_speed
 		input_dir -= side_thrust
 		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)	
@@ -175,11 +168,12 @@ func get_input():
 	
 	if Input.is_action_pressed("ui_down") || swipe_up:
 		down_thrust += 1
+		$RocketWhoosh.volume_db = -15
 		if down_thrust > 45 and down_thrust < 165 and camera_shake_toggle == true:
-			if down_thrust > 60 and rocket_whoosh == false:
+			if down_thrust > 45 and rocket_whoosh == false:
 				$RocketWhoosh.play()
-				$AnimatedSprite.scale.x = 0.255
-				$AnimatedSprite.scale.y = 0.3
+				$AnimatedSprite.scale.x = 0.26
+				$AnimatedSprite.scale.y = 0.32
 				fuel_base_usage = 10
 				rocket_whoosh = true
 			camera_shake(shake_amount)	
@@ -203,11 +197,13 @@ func get_input():
 			middleOn = true
 			
 	if Input.is_action_just_released("ui_down") || swipe_up_released:
-		$AnimatedSprite.play("exhaustend")
-		down_thrust = 0
+		$AnimatedSprite.play("exhaustend")		
 		rocket_whoosh = false
+		if $RocketWhoosh.playing and down_thrust < 70:
+			$RocketWhoosh.volume_db = -50
 		$AnimatedSprite.scale.y = 0.25
 		$AnimatedSprite.scale.x = 0.25
+		down_thrust = 0
 		fuel_base_usage = 5
 		$Thrusters.playing = false
 		middleOn = false
@@ -225,6 +221,8 @@ func get_input():
 		if just_starting:
 			just_starting = false
 		speed += constant_speed
+		if speed > max_speed:
+			speed = max_speed
 		y_input_dir += top_thrust
 		FUEL -= fuel_base_usage / 2
 		$GUI/Fuel.adjust(FUEL)
@@ -251,7 +249,7 @@ func get_input():
 		if get_tree().get_current_scene().get_name() == "LevelOne":
 			velocity.x = move_toward(-150, 0, friction)
 		
-	if input_dir != 0 || y_input_dir != 0:
+	if input_dir != 0 or y_input_dir != 0:
 		# accelerate when there's input
 		if input_dir != 0:
 			velocity.x = move_toward(velocity.x, input_dir * speed, acceleration)
@@ -268,16 +266,12 @@ func _physics_process(delta):
 	if gameOver:
 		return
 		
-#	if FUEL < 800:
-#		black_smoke.visible = true
-		
 	if FUEL <= 0 && !$"/root/Global".test_mode:
 		 game_over()
 		
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	# my noob collision detection with surfaces	
 
 	var input = Vector2()
 
@@ -285,8 +279,9 @@ func _physics_process(delta):
 	input.x -= float(Input.is_action_pressed('ui_right'))
 	input.y += float(Input.is_action_pressed('ui_up'))
 	input.y -= float(Input.is_action_pressed('ui_down'))	
-
+	
 	move_and_slide(input * speed * delta)
+	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "TileMap" && !$"/root/Global".test_mode:
@@ -306,7 +301,6 @@ func _on_LaserBarrier_body_entered(body: Node) -> void:
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
-#	black_smoke.visible = false
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
 

@@ -13,7 +13,8 @@ func _on_CentreOfPortal_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://Scenes/Won.tscn")
+	$"../".transfer_player()
+#	get_tree().change_scene("res://Scenes/Won.tscn")
 #	$"../Player".position.x = 651
 #	$"../Player".position.y = -1200
 #	yield(get_tree().create_timer(3), "timeout")
