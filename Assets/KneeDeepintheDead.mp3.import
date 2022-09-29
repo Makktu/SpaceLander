@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/KneeDeepintheDead.mp3-14d4aa4a50fcabb71ceb45138ce40416.mp3str"
+
+[deps]
+
+source_file="res://Assets/KneeDeepintheDead.mp3"
+dest_files=[ "res://.import/KneeDeepintheDead.mp3-14d4aa4a50fcabb71ceb45138ce40416.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

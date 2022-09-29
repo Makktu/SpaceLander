@@ -5,6 +5,8 @@ onready var Collision_Sound = $AudioStreamPlayer2D
 onready var Swipe = $Camera2D/SwipeScreenButton
 
 
+var passed_zooms = [false, false, false, false, false, false]
+
 var just_starting = true
 var shake_amount = 1
 var down_thrust = 0
@@ -27,7 +29,7 @@ var input_dir = 0
 var y_input_dir = 0
 
 var FUEL = 3000
-var FUEL_POD = 3300
+var FUEL_POD = 6000
 var fuel_base_usage = 5
 var fuel_alarm_threshold = 500
 var fuel_alert_played = false
@@ -78,11 +80,6 @@ func game_over():
 	$Camera2D.game_over_zoom_out()
 	yield(get_tree().create_timer(1.5), "timeout")
 				
-
-func _on_LaserBarrier_area_entered(area: Area2D) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
 
 func _on_Boom_finished() -> void:
 	get_tree().change_scene("res://Scenes/Game Over.tscn")
@@ -294,10 +291,6 @@ func _physics_process(delta):
 			fuel_alert_played = true
 			fuel_alert_beep()		
 
-func _on_LaserBarrier_body_entered(body: Node) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
 
 func _on_FuelPickup_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
@@ -334,26 +327,6 @@ func _ready():
 	pass
 
 
-func _on_LaserBarrier2_body_entered(body: Node) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
-
-func _on_LaserBarrier5_body_entered(body: Node) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
-
-func _on_LaserBarrier6_body_entered(body: Node) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
-
-func _on_LaserBarrier7_body_entered(body: Node) -> void:
-	if !$"/root/Global".test_mode:
-		game_over()
-
-
 func _on_FuelPickup2_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD / 2
 	$GUI/Fuel/Value.pickup_fuel()
@@ -363,3 +336,33 @@ func _on_FuelPickup2_body_entered(body: Node) -> void:
 func _on_OutOfBounds_body_entered(body):
 	if !$"/root/Global".test_mode:
 		game_over()
+
+
+func _on_3rdCameraZoom_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms[0] == false:
+		passed_zooms[0] = true
+		$Camera2D.zoom_in_or_out("IN", 200, 0.03)
+
+
+func _on_ZoomOutMiddle2_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms[1] == false:
+		passed_zooms[1] = true
+		$Camera2D.zoom_in_or_out("OUT", 200, 0.09)
+
+
+func _on_ZoomOutMiddle_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms[2] == false:
+		passed_zooms[2] = true
+		$Camera2D.zoom_in_or_out("OUT", 300, 0.02)
+
+
+func _on_ZoomBackInMiddle2_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms[3] == false:
+		passed_zooms[3] = true
+		$Camera2D.zoom_in_or_out("IN", 250, 0.01)
+
+
+func _on_ZoomOut_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms[4] == false:
+		passed_zooms[4] = true
+		$Camera2D.zoom_in_or_out("OUT", 550, 0.05)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Proletariat.mp3-bb0d14003ee5bf6afed1e63e3552b151.mp3str"
+
+[deps]
+
+source_file="res://Assets/Proletariat.mp3"
+dest_files=[ "res://.import/Proletariat.mp3-bb0d14003ee5bf6afed1e63e3552b151.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

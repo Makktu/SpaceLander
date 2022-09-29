@@ -20,11 +20,5 @@ var user_OS = OS.get_name()
 func _ready() -> void:
 	BGMusic.play()
 	print(user_OS)
-	
-func store_player(player):
-	the_player = player
-	
-func get_player():
-	return the_player
 
 
