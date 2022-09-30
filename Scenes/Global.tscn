@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Proletariat.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Music/orc.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Global.gd" type="Script" id=2]
-[ext_resource path="res://Assets/lander0.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Assets/lander_march.mp3" type="AudioStream" id=4]
-[ext_resource path="res://Assets/LANDER_DUB1.mp3" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Aggressor2.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Music/KneeDeepintheDead.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Music/lander_march.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Music/LANDER_DUB1.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Music/Aggressor2.mp3" type="AudioStream" id=6]
 
 [node name="Global" type="Node2D"]
 script = ExtResource( 2 )

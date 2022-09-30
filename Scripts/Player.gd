@@ -347,6 +347,7 @@ func _on_OutOfBounds_body_entered(body):
 
 func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms[0] == false:
+#		change_lighting(1.1, 1)
 		passed_zooms[0] = true
 		$Camera2D.zoom_in_or_out("IN", 200, 0.03)
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LawAbidingCitizen.mp3-36654a660f9a19e2994d1ad893d307cb.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/LawAbidingCitizen.mp3"
+dest_files=[ "res://.import/LawAbidingCitizen.mp3-36654a660f9a19e2994d1ad893d307cb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

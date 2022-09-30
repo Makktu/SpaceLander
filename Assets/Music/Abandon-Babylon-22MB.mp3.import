@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Abandon-Babylon-22MB.mp3-6705594efe4a475eccc3f2a7a13000b8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Abandon-Babylon-22MB.mp3"
+dest_files=[ "res://.import/Abandon-Babylon-22MB.mp3-6705594efe4a475eccc3f2a7a13000b8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

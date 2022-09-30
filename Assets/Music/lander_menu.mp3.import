@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lander_menu.mp3-76abc162e08d419f0be099cdc1793d0c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/lander_menu.mp3"
+dest_files=[ "res://.import/lander_menu.mp3-76abc162e08d419f0be099cdc1793d0c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
