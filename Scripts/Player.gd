@@ -52,6 +52,9 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 50
 
+func change_lighting(extent, tex_scale):
+	$Light2D.energy = extent
+	$Light2D.texture_scale = tex_scale
 
 func game_over():
 	gameOver = true
@@ -260,6 +263,10 @@ func get_input():
 
 
 func _physics_process(delta):
+	
+	if position.y > 2027 and position.x > 5000:
+		get_tree().change_scene("res://Scenes/Won.tscn")
+	
 	if gameOver:
 		return
 		
@@ -366,3 +373,9 @@ func _on_ZoomOut_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms[4] == false:
 		passed_zooms[4] = true
 		$Camera2D.zoom_in_or_out("OUT", 550, 0.05)
+
+
+func _on_FuelPickup3_body_entered(body: Node) -> void:
+	FUEL += FUEL_POD
+	$GUI/Fuel/Value.pickup_fuel()
+	fuel_alert_played = false

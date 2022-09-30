@@ -80,7 +80,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 47, 49.5 )
+extents = Vector2( 261, 49.5 )
 
 [node name="Portal" type="Area2D"]
 script = ExtResource( 66 )
@@ -92,7 +92,7 @@ material = SubResource( 4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "portal"
-frame = 32
+frame = 4
 playing = true
 
 [node name="NearingPortal" type="AudioStreamPlayer2D" parent="."]
@@ -106,7 +106,7 @@ stream = ExtResource( 67 )
 [node name="CentreOfPortal" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentreOfPortal"]
-position = Vector2( 10, 7.5 )
+position = Vector2( -3, 7.5 )
 shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]

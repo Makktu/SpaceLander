@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="WhiteScreen" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+self_modulate = Color( 0.454902, 0.192157, 0.192157, 1 )
+color = Color( 0.992157, 0.992157, 0.992157, 1 )
