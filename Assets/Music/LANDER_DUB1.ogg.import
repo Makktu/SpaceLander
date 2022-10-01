@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LANDER_DUB1.ogg-b5749898e5b449918c6f8d3f34ec648e.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/LANDER_DUB1.ogg"
+dest_files=[ "res://.import/LANDER_DUB1.ogg-b5749898e5b449918c6f8d3f34ec648e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

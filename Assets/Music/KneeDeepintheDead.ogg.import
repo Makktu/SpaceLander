@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/KneeDeepintheDead.ogg-1fb9770428439eb746c9d64f57f09413.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/KneeDeepintheDead.ogg"
+dest_files=[ "res://.import/KneeDeepintheDead.ogg-1fb9770428439eb746c9d64f57f09413.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

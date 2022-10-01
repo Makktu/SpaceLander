@@ -1,32 +1,37 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Music/orc.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Music/Aggressor2-mq.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Global.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Music/KneeDeepintheDead.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Music/lander_march.mp3" type="AudioStream" id=4]
-[ext_resource path="res://Assets/Music/LANDER_DUB1.mp3" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Music/Aggressor2.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Music/orc.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Music/LANDER_DUB3.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Music/KneeDeepintheDead.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Music/LANDER_DUB1.ogg" type="AudioStream" id=6]
 
 [node name="Global" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource( 3 )
 volume_db = -15.0
 max_distance = 200000.0
 
 [node name="BGMusic2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 1 )
 volume_db = -15.0
+max_distance = 200000.0
 
 [node name="BGMusic3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -15.0
+max_distance = 200000.0
 
 [node name="BGMusic4" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 6 )
 volume_db = -15.0
 
 [node name="BGMusic5" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 4 )
 volume_db = -15.0
+
+[connection signal="finished" from="BGMusic" to="." method="_on_BGMusic_finished"]
+[connection signal="finished" from="BGMusic3" to="." method="_on_BGMusic3_finished"]
