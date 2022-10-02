@@ -28,10 +28,15 @@ max_distance = 200000.0
 [node name="BGMusic4" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 volume_db = -15.0
+max_distance = 200000.0
 
 [node name="BGMusic5" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
+max_distance = 200000.0
 
 [connection signal="finished" from="BGMusic" to="." method="_on_BGMusic_finished"]
+[connection signal="finished" from="BGMusic2" to="." method="_on_BGMusic2_finished"]
 [connection signal="finished" from="BGMusic3" to="." method="_on_BGMusic3_finished"]
+[connection signal="finished" from="BGMusic4" to="." method="_on_BGMusic4_finished"]
+[connection signal="finished" from="BGMusic5" to="." method="_on_BGMusic5_finished"]
