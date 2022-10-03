@@ -18,10 +18,4 @@ func _on_StartScreen_pressed() -> void:
 	get_tree().change_scene("res://Scenes/Game Over.tscn")
 
 func _on_Toggle_Music_pressed() -> void:
-	
-	if Global.BGplaying:
-		Global.BGMusic.stop()
-	else:
-		Global.BGMusic.play()
-			
-	Global.BGplaying = !Global.BGplaying
+	$"/root/Global".toggle_music_in_pause_screen()

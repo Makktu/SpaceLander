@@ -1,6 +1,6 @@
 # SpaceLander
 
-#### "Design Document" of a kind:
+## "Design Document"
 
 The elevator pitch: Guide a spaceship in zero-g using reaction thrusters only to explore a mysterious cosmic Megastructure.
 

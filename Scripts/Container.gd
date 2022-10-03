@@ -18,8 +18,10 @@ func _process(delta: float) -> void:
 func _on_Start_Button_pressed() -> void:
 	$"/root/Global".test_mode = false
 	get_tree().change_scene("res://Scenes/World.tscn")
-
-
 func _on_TestMode_Button_pressed() -> void:
 	$"/root/Global".test_mode = true
 	get_tree().change_scene("res://Scenes/World.tscn")
+
+
+func _on_Credits_pressed() -> void:
+	get_tree().change_scene("res://Scenes/Credits.tscn")
