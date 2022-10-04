@@ -181,15 +181,6 @@ custom_colors/font_color = Color( 0.890196, 0.776471, 0.0666667, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "SpaceLander"
 
-[node name="AuthorTag" type="Label" parent="Container"]
-margin_left = 329.0
-margin_top = 879.0
-margin_right = 688.0
-margin_bottom = 921.0
-custom_colors/font_color = Color( 0.94902, 0.921569, 0.913725, 1 )
-custom_fonts/font = SubResource( 5 )
-text = "game: makktu | music: dmed"
-
 [node name="VerNumber" type="Label" parent="Container"]
 margin_left = 787.0
 margin_top = 889.0
@@ -197,7 +188,7 @@ margin_right = 1139.0
 margin_bottom = 931.0
 custom_colors/font_color = Color( 0.937255, 0.843137, 0.0235294, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "v0.6.3	"
+text = "v0.6.4"
 
 [node name="Camera2D" type="Camera2D" parent="Container"]
 position = Vector2( 507, 298 )

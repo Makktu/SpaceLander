@@ -6,6 +6,7 @@ func transfer_player():
 	yield(get_tree().create_timer(1), "timeout")
 	$Player.position.x = 8230
 	$Player.position.y = -2900
+	$ParallaxBackground/ParallaxLayer/Sprite.texture = load("res://Assets/Starfield 1 - 1024x1024.png")
 	yield(get_tree().create_timer(2), "timeout")
 	$CanvasModulate.visible = false
 	$CanvasModulate2.visible = true

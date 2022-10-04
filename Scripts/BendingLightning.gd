@@ -13,5 +13,5 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite.speed_scale = 0.6
 
 func _ready() -> void:
-	$AnimatedSprite.speed_scale = 0.6
+	$AnimatedSprite.speed_scale = 1
 	$AnimatedSprite.play("lightning")

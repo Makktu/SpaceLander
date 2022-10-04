@@ -6,6 +6,7 @@ onready var Swipe = $Camera2D/SwipeScreenButton
 
 
 var passed_zooms = [false, false, false, false, false, false]
+var passed_zooms_levelOne = [false, false, false, false, false]
 var transitioning_to_new = false
 
 var just_starting = true
@@ -53,9 +54,11 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 50
 
-func change_lighting(extent, tex_scale):
-	$Light2D.energy = extent
-	$Light2D.texture_scale = tex_scale
+func change_lighting(direction, amount):
+	for n in amount:
+		yield(get_tree().create_timer(0.02), "timeout")
+		$Light2D.energy -= 0.001
+		$Light2D.texture_scale -= 0.0001
 
 func game_over():
 	gameOver = true
@@ -268,8 +271,8 @@ func _physics_process(delta):
 #	if transitioning_to_new:
 #		$"..".set_modulate(lerp(get_modulate(), Color(0,0,0,1), 0.2))
 	
-	if position.y > 2027 and position.x > 5000:
-		get_tree().change_scene("res://Scenes/Won.tscn")
+#	if position.y > 2027 and position.x > 5000:
+#		get_tree().change_scene("res://Scenes/Won.tscn")
 	
 	if gameOver:
 		return
@@ -351,7 +354,7 @@ func _on_OutOfBounds_body_entered(body):
 
 func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms[0] == false:
-#		change_lighting(1.1, 1)
+		change_lighting("down", 100)
 		passed_zooms[0] = true
 		$Camera2D.zoom_in_or_out("IN", 200, 0.03)
 
@@ -384,3 +387,17 @@ func _on_FuelPickup3_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
+
+
+func _on_ZoomLevel1_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms_levelOne[0] == false:
+		passed_zooms_levelOne[0] = true
+		$Camera2D.zoom_in_or_out("IN", 250, 0.01)
+		if passed_zooms_levelOne[1] == true:
+			passed_zooms_levelOne[1] = false
+
+
+func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
+	if body.name == "Player" and passed_zooms_levelOne[1] == false and passed_zooms_levelOne[0] == true:
+		passed_zooms_levelOne[1] = true
+		$Camera2D.zoom_in_or_out("OUT", 200, 0.01)

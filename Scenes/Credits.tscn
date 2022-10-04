@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Starfield7.png" type="Texture" id=1]
-[ext_resource path="res://Assets/SpaceLander-splash1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/SpaceLander-splash2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scripts/CreditScroll.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/CreditsListing.gd" type="Script" id=5]
@@ -21,7 +21,7 @@ font_data = ExtResource( 3 )
 bg_color = Color( 0.733333, 0.0666667, 0.0470588, 1 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 40
+size = 46
 font_data = ExtResource( 3 )
 
 [node name="Credits" type="Node2D"]
@@ -30,9 +30,9 @@ font_data = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="VintageScifiBackdrop" type="Sprite" parent="Container"]
-modulate = Color( 0.0941176, 0.0941176, 0.0941176, 0.784314 )
-position = Vector2( 357.82, 639.615 )
-scale = Vector2( 0.689804, 1.22972 )
+self_modulate = Color( 1, 1, 1, 0.760784 )
+position = Vector2( 378, 777.202 )
+scale = Vector2( 0.909578, 1.0875 )
 z_index = -2
 texture = ExtResource( 2 )
 
@@ -59,52 +59,35 @@ custom_fonts/font = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 text = "BACK"
 
-[node name="ViewportContainer" type="ViewportContainer" parent="Container"]
-margin_left = 66.0
-margin_top = 253.0
-margin_right = 653.0
-margin_bottom = 1153.0
-
-[node name="Viewport" type="Viewport" parent="Container/ViewportContainer"]
-size = Vector2( 900, 900 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="CreditsContainer" type="Node2D" parent="Container/ViewportContainer/Viewport"]
+[node name="CreditsContainer" type="Node2D" parent="Container"]
+position = Vector2( 0, -970 )
 script = ExtResource( 5 )
 
-[node name="CreditsListing" type="RichTextLabel" parent="Container/ViewportContainer/Viewport/CreditsContainer"]
-margin_left = 63.0
-margin_top = 1289.0
-margin_right = 681.0
-margin_bottom = 2225.0
-custom_colors/default_color = Color( 0.811765, 0.0901961, 0.0901961, 1 )
+[node name="CreditsListing" type="RichTextLabel" parent="Container/CreditsContainer"]
+margin_left = 75.0
+margin_top = 1293.0
+margin_right = 693.0
+margin_bottom = 2229.0
+rect_scale = Vector2( 0.941168, 0.891458 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
-text = "Programming & Game Design
+text = "Game Programming & Design:
 John McNamara
+________________
+Art Assets from creators at OpenGameArt.org:
+[names to follow]
+________________
+ Music:
 
-Music Tracks:
-
-'orc'
+'orc' / 'Lander_DUB1' / 'Lander_DUB3'
+by
 dmed
 
-'Aggressor'
-Karl Casey/White Bat Audio
-
-'Kneedeep In The Dead'
-Karl Casey/White Bat Audio
-
-'Lander_DUB1'
-dmed
-
-'Lander_DUB3'
-dmed
+'Aggressor' / 'Knee-deep In The Dead'
+by
+Karl Casey @ White Bat Audio
 "
 scroll_active = false
-
-[node name="Camera2D" type="Camera2D" parent="Container/ViewportContainer/Viewport"]
-current = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
