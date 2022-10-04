@@ -4,9 +4,9 @@ onready var BGplaying = true
 onready var test_mode = false
 var user_OS = OS.get_name()
 
-var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/Aggressor2-mq.ogg", "res://Assets/Music/KneeDeepintheDead.ogg", "res://Assets/Music/LawAbidingCitizen.ogg", "res://Assets/Music/LANDER_DUB3.ogg"]
+var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/Aggressor2-mq.ogg", "res://Assets/Music/KneeDeepintheDead.ogg", "res://Assets/Music/LawAbidingCitizen.ogg", "res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/MassExtinction.ogg","res://Assets/Music/SoulEater.ogg","res://Assets/Music/TheDevilsEyes.ogg","res://Assets/Music/Videodrome.ogg"]
 
-var music_playing_order = [0,1,2,3,4]
+var music_playing_order = [8,7,6,5,0,1,2,3,4]
 
 var current_music_track = 0
 
@@ -15,11 +15,11 @@ var now_playing = music_tracks_list[music_playing_order[current_music_track]]
 func _ready() -> void:
 	play_next_track()
 	
-#func _unhandled_input(event):
-#	if event is InputEventKey:
-#		if event.pressed and event.scancode == KEY_0:
-#			$BGMusic.stop()
-#			play_next_track()
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_0:
+			$BGMusic.stop()
+			play_next_track()
 
 func _on_BGMusic_finished() -> void:
 	# pause a few seconds between tracks
@@ -34,7 +34,7 @@ func play_next_track():
 	$BGMusic.stream = load(now_playing)
 	$BGMusic.play()
 	current_music_track += 1
-	if current_music_track > 4:
+	if current_music_track > music_tracks_list.size() - 1:
 		current_music_track = 0
 	
 
