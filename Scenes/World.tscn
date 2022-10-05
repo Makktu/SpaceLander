@@ -427,7 +427,7 @@ visible = false
 color = Color( 0.184314, 0.486275, 0.109804, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 8208, -4466 )
+position = Vector2( 686, -877 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )

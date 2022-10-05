@@ -264,6 +264,8 @@ func get_input():
 		velocity.x = move_toward(velocity.x, 0, friction)
 		velocity.y = move_toward(velocity.y, 0, friction)
 		
+	velocity.normalized()
+		
 
 
 func _physics_process(delta):
@@ -271,8 +273,8 @@ func _physics_process(delta):
 #	if transitioning_to_new:
 #		$"..".set_modulate(lerp(get_modulate(), Color(0,0,0,1), 0.2))
 	
-#	if position.y > 2027 and position.x > 5000:
-#		get_tree().change_scene("res://Scenes/Won.tscn")
+	if position.y > 2027 and position.x > 5000:
+		get_tree().change_scene("res://Scenes/Won.tscn")
 	
 	if gameOver:
 		return
