@@ -192,7 +192,7 @@
 [ext_resource path="res://Assets/fireball-all/0025.png" type="Texture" id=190]
 [ext_resource path="res://Assets/fireball-all/0011.png" type="Texture" id=191]
 [ext_resource path="res://Assets/fireball-all/0016.png" type="Texture" id=192]
-[ext_resource path="res://Scenes/Fireball.gd" type="Script" id=193]
+[ext_resource path="res://Scripts/Fireball.gd" type="Script" id=193]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

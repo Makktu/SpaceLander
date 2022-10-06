@@ -4,8 +4,8 @@ extends Node2D
 func transfer_player():
 	$CanvasLayer/SceneTransitionRect/AnimationPlayer.play("fade")
 	yield(get_tree().create_timer(1), "timeout")
-	$Player.position.x = 8230
-	$Player.position.y = -2900
+	$Player.position.x = 8051
+	$Player.position.y = -3239
 	$ParallaxBackground/ParallaxLayer/Sprite.texture = load("res://Assets/Starfield 1 - 1024x1024.png")
 	yield(get_tree().create_timer(2), "timeout")
 	$CanvasModulate.visible = false
@@ -17,8 +17,10 @@ func transfer_player():
 #	$"Player/Camera2D".zoom = Vector2(1,1)
 	$"Player/GUI".visible = true	
 	$"Player/FadeOut".play_backwards("fadeout")
+#	$Level1_NODES/LightningEnemy/AnimatedSprite.visible = true
 	$"Player".just_starting = true
 	yield(get_tree().create_timer(3), "timeout")
 	$"Player/Camera2D".zoom_in_or_out("OUT", 130, 0.02)
+#	$Level1_NODES/LightningEnemy/AnimatedSprite.visible = false
 
 

@@ -108,7 +108,7 @@ script = ExtResource( 4 )
 [node name="VintageScifiBackdrop" type="Sprite" parent="Container"]
 self_modulate = Color( 0.819608, 0.627451, 0.576471, 1 )
 position = Vector2( 473, 641 )
-scale = Vector2( 0.968594, 1.27418 )
+scale = Vector2( 1.16343, 1.55512 )
 z_index = -2
 texture = ExtResource( 2 )
 
@@ -133,10 +133,10 @@ margin_bottom = 1251.0
 custom_colors/font_color = Color( 0.890196, 0.776471, 0.0666667, 1 )
 custom_fonts/font = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
-text = "<<<"
+text = "<"
 
 [node name="CreditsContainer" type="Node2D" parent="Container"]
-position = Vector2( 2, 17 )
+position = Vector2( 2, -10 )
 z_index = -1
 script = ExtResource( 5 )
 
@@ -144,7 +144,7 @@ script = ExtResource( 5 )
 margin_left = 75.0
 margin_top = 1293.0
 margin_right = 693.0
-margin_bottom = 2229.0
+margin_bottom = 2521.0
 rect_scale = Vector2( 0.941168, 0.891458 )
 custom_colors/default_color = Color( 0.909804, 0.839216, 0.0313726, 1 )
 custom_fonts/normal_font = SubResource( 1 )
@@ -154,23 +154,29 @@ ________________
 Art Assets from creators at OpenGameArt.org:
 [names to follow]
 ________________
+
  Music:
 
-'orc' / 'Lander_DUB1' / 'Lander_DUB3'
-by
-dmed
+'orc'
+'Lander_DUB1'
+'Lander_DUB3'
+Brian Kavanagh @ lazygamer.net
 
-'Aggressor' / 'Knee-deep In The Dead'
-by
+'Aggressor'
+'Knee-deep In The Dead'
 Karl Casey @ White Bat Audio
-"
+
+Other
+boilerplate
+here
+eventually"
 scroll_active = false
 
 [node name="Portal" type="Area2D" parent="Container"]
 visible = false
 modulate = Color( 0.792157, 0.431373, 0.454902, 0.627451 )
 position = Vector2( 352, 702 )
-scale = Vector2( 3, 4 )
+scale = Vector2( 2, 3 )
 script = ExtResource( 54 )
 
 [node name="Sprite" type="Sprite" parent="Container/Portal"]
@@ -180,7 +186,7 @@ material = SubResource( 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "portal"
-frame = 51
+frame = 33
 speed_scale = 0.6
 playing = true
 
