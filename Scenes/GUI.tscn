@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Fuel.gd" type="Script" id=2]
@@ -9,6 +9,49 @@
 size = 55
 extra_spacing_space = 35
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.979681, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "text_anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.979681, 1 ), Vector2( 1.25, 1.25 ), Vector2( 0.98, 1 ) ]
+}
 
 [node name="GUI" type="Node2D"]
 z_index = 10
@@ -37,3 +80,8 @@ text_color = Color( 1, 1, 1, 1 )
 [node name="Alert" type="AudioStreamPlayer" parent="Fuel"]
 stream = ExtResource( 3 )
 volume_db = -20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Fuel")
+anims/RESET = SubResource( 2 )
+anims/text_anim = SubResource( 3 )

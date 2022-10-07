@@ -4,7 +4,7 @@ extends Node2D
 func transfer_player():
 	$CanvasLayer/SceneTransitionRect/AnimationPlayer.play("fade")
 	yield(get_tree().create_timer(1), "timeout")
-	$Player.position.x = 8051
+	$Player.position.x = 8045
 	$Player.position.y = -3239
 	$ParallaxBackground/ParallaxLayer/Sprite.texture = load("res://Assets/Starfield 1 - 1024x1024.png")
 	yield(get_tree().create_timer(2), "timeout")

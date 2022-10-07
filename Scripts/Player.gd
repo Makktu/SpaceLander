@@ -58,7 +58,7 @@ func change_lighting(direction, amount):
 	for n in amount:
 		yield(get_tree().create_timer(0.02), "timeout")
 		$Light2D.energy -= 0.001
-		$Light2D.texture_scale -= 0.0001
+#		$Light2D.texture_scale -= 0
 
 func game_over():
 	gameOver = true
@@ -114,6 +114,12 @@ func get_input():
 
 	input_dir = 0
 	y_input_dir = 0
+	
+# developer cam
+	if Input.is_action_pressed("ui_page_down"):
+		$Camera2D.zoom_in_or_out("IN", 4, 0.1)
+	if Input.is_action_pressed("ui_page_up"):
+		$Camera2D.zoom_in_or_out("OUT", 4, 0.1)
 	
 # UI LEFT
 	if Input.is_action_pressed("ui_left") || swipe_right:
@@ -403,3 +409,4 @@ func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms_levelOne[1] == false and passed_zooms_levelOne[0] == true:
 		passed_zooms_levelOne[1] = true
 		$Camera2D.zoom_in_or_out("OUT", 200, 0.01)
+#		change_lighting("down",600)
