@@ -4,9 +4,9 @@ onready var BGplaying = true
 onready var test_mode = false
 var user_OS = OS.get_name()
 
-var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/Aggressor2-mq.ogg", "res://Assets/Music/KneeDeepintheDead.ogg", "res://Assets/Music/LawAbidingCitizen.ogg", "res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/MassExtinction.ogg","res://Assets/Music/SoulEater.ogg","res://Assets/Music/TheDevilsEyes.ogg","res://Assets/Music/Videodrome.ogg"]
+var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/Aggressor2-mq.ogg", "res://Assets/Music/KneeDeepintheDead.ogg", "res://Assets/Music/LawAbidingCitizen.ogg", "res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/MassExtinction.ogg","res://Assets/Music/SoulEater.ogg","res://Assets/Music/TheDevilsEyes.ogg","res://Assets/Music/Videodrome.ogg", "res://Assets/Music/TheSaga.ogg"]
 
-var music_playing_order = [0,8,7,6,5,1,2,3,4]
+var music_playing_order = [9,0,8,7,6,5,1,2,3,4]
 
 var current_music_track = 0
 

@@ -59,7 +59,7 @@ position = Vector2( 195, 185 )
 script = ExtResource( 31 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.866667, 0.0666667, 0.0666667, 1 )
+modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 frame = 157

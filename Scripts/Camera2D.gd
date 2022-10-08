@@ -4,10 +4,11 @@ var zoom_start = 1
 var new_zoom = 0.001
 
 func game_over_zoom_out():
-	for n in 1000: 			
+	for n in 1000: 		
+		yield(get_tree().create_timer(0.0002), "timeout")	
 		zoom = Vector2(zoom_start,zoom_start)
 		zoom_start += new_zoom + 0.02
-		yield(get_tree().create_timer(0.0002), "timeout")
+
 		
 
 func starting_camera_zoom():

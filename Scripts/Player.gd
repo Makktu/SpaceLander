@@ -410,3 +410,12 @@ func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
 		passed_zooms_levelOne[1] = true
 		$Camera2D.zoom_in_or_out("OUT", 200, 0.01)
 #		change_lighting("down",600)
+
+
+func _on_EndLevel2_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		yield(get_tree().create_timer(3), "timeout")
+		$"../CanvasLayer/SceneTransitionRect/AnimationPlayer".play("fade")
+		yield(get_tree().create_timer(2), "timeout")
+		get_tree().change_scene("res://Scenes/Won.tscn")
+		

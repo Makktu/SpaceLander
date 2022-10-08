@@ -6,3 +6,6 @@ func _on_FuelPickup_body_entered(body: Node) -> void:
 	yield($AudioStreamPlayer2D, "finished")
 	queue_free()
 	
+func _ready() -> void:
+	$AnimationPlayer.play("RESET")
+	
