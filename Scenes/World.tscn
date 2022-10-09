@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Scenes/WorldPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Particles.tscn" type="PackedScene" id=2]
@@ -41,6 +41,8 @@
 [ext_resource path="res://Scripts/LightningEnemy.gd" type="Script" id=39]
 [ext_resource path="res://Scripts/LightningVertical.gd" type="Script" id=40]
 [ext_resource path="res://Scenes/EnemyStar.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Assets/Screen Shaders/SimpleGrain.shader" type="Shader" id=42]
+[ext_resource path="res://Assets/NTSCBasic.shader" type="Shader" id=43]
 [ext_resource path="res://Scenes/FuelPickup.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Scenes/LaserBarrier.tscn" type="PackedScene" id=46]
@@ -53,6 +55,17 @@
 [ext_resource path="res://Scenes/ZoomCameraDetection.tscn" type="PackedScene" id=58]
 [ext_resource path="res://Scenes/ZoomOutCameraDetection.tscn" type="PackedScene" id=59]
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=60]
+
+[sub_resource type="ShaderMaterial" id=65]
+shader = ExtResource( 42 )
+shader_param/amount = 0.123
+
+[sub_resource type="ShaderMaterial" id=66]
+shader = ExtResource( 43 )
+shader_param/_bleeding = 0.5
+shader_param/_fringing = 0.123
+shader_param/_scanline = 0.5
+shader_param/linearColorSpace = true
 
 [sub_resource type="ConvexPolygonShape2D" id=53]
 points = PoolVector2Array( 256, 64, 0, 64, 0, 0, 256, 0 )
@@ -491,15 +504,28 @@ extents = Vector2( 48.7501, 240 )
 position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 65 )
+margin_left = -370.0
+margin_top = -2569.0
+margin_right = 1766.0
+margin_bottom = 1282.0
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+material = SubResource( 66 )
 color = Color( 0.101961, 0.0980392, 0.0980392, 1 )
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0.164706, 0.168627, 0.180392, 1 )
 
+[node name="CanvasModulate3" type="CanvasModulate" parent="."]
+visible = false
+color = Color( 0.0470588, 0.937255, 0.603922, 1 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 7991, -3261 )
+position = Vector2( 700, -649 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -822,7 +848,7 @@ script = ExtResource( 39 )
 scale = Vector2( 1.5, 1.9 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 4
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy"]
@@ -850,7 +876,7 @@ script = ExtResource( 39 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 4
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy3"]
@@ -878,7 +904,7 @@ script = ExtResource( 39 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 5
+frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy2"]
@@ -907,7 +933,7 @@ script = ExtResource( 40 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningVertical"]
@@ -936,7 +962,7 @@ script = ExtResource( 40 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 2
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningVertical2"]
