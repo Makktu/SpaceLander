@@ -2,11 +2,12 @@ extends Node2D
 
 onready var BGplaying = true
 onready var test_mode = false
+onready var on_screen_track_info = load("res://Scenes/World/CanvasLayer")
 var user_OS = OS.get_name()
 
-var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/Aggressor2-mq.ogg", "res://Assets/Music/KneeDeepintheDead.ogg", "res://Assets/Music/LawAbidingCitizen.ogg", "res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/MassExtinction.ogg","res://Assets/Music/SoulEater.ogg","res://Assets/Music/TheDevilsEyes.ogg","res://Assets/Music/Videodrome.ogg", "res://Assets/Music/TheSaga.ogg"]
+var music_tracks_list = ["res://Assets/Music/orc.ogg", "res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/lander0.ogg", "res://Assets/Music/LANDER_DUB1.ogg", "res://Assets/Music/lander_march.ogg", "res://Assets/Music/lander_menu.ogg", "res://Assets/Music/wonder.ogg"]
 
-var music_playing_order = [9,0,8,7,6,5,1,2,3,4]
+var music_playing_order = [2,0,1,3,4,5,6]
 
 var current_music_track = 0
 
@@ -28,15 +29,13 @@ func _on_BGMusic_finished() -> void:
 	
 		
 func play_next_track():
-	print(now_playing, current_music_track)
 	now_playing = music_tracks_list[music_playing_order[current_music_track]]
-	print(now_playing)
 	$BGMusic.stream = load(now_playing)
 	$BGMusic.play()
 	current_music_track += 1
 	if current_music_track > music_tracks_list.size() - 1:
 		current_music_track = 0
-	
+
 
 func toggle_music_in_pause_screen():
 	if $BGMusic.playing:

@@ -553,7 +553,7 @@ scale = Vector2( 3, 2 )
 z_index = -1
 frames = SubResource( 50 )
 animation = "fireball"
-frame = 125
+frame = 139
 playing = true
 
 [node name="AlertBeep" type="AudioStreamPlayer2D" parent="."]

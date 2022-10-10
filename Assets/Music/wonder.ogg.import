@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wonder.ogg-fafd29a3990b62798bb36b4b25c1e098.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/wonder.ogg"
+dest_files=[ "res://.import/wonder.ogg-fafd29a3990b62798bb36b4b25c1e098.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

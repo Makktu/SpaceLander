@@ -148,28 +148,29 @@ margin_bottom = 2521.0
 rect_scale = Vector2( 0.941168, 0.891458 )
 custom_colors/default_color = Color( 0.909804, 0.839216, 0.0313726, 1 )
 custom_fonts/normal_font = SubResource( 1 )
-text = "Game Programming & Design:
+text = "Game Programming & Design
+by
 John McNamara
-________________
-Art Assets from creators at OpenGameArt.org:
-[names to follow]
-________________
 
- Music:
+*	*	*	*
+
+Art Assets by creators at OpenGameArt.org:
+[names to follow]
+
+*	*	*	*
+
+Original Music composed
+by
+dmed 
 
 'orc'
 'Lander_DUB1'
 'Lander_DUB3'
-Brian Kavanagh @ lazygamer.net
+'wonder'
 
-'Aggressor'
-'Knee-deep In The Dead'
-Karl Casey @ White Bat Audio
+*	*	*	*
 
-Other
-boilerplate
-here
-eventually"
+"
 scroll_active = false
 
 [node name="Portal" type="Area2D" parent="Container"]
@@ -186,7 +187,7 @@ material = SubResource( 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "portal"
-frame = 33
+frame = 21
 speed_scale = 0.6
 playing = true
 
