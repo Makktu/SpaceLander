@@ -22,7 +22,7 @@ margin_right = 592.0
 margin_bottom = 841.0
 rect_scale = Vector2( 1.5, 1.5 )
 
-[node name="Toggle Music" type="Button" parent="VBoxContainer"]
+[node name="ToggleMusic" type="Button" parent="VBoxContainer"]
 margin_right = 900.0
 margin_bottom = 85.0
 custom_colors/font_color = Color( 0.917647, 0.866667, 0.0823529, 1 )
@@ -45,6 +45,6 @@ custom_colors/font_color = Color( 0.188235, 0.807843, 0.101961, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Resume"
 
-[connection signal="pressed" from="VBoxContainer/Toggle Music" to="." method="_on_Toggle_Music_pressed"]
+[connection signal="pressed" from="VBoxContainer/ToggleMusic" to="." method="_on_Toggle_Music_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartScreen" to="." method="_on_StartScreen_pressed"]
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_Resume_pressed"]

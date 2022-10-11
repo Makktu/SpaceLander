@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-onready var black_smoke = $BlackSmoke/AnimatedSprite
 onready var Collision_Sound = $AudioStreamPlayer2D
 onready var Swipe = $Camera2D/SwipeScreenButton
 
@@ -89,7 +88,7 @@ func game_over():
 				
 
 func _on_Boom_finished() -> void:
-	get_tree().change_scene("res://Scenes/Game Over.tscn")
+	get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 
 func update_GUI():

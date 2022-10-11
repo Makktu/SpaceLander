@@ -1,4 +1,4 @@
-[gd_scene load_steps=265 format=2]
+[gd_scene load_steps=264 format=2]
 
 [ext_resource path="res://Assets/whoosh2.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/TouchControls.gd" type="Script" id=2]
@@ -183,7 +183,6 @@
 [ext_resource path="res://Assets/fireball-all/0163.png" type="Texture" id=181]
 [ext_resource path="res://Assets/fireball-all/0192.png" type="Texture" id=182]
 [ext_resource path="res://Assets/fireball-all/0159.png" type="Texture" id=183]
-[ext_resource path="res://Scripts/BlackSmoke.gd" type="Script" id=184]
 [ext_resource path="res://Assets/fireball-all/0170.png" type="Texture" id=185]
 [ext_resource path="res://Assets/fireball-all/0156.png" type="Texture" id=186]
 [ext_resource path="res://Assets/fireball-all/0171.png" type="Texture" id=187]
@@ -543,7 +542,6 @@ animation = "kaboom"
 frame = 2
 
 [node name="BlackSmoke" type="Node2D" parent="."]
-script = ExtResource( 184 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="BlackSmoke"]
 visible = false
@@ -553,7 +551,7 @@ scale = Vector2( 3, 2 )
 z_index = -1
 frames = SubResource( 50 )
 animation = "fireball"
-frame = 139
+frame = 153
 playing = true
 
 [node name="AlertBeep" type="AudioStreamPlayer2D" parent="."]

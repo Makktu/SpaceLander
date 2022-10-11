@@ -11,5 +11,5 @@ dest_files=[ "res://.import/lander_menu.ogg-8fb8553b3d62afe6d5ee44d577bed2c6.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

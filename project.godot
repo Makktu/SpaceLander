@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://Scenes/Game Over.tscn"
+run/main_scene="res://Scenes/GameOver.tscn"
 run/delta_sync_after_draw=true
 
 [autoload]

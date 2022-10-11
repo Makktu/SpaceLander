@@ -1,15 +1,15 @@
 extends Node2D
 
-var move_direction = 1
+var move_direction = 0.6
 
-var starting_pos = 6330
-var ending_pos = 9704
+var starting_pos = 6519
+var ending_pos = 7692
 
 func _physics_process(delta: float) -> void:
 	if position.x <= starting_pos:
-		move_direction = 1
+		move_direction = 0.8
 	if position.x >= ending_pos:
-		move_direction = -1
+		move_direction = -0.8
 	position.x += move_direction
 
 

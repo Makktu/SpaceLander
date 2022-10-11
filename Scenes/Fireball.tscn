@@ -210,5 +210,5 @@ modulate = Color( 0.909804, 0.654902, 0.0392157, 1 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "fireball"
-frame = 73
+frame = 105
 playing = true

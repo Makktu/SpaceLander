@@ -6,7 +6,7 @@
 size = 60
 font_data = ExtResource( 1 )
 
-[node name="Gently Now" type="Node2D"]
+[node name="GentlyNow" type="Node2D"]
 
 [node name="Label" type="Label" parent="."]
 margin_right = 195.0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/lander_march.ogg-ddacb4b66d54df3ef85f3c798a218d17.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -1,13 +1,12 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Scenes/WorldPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Particles.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/pill.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=4]
 [ext_resource path="res://Assets/RockTilesBackGround.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Starfield7.png" type="Texture" id=6]
 [ext_resource path="res://Assets/light.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Tiny Top Down 32x32.png" type="Texture" id=8]
+[ext_resource path="res://Assets/TinyTopDown32x32.png" type="Texture" id=8]
 [ext_resource path="res://Assets/bending_lightning/04.png" type="Texture" id=9]
 [ext_resource path="res://Assets/pulsating_star/02.png" type="Texture" id=10]
 [ext_resource path="res://Assets/rings/d_0002.png" type="Texture" id=11]
@@ -41,13 +40,14 @@
 [ext_resource path="res://Scripts/LightningEnemy.gd" type="Script" id=39]
 [ext_resource path="res://Scripts/LightningVertical.gd" type="Script" id=40]
 [ext_resource path="res://Scenes/EnemyStar.tscn" type="PackedScene" id=41]
-[ext_resource path="res://Assets/Screen Shaders/Testing.shader" type="Shader" id=42]
-[ext_resource path="res://Assets/NTSCBasic.shader" type="Shader" id=43]
 [ext_resource path="res://Scenes/FuelPickup.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Scenes/LaserBarrier.tscn" type="PackedScene" id=46]
+[ext_resource path="res://Scenes/EnemyStar2.gd" type="Script" id=47]
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=49]
 [ext_resource path="res://Scenes/PauseScreen.tscn" type="PackedScene" id=50]
+[ext_resource path="res://Scenes/EnemyStar3.gd" type="Script" id=51]
+[ext_resource path="res://Scenes/RailingForLightning.tscn" type="PackedScene" id=52]
 [ext_resource path="res://Scenes/Portal.tscn" type="PackedScene" id=53]
 [ext_resource path="res://Scenes/Station1.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/GlowingSun.tscn" type="PackedScene" id=55]
@@ -56,32 +56,89 @@
 [ext_resource path="res://Scenes/ZoomOutCameraDetection.tscn" type="PackedScene" id=59]
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=60]
 
-[sub_resource type="ShaderMaterial" id=65]
-shader = ExtResource( 42 )
-shader_param/overlay = true
-shader_param/scanlines_opacity = 0.4
-shader_param/scanlines_width = 0.05
-shader_param/grille_opacity = 0.3
-shader_param/resolution = Vector2( 640, 480 )
-shader_param/pixelate = true
-shader_param/roll = false
-shader_param/roll_speed = 8.0
-shader_param/roll_size = 0.0
-shader_param/roll_variation = 1.355
-shader_param/distort_intensity = 0.05
-shader_param/noise_opacity = 0.4
-shader_param/noise_speed = 1.0
-shader_param/static_noise_intensity = 0.06
-shader_param/aberration = 0.03
-shader_param/brightness = 1.4
-shader_param/discolor = true
-shader_param/warp_amount = 0.0
-shader_param/clip_warp = false
-shader_param/vignette_intensity = 0.4
-shader_param/vignette_opacity = 0.5
+[sub_resource type="Shader" id=67]
+code = "//SHADER ORIGINALY CREADED BY \"keijiro\" FROM GITHUB
+//PORTED AND MODIFYED TO GODOT BY AHOPNESS (@ahopness)
+//LICENSE : MIT
+//COMATIBLE WITH : GLES2, GLES3
+//GITHUB LINK : https://github.com/keijiro/KinoTube/
+
+shader_type canvas_item;
+
+const float PI = 3.14159265359;
+
+uniform float _bleeding :hint_range(0, 1) = 0.5;
+uniform float _fringing :hint_range(0, 1) = 0.5;
+uniform float _scanline :hint_range(0, 1) = 0.5;
+uniform bool linearColorSpace = true;
+
+vec3 LinearToGammaSpace (vec3 linRGB){
+	linRGB = max(linRGB, vec3(0, 0, 0));
+	return max(1.055 * pow(linRGB, vec3(0.416666667)) - 0.055, 0);
+}
+vec3 GammaToLinearSpace (vec3 sRGB){
+	return sRGB * (sRGB * (sRGB * 0.305306011 + 0.682171111) + 0.012522878);
+}
+
+vec3 RGB2YIQ(vec3 rgb){
+	rgb = clamp(rgb, 0, 1);
+	if (!linearColorSpace){
+		rgb = LinearToGammaSpace(rgb);
+	}
+	return mat3(vec3(0.299,  0.587,  0.114),
+				vec3(0.596, -0.274, -0.322),
+				vec3(0.211, -0.523,  0.313)) * rgb;
+}
+vec3 YIQ2RGB(vec3 yiq){
+	vec3 rgb = mat3(vec3(1,  0.956,  0.621),
+				    vec3(1, -0.272, -0.647),
+				    vec3(1, -1.106,  1.703)) * yiq;
+	
+	rgb = clamp(rgb, 0, 1);
+	if (!linearColorSpace){
+		rgb = GammaToLinearSpace(rgb);
+	}
+	
+	return rgb;
+}
+
+vec3 SampleYIQ(vec2 uv, float du, sampler2D _MainTex){
+	uv.x += du;
+	return RGB2YIQ(texture(_MainTex, uv).rgb);
+}
+
+void fragment(){
+	float bleedWidth = 0.04 * _bleeding;  // width of bleeding
+	float bleedStep = 2.5 / (1.0 / SCREEN_PIXEL_SIZE).x; // max interval of taps
+	float bleedTaps = ceil(bleedWidth / bleedStep);
+	float bleedDelta = bleedWidth / bleedTaps;
+	float fringeWidth = 0.0025 * _fringing; // width of fringing
+	
+	vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy;
+	vec3 yiq = SampleYIQ(uv, 0, SCREEN_TEXTURE);
+	
+        // Bleeding
+        for (float i = 0.0; i < bleedTaps; i++)
+        {
+            yiq.y += SampleYIQ(uv, - bleedTaps * i, SCREEN_TEXTURE).y;
+            yiq.z += SampleYIQ(uv, + bleedTaps * i, SCREEN_TEXTURE).z;
+        }
+        yiq.yz /= bleedTaps + 1.0;
+
+        // Fringing
+        float y1 = SampleYIQ(uv, - fringeWidth, SCREEN_TEXTURE).x;
+        float y2 = SampleYIQ(uv, + fringeWidth, SCREEN_TEXTURE).x;
+        yiq.yz += y2 - y1;
+
+        // Scanline
+        float scan = sin(uv.y * 500.0 * PI);
+        scan = mix(1.0, (scan + 1.0) / 2.0, _scanline);
+
+        COLOR =  vec4(YIQ2RGB(yiq * scan), 1);
+}"
 
 [sub_resource type="ShaderMaterial" id=66]
-shader = ExtResource( 43 )
+shader = SubResource( 67 )
 shader_param/_bleeding = 0.5
 shader_param/_fringing = 0.123
 shader_param/_scanline = 0.5
@@ -496,10 +553,6 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=67]
-size = 35
-font_data = ExtResource( 60 )
-
 [sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 10, 202.638 )
 
@@ -528,15 +581,6 @@ extents = Vector2( 48.7501, 240 )
 position = Vector2( -402, 853 )
 script = ExtResource( 4 )
 
-[node name="ShaderExperiment" type="ColorRect" parent="."]
-visible = false
-material = SubResource( 65 )
-margin_left = -370.0
-margin_top = -2569.0
-margin_right = 1766.0
-margin_bottom = 1282.0
-color = Color( 0.231373, 0.0745098, 0.0745098, 1 )
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 material = SubResource( 66 )
 color = Color( 0.101961, 0.0980392, 0.0980392, 1 )
@@ -545,12 +589,8 @@ color = Color( 0.101961, 0.0980392, 0.0980392, 1 )
 visible = false
 color = Color( 0.164706, 0.168627, 0.180392, 1 )
 
-[node name="CanvasModulate3" type="CanvasModulate" parent="."]
-visible = false
-color = Color( 0.0470588, 0.937255, 0.603922, 1 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 700, -649 )
+position = Vector2( 900, 1406 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -570,7 +610,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 1280 )
 
 [node name="TileMap" type="TileMap" parent="."]
-modulate = Color( 0.741176, 0.490196, 0.152941, 1 )
+modulate = Color( 0.466667, 0.87451, 0.933333, 1 )
 position = Vector2( 1, 0 )
 z_index = -10
 tile_set = SubResource( 24 )
@@ -625,10 +665,11 @@ layer = 5
 
 [node name="Pause" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-margin_left = 615.0
-margin_top = 4.0
-margin_right = 715.0
-margin_bottom = 49.0
+self_modulate = Color( 1, 1, 1, 0.498039 )
+margin_left = 614.0
+margin_top = 143.0
+margin_right = 714.0
+margin_bottom = 189.0
 custom_fonts/font = SubResource( 39 )
 text = "Pause"
 __meta__ = {
@@ -650,15 +691,6 @@ color = Color( 0, 0, 0, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/SceneTransitionRect"]
 anims/RESET = SubResource( 60 )
 anims/fade = SubResource( 61 )
-
-[node name="ShowCurrentlyPlayingTrack" type="Node2D" parent="CanvasLayer"]
-visible = false
-
-[node name="CurrentTrack" type="Label" parent="CanvasLayer/ShowCurrentlyPlayingTrack"]
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = SubResource( 67 )
-text = "Placeholder"
 
 [node name="LaserBarrier" parent="." instance=ExtResource( 46 )]
 position = Vector2( 699, 398 )
@@ -702,12 +734,6 @@ energy = 0.9
 [node name="Portal" parent="." instance=ExtResource( 53 )]
 position = Vector2( 661, 5395 )
 scale = Vector2( 7, 7 )
-
-[node name="ContactParticles" parent="Portal" instance=ExtResource( 2 )]
-visible = false
-modulate = Color( 0.0313726, 0.509804, 0.933333, 0.278431 )
-position = Vector2( 8, -1 )
-scale = Vector2( 0.9, 0.9 )
 
 [node name="GlowingSun" parent="." instance=ExtResource( 55 )]
 modulate = Color( 0.894118, 0.45098, 0.054902, 1 )
@@ -783,6 +809,10 @@ scale = Vector2( 2, 2 )
 
 [node name="FuelPickup3" parent="." instance=ExtResource( 44 )]
 position = Vector2( 7749, 307 )
+
+[node name="FuelPickup8" parent="." instance=ExtResource( 44 )]
+position = Vector2( 8472, 1024 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="FuelPickup5" parent="." instance=ExtResource( 44 )]
 position = Vector2( 7170, -638 )
@@ -863,6 +893,26 @@ position = Vector2( 8227, 825 )
 rotation = 1.5708
 scale = Vector2( 0.3, 0.33998 )
 
+[node name="LaserBarrier29" parent="Level1_NODES" instance=ExtResource( 46 )]
+position = Vector2( 9089, 1079 )
+scale = Vector2( 0.5, 1.18 )
+
+[node name="LaserBarrier30" parent="Level1_NODES" instance=ExtResource( 46 )]
+position = Vector2( 9182, 1078 )
+scale = Vector2( 0.5, 1.18 )
+
+[node name="LaserBarrier31" parent="Level1_NODES" instance=ExtResource( 46 )]
+position = Vector2( 9377, 1083 )
+scale = Vector2( 0.5, 1.18 )
+
+[node name="LaserBarrier32" parent="Level1_NODES" instance=ExtResource( 46 )]
+position = Vector2( 9470, 1082 )
+scale = Vector2( 0.5, 1.18 )
+
+[node name="LaserBarrier33" parent="Level1_NODES" instance=ExtResource( 46 )]
+position = Vector2( 9670, 1079 )
+scale = Vector2( 0.5, 1.15 )
+
 [node name="TeleportRings" type="Node2D" parent="Level1_NODES"]
 position = Vector2( 8029, -3122 )
 
@@ -870,11 +920,10 @@ position = Vector2( 8029, -3122 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "rings"
-frame = 1
 playing = true
 
 [node name="LightningEnemy" type="Area2D" parent="Level1_NODES"]
-position = Vector2( 6332, -2459 )
+position = Vector2( 6354, -2461 )
 scale = Vector2( 0.4, 0.35 )
 script = ExtResource( 39 )
 
@@ -882,27 +931,31 @@ script = ExtResource( 39 )
 scale = Vector2( 1.5, 1.9 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 10
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy"]
 position = Vector2( 8.74902, -8.57178 )
 shape = SubResource( 64 )
 
-[node name="UpperRail" type="Sprite" parent="Level1_NODES/LightningEnemy"]
-modulate = Color( 0, 1, 0.0901961, 1 )
-position = Vector2( 8.75005, 248.572 )
-scale = Vector2( 1.89903, 0.622347 )
-texture = ExtResource( 3 )
+[node name="LightningEnemy4" type="Area2D" parent="Level1_NODES"]
+position = Vector2( 9695, -2456 )
+scale = Vector2( 0.4, 0.35 )
+script = ExtResource( 39 )
 
-[node name="LowerRail" type="Sprite" parent="Level1_NODES/LightningEnemy"]
-modulate = Color( 0, 1, 0.0901961, 1 )
-position = Vector2( 8.5, -260 )
-scale = Vector2( 1.89903, 0.622347 )
-texture = ExtResource( 3 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Level1_NODES/LightningEnemy4"]
+scale = Vector2( 1.5, 1.9 )
+frames = SubResource( 63 )
+animation = "lightning"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy4"]
+position = Vector2( 8.74902, -8.57178 )
+shape = SubResource( 64 )
 
 [node name="LightningEnemy3" type="Area2D" parent="Level1_NODES"]
-position = Vector2( 6346, -1500 )
+position = Vector2( 6537, -1498 )
 scale = Vector2( 0.4, 0.35 )
 script = ExtResource( 39 )
 
@@ -910,24 +963,12 @@ script = ExtResource( 39 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 10
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy3"]
 position = Vector2( 8.74902, -8.57178 )
 shape = SubResource( 64 )
-
-[node name="UpperRail" type="Sprite" parent="Level1_NODES/LightningEnemy3"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 9.99951, 262.857 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="LowerRail" type="Sprite" parent="Level1_NODES/LightningEnemy3"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -0.000488281, -268.572 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
 
 [node name="LightningEnemy2" type="Area2D" parent="Level1_NODES"]
 position = Vector2( 9555, -1978 )
@@ -938,91 +979,105 @@ script = ExtResource( 39 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 11
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy2"]
 position = Vector2( 8.74902, -8.57178 )
 shape = SubResource( 64 )
 
-[node name="UpperRail" type="Sprite" parent="Level1_NODES/LightningEnemy2"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 9.99951, 262.857 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
+[node name="LightningEnemy5" type="Area2D" parent="Level1_NODES"]
+position = Vector2( 6556, -1986 )
+scale = Vector2( 0.4, 0.35 )
+script = ExtResource( 39 )
 
-[node name="LowerRail" type="Sprite" parent="Level1_NODES/LightningEnemy2"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -0.000488281, -268.572 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Level1_NODES/LightningEnemy5"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 63 )
+animation = "lightning"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningEnemy5"]
+position = Vector2( 8.74902, -8.57178 )
+shape = SubResource( 64 )
 
 [node name="LightningVertical" type="Area2D" parent="Level1_NODES"]
-position = Vector2( 9664, -907 )
+position = Vector2( 9688, -904 )
 rotation = 1.5708
-scale = Vector2( 0.4, 0.35 )
+scale = Vector2( 0.4, 0.27 )
 script = ExtResource( 40 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level1_NODES/LightningVertical"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 9
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningVertical"]
 position = Vector2( 8.74902, -8.57178 )
 shape = SubResource( 64 )
 
-[node name="UpperRail" type="Sprite" parent="Level1_NODES/LightningVertical"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 9.99951, 262.857 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="LowerRail" type="Sprite" parent="Level1_NODES/LightningVertical"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -0.000488281, -268.572 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
-
 [node name="LightningVertical2" type="Area2D" parent="Level1_NODES"]
-position = Vector2( 6404, -895 )
+position = Vector2( 6396, -892 )
 rotation = 1.5708
-scale = Vector2( 0.4, 0.35 )
+scale = Vector2( 0.4, 0.30998 )
 script = ExtResource( 40 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level1_NODES/LightningVertical2"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "lightning"
-frame = 8
+frame = 11
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/LightningVertical2"]
 position = Vector2( 8.74902, -8.57178 )
 shape = SubResource( 64 )
 
-[node name="UpperRail" type="Sprite" parent="Level1_NODES/LightningVertical2"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 9.99951, 262.857 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="LowerRail" type="Sprite" parent="Level1_NODES/LightningVertical2"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -0.000488281, -268.572 )
-scale = Vector2( 1.4904, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="Pill" type="Sprite" parent="."]
-visible = false
-position = Vector2( 9427, -990 )
-texture = ExtResource( 3 )
-
 [node name="EnemyStar" parent="." instance=ExtResource( 41 )]
 position = Vector2( 8063, -1000 )
 scale = Vector2( 1.5, 1.5 )
+
+[node name="EnemyStar2" parent="." instance=ExtResource( 41 )]
+position = Vector2( 6506, 301 )
+scale = Vector2( 1.5, 1.5 )
+script = ExtResource( 47 )
+
+[node name="EnemyStar3" parent="." instance=ExtResource( 41 )]
+position = Vector2( 7592, 1298 )
+scale = Vector2( 1.5, 1.5 )
+script = ExtResource( 51 )
+
+[node name="RailingForLightning" parent="." instance=ExtResource( 52 )]
+position = Vector2( 7028, -2557 )
+scale = Vector2( 15.32, 2 )
+
+[node name="RailingForLightning2" parent="." instance=ExtResource( 52 )]
+position = Vector2( 9037, -2561 )
+scale = Vector2( 15.32, 2 )
+
+[node name="RailingForLightning4" parent="." instance=ExtResource( 52 )]
+position = Vector2( 8025, -1596 )
+scale = Vector2( 32.84, 2 )
+
+[node name="RailingForLightning6" parent="." instance=ExtResource( 52 )]
+position = Vector2( 8041, -2082 )
+scale = Vector2( 32.92, 2 )
+
+[node name="RailingForLightning3" parent="." instance=ExtResource( 52 )]
+position = Vector2( 9763, -1698 )
+rotation = 1.5708
+scale = Vector2( 18.4, 2 )
+
+[node name="RailingForLightning5" parent="." instance=ExtResource( 52 )]
+position = Vector2( 6304, -1694 )
+rotation = 1.5708
+scale = Vector2( 18.4, 2 )
+
+[node name="Sparks" parent="." instance=ExtResource( 2 )]
+position = Vector2( 7024, -2550 )
+scale = Vector2( 14.16, 7 )
 
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
 [connection signal="body_entered" from="3rdCameraZoom" to="Player" method="_on_3rdCameraZoom_body_entered"]
@@ -1036,13 +1091,16 @@ scale = Vector2( 1.5, 1.5 )
 [connection signal="pressed" from="CanvasLayer/Pause" to="CanvasLayer/PauseScreen" method="_on_Pause_pressed"]
 [connection signal="body_entered" from="FuelPickup2" to="Player" method="_on_FuelPickup2_body_entered"]
 [connection signal="body_entered" from="FuelPickup3" to="Player" method="_on_FuelPickup3_body_entered"]
+[connection signal="body_entered" from="FuelPickup8" to="Player" method="_on_FuelPickup3_body_entered"]
 [connection signal="body_entered" from="FuelPickup5" to="Player" method="_on_FuelPickup3_body_entered"]
 [connection signal="body_entered" from="FuelPickup4" to="Player" method="_on_FuelPickup3_body_entered"]
 [connection signal="body_entered" from="FuelPickup6" to="Player" method="_on_FuelPickup3_body_entered"]
 [connection signal="body_entered" from="FuelPickup7" to="Player" method="_on_FuelPickup3_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/LightningEnemy" to="Level1_NODES/LightningEnemy" method="_on_LightningEnemy_body_entered"]
+[connection signal="body_entered" from="Level1_NODES/LightningEnemy4" to="Level1_NODES/LightningEnemy4" method="_on_LightningEnemy_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/LightningEnemy3" to="Level1_NODES/LightningEnemy3" method="_on_LightningEnemy_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/LightningEnemy2" to="Level1_NODES/LightningEnemy2" method="_on_LightningEnemy_body_entered"]
+[connection signal="body_entered" from="Level1_NODES/LightningEnemy5" to="Level1_NODES/LightningEnemy5" method="_on_LightningEnemy_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/LightningVertical" to="Level1_NODES/LightningVertical" method="_on_LightningVertical_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/LightningVertical2" to="Level1_NODES/LightningVertical2" method="_on_LightningVertical_body_entered"]
 
