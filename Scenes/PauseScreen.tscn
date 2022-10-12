@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/PauseScreen.gd" type="Script" id=2]
@@ -6,6 +6,15 @@
 [sub_resource type="DynamicFont" id=1]
 size = 80
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="PauseScreen" type="Node2D"]
 pause_mode = 2
@@ -24,25 +33,28 @@ rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="ToggleMusic" type="Button" parent="VBoxContainer"]
 margin_right = 900.0
-margin_bottom = 85.0
+margin_bottom = 79.0
 custom_colors/font_color = Color( 0.917647, 0.866667, 0.0823529, 1 )
 custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 text = "Toggle Music"
 
 [node name="StartScreen" type="Button" parent="VBoxContainer"]
-margin_top = 89.0
+margin_top = 83.0
 margin_right = 900.0
-margin_bottom = 174.0
+margin_bottom = 162.0
 custom_colors/font_color = Color( 0.988235, 0.984314, 0.968627, 1 )
 custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
 text = "Start Screen"
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
-margin_top = 178.0
+margin_top = 166.0
 margin_right = 900.0
-margin_bottom = 263.0
+margin_bottom = 245.0
 custom_colors/font_color = Color( 0.188235, 0.807843, 0.101961, 1 )
 custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
 text = "Resume"
 
 [connection signal="pressed" from="VBoxContainer/ToggleMusic" to="." method="_on_Toggle_Music_pressed"]

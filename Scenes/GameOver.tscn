@@ -85,7 +85,7 @@ bg_color = Color( 0.733333, 0.0666667, 0.0470588, 1 )
 [sub_resource type="Theme" id=1]
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.733333, 0.0666667, 0.0470588, 1 )
+bg_color = Color( 0.878431, 0.870588, 0.0392157, 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 180
@@ -166,7 +166,7 @@ margin_right = 831.0
 margin_bottom = 944.0
 rect_scale = Vector2( 0.7, 0.7 )
 theme = SubResource( 1 )
-custom_colors/font_color = Color( 0.890196, 0.776471, 0.0666667, 1 )
+custom_colors/font_color = Color( 0.890196, 0.0666667, 0.0666667, 1 )
 custom_fonts/font = SubResource( 2 )
 custom_styles/normal = SubResource( 7 )
 text = "TEST MODE"
@@ -222,7 +222,8 @@ z_index = -10
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Container/AnimationAll"]
 self_modulate = Color( 1, 0.945098, 0, 1 )
 frames = SubResource( 10 )
-frame = 4
+animation = "lightning"
+frame = 11
 playing = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

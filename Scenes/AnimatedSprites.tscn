@@ -1,10 +1,9 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/bending_lightning/03.png" type="Texture" id=1]
 [ext_resource path="res://Assets/bending_lightning/00.png" type="Texture" id=2]
 [ext_resource path="res://Assets/bending_lightning/02.png" type="Texture" id=3]
 [ext_resource path="res://Assets/bending_lightning/01.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/BendingLightning.gd" type="Script" id=5]
 [ext_resource path="res://Assets/pulsating_star/05.png" type="Texture" id=6]
 [ext_resource path="res://Assets/rings/d_0003.png" type="Texture" id=7]
 [ext_resource path="res://Assets/rings/d_0009.png" type="Texture" id=8]
@@ -51,7 +50,6 @@ animations = [ {
 } ]
 
 [node name="AnimationAll" type="Node2D"]
-script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

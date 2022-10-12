@@ -26,6 +26,8 @@ var swipe_left_released = false
 var swipe_right_released = false
 #####################################
 
+var level_coords = [[665, -1182], [8045, -3239]]
+
 var input_dir = 0
 var y_input_dir = 0
 
@@ -53,11 +55,14 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 50
 
-func change_lighting(direction, amount):
-	for n in amount:
-		yield(get_tree().create_timer(0.02), "timeout")
-		$Light2D.energy -= 0.001
-#		$Light2D.texture_scale -= 0
+func change_lighting():
+#	$Light2D.energy = 0
+#	$Light2D.texture_scale = 0
+#	for n in amount:
+#		print(n)
+#		$Light2D.energy -= 1
+#		$Light2D.texture_scale -= 1
+	pass
 
 func game_over():
 	gameOver = true
@@ -70,25 +75,22 @@ func game_over():
 	$RightThrusters.stop()
 	$RightThrusters.visible = false
 	$AnimatedSprite.stop()
-	$AnimatedSprite.visible = false
-	
-#	if FUEL <= 0:
-#		# if reason for game over is total fuel loss, pause for half a second		
-#		yield(get_tree().create_timer(0.5), "timeout")
-		
+	$AnimatedSprite.visible = false		
 	$Boom.play()
 	$Kaboom.visible = true
 	$Kaboom.play()
 	$Sprite.visible = false
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
-	yield(get_tree().create_timer(0.5), "timeout")
-	$Camera2D.game_over_zoom_out()
-	yield(get_tree().create_timer(1.5), "timeout")
-				
+	yield(get_tree().create_timer(1), "timeout")
+	if $"/root/Global".current_level == 1:
+		$Camera2D.game_over_zoom_out()				
 
 func _on_Boom_finished() -> void:
-	get_tree().change_scene("res://Scenes/GameOver.tscn")
+	$"/root/Global".blank_screen(3)
+	yield(get_tree().create_timer(1), "timeout")
+	$"..".transfer_player()
+
 
 
 func update_GUI():
@@ -278,8 +280,8 @@ func _physics_process(delta):
 #	if transitioning_to_new:
 #		$"..".set_modulate(lerp(get_modulate(), Color(0,0,0,1), 0.2))
 	
-	if position.y > 2027 and position.x > 5000:
-		get_tree().change_scene("res://Scenes/Won.tscn")
+#	if position.y > 2027 and position.x > 5000:
+#		get_tree().change_scene("res://Scenes/Won.tscn")
 	
 	if gameOver:
 		return
@@ -343,10 +345,20 @@ func _input(event):
 		swipe_right_released = true
 		swipe_right = false	
 		
-func _ready():
+func set_player_position():
+	var x
+	var y
+	x = level_coords[$"/root/Global".current_level - 1][0]
+	y = level_coords[$"/root/Global".current_level - 1][1]
 	$Camera2D.starting_camera_zoom()
-	pass
-
+	position.x = x
+	position.y = y
+	if $"/root/Global".current_level == 2:
+		$"..".complete_transfer()
+		
+func _ready():
+	set_player_position()
+	
 
 func _on_FuelPickup2_body_entered(body: Node) -> void:
 	FUEL += FUEL_POD / 2
@@ -361,7 +373,6 @@ func _on_OutOfBounds_body_entered(body):
 
 func _on_3rdCameraZoom_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms[0] == false:
-		change_lighting("down", 100)
 		passed_zooms[0] = true
 		$Camera2D.zoom_in_or_out("IN", 200, 0.03)
 
@@ -414,7 +425,6 @@ func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
 func _on_EndLevel2_body_entered(body: Node) -> void:
 	if body.name == "Player":
 		yield(get_tree().create_timer(3), "timeout")
-		$"../CanvasLayer/SceneTransitionRect/AnimationPlayer".play("fade")
 		yield(get_tree().create_timer(2), "timeout")
 		get_tree().change_scene("res://Scenes/Won.tscn")
 		

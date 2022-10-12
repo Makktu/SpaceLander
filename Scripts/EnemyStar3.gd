@@ -1,14 +1,14 @@
 extends Area2D
 
-var init_direction_x = 1
+var init_direction_x = 2
 
-var init_direction_y = 0.75
+var init_direction_y = 0.5
 
-var max_x = 9427
-var min_x = 6620
+var max_x = 8529
+var min_x = 6762
 
-var max_y = -900
-var min_y = -1066
+var max_y = 1382
+var min_y = 1235
 
 
 func _ready() -> void:
@@ -24,12 +24,12 @@ func _physics_process(delta: float) -> void:
 	position.x += init_direction_x
 	position.y += init_direction_y
 	if position.x > max_x:
-		init_direction_x = -1.5
+		init_direction_x = -2
 	if position.x < min_x:
-		init_direction_x = 1.5
+		init_direction_x = 2
 	if position.y > max_y:
-		init_direction_y = -0.75
+		init_direction_y = -0.5
 	if position.y < min_y:
-		init_direction_y = 0.75
+		init_direction_y = 0.5
 		
 	

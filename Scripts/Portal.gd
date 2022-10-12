@@ -11,11 +11,9 @@ func _on_CentreOfPortal_body_entered(body: Node) -> void:
 		$Timer.start()
 
 
-
 func _on_Timer_timeout():
-	$"../".transfer_player()
-#	get_tree().change_scene("res://Scenes/Won.tscn")
-#	$"../Player".position.x = 651
-#	$"../Player".position.y = -1200
-#	yield(get_tree().create_timer(3), "timeout")
-#	$"../Player/FadeOut".play("fadein")
+	$"/root/Global".blank_screen(2)
+	$"/root/Global".current_level = 2
+	var fuel_amount = $"../Player/GUI/Fuel/Value".text
+	yield(get_tree().create_timer(0.5), "timeout")
+	$"../".transfer_player(fuel_amount)

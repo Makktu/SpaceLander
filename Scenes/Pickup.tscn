@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Pickup.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/pill.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 53.2541
@@ -44,6 +43,10 @@ tracks/0/keys = {
 "values": [ Vector2( 0.25, 0.25 ), Vector2( 0.5, 0.5 ), Vector2( 0.25, 0.25 ) ]
 }
 
+[sub_resource type="StreamTexture" id=29]
+flags = 4
+load_path = "res://.import/pill.png-e4275d35b8941533decea7bab72c0bfc.stex"
+
 [node name="Pickup" type="Area2D"]
 position = Vector2( 965, 385 )
 scale = Vector2( 0.25, 0.25 )
@@ -72,6 +75,6 @@ anims/embiggen = SubResource( 28 )
 [node name="Sprite" type="Sprite" parent="AnimationPlayer"]
 position = Vector2( 976, 374 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+texture = SubResource( 29 )
 
 [connection signal="body_entered" from="." to="." method="_on_Pickup_body_entered"]

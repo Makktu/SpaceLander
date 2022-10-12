@@ -8,13 +8,13 @@ func _on_Resume_pressed() -> void:
 	pause_button.show()
 
 func _on_Pause_pressed() -> void:
-	print("HERE!")
 	self.show()
 	pause_button.hide()
 	get_tree().paused = true
 
 func _on_StartScreen_pressed() -> void:
 	get_tree().paused = false
+	$"/root/Global".current_level = 1
 	get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _on_Toggle_Music_pressed() -> void:
