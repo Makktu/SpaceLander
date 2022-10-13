@@ -28,17 +28,13 @@ func transfer_player(fuel_amount = 3000):
 	
 func complete_transfer():
 	if $"/root/Global".current_level == 2:		
-		$CanvasModulate.visible = false
-		$CanvasModulate2.visible = true
 		$Player/Light2D.energy = 1
 		$Player/Light2D.texture_scale = 3
+		$Player/Camera2D.zoom_in_or_out("OUT", 200, 1)
+
 	yield(get_tree().create_timer(3), "timeout")
 	$Player/Sprite.visible = true
-#	$"Player/FadeOut".play_backwards("fadeout")
 	$"Player/GUI".visible = true
 	$"Player".just_starting = true	
 	if !dev_transfer:
-#		$"Player/Camera2D".zoom_in_or_out("IN", 550, 0.002)
 		dev_transfer = false
-#	$"Player/Camera2D".zoom_in_or_out("OUT", 130, 0.02)
-	print($Player/Light2D.energy, " / ", $Player/Light2D.texture_scale)

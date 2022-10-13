@@ -66,6 +66,7 @@ func change_lighting():
 
 func game_over():
 	gameOver = true
+	$Light2D/AnimationPlayer.play("a_thousand-suns")
 	$ThrustersOther.stop()
 	$Thrusters.stop()
 	$TopThrusters.stop()
@@ -350,11 +351,15 @@ func set_player_position():
 	var y
 	x = level_coords[$"/root/Global".current_level - 1][0]
 	y = level_coords[$"/root/Global".current_level - 1][1]
-	$Camera2D.starting_camera_zoom()
 	position.x = x
 	position.y = y
+	$Camera2D.starting_camera_zoom()
 	if $"/root/Global".current_level == 2:
+		print($"/root/Global".current_level, " ELSE!")
 		$"..".complete_transfer()
+		$Camera2D.zoom_in_or_out("OUT", 4000, 0.2)
+
+	
 		
 func _ready():
 	set_player_position()
