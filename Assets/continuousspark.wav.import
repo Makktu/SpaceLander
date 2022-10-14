@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/hum.wav-d0e5435baaa0e2b9b6324f555657137d.sample"
+path="res://.import/continuousspark.wav-651645ea804824ee5731912ff4a2c8e7.sample"
 
 [deps]
 
-source_file="res://Assets/hum.wav"
-dest_files=[ "res://.import/hum.wav-d0e5435baaa0e2b9b6324f555657137d.sample" ]
+source_file="res://Assets/continuousspark.wav"
+dest_files=[ "res://.import/continuousspark.wav-651645ea804824ee5731912ff4a2c8e7.sample" ]
 
 [params]
 

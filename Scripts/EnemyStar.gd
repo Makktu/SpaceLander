@@ -30,6 +30,10 @@ func _physics_process(delta: float) -> void:
 	if position.y > max_y:
 		init_direction_y = -0.75
 	if position.y < min_y:
-		init_direction_y = 0.75
+		init_direction_y = 0.75	
+
+
+func _on_SoundProximity_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		$AudioStreamPlayer2D.play()
 		
-	

@@ -14,8 +14,8 @@ var current_music_track = 0
 var now_playing = music_tracks_list[current_music_track]
 
 func _ready() -> void:
-	pass
-#	play_next_track()
+#	pass
+	play_next_track()
 
 func blank_screen(time_blank):
 	$CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer.play("fade")

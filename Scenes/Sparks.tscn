@@ -12,8 +12,8 @@ position = Vector2( 325, 590 )
 
 [node name="LightningSparks" type="CPUParticles2D" parent="."]
 material = SubResource( 1 )
-amount = 300
-lifetime = 0.4
+amount = 55
+lifetime = 0.2
 randomness = 1.0
 lifetime_randomness = 0.7
 emission_shape = 2
@@ -26,8 +26,9 @@ initial_velocity = 5.0
 initial_velocity_random = 1.0
 linear_accel = 100.0
 damping = 47.71
-scale_amount = 0.25
+scale_amount = 0.5
 scale_amount_random = 0.06
+color = Color( 0.572549, 0.898039, 0.537255, 1 )
 anim_speed = 21.14
 anim_speed_random = 0.42
 anim_offset = 0.61

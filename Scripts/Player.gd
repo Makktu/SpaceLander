@@ -83,7 +83,7 @@ func game_over():
 	$Sprite.visible = false
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
-	yield(get_tree().create_timer(1), "timeout")
+#	yield(get_tree().create_timer(1), "timeout")
 	if $"/root/Global".current_level == 1:
 		$Camera2D.game_over_zoom_out()				
 
@@ -357,7 +357,7 @@ func set_player_position():
 	if $"/root/Global".current_level == 2:
 		print($"/root/Global".current_level, " ELSE!")
 		$"..".complete_transfer()
-		$Camera2D.zoom_in_or_out("OUT", 4000, 0.2)
+#		$Camera2D.zoom_in_or_out("OUT", 1000, 0.01)
 
 	
 		
@@ -415,7 +415,7 @@ func _on_FuelPickup3_body_entered(body: Node) -> void:
 func _on_ZoomLevel1_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms_levelOne[0] == false:
 		passed_zooms_levelOne[0] = true
-		$Camera2D.zoom_in_or_out("IN", 250, 0.01)
+		$Camera2D.zoom_in_or_out("IN", 350, 0.01)
 		if passed_zooms_levelOne[1] == true:
 			passed_zooms_levelOne[1] = false
 
@@ -432,4 +432,10 @@ func _on_EndLevel2_body_entered(body: Node) -> void:
 		yield(get_tree().create_timer(3), "timeout")
 		yield(get_tree().create_timer(2), "timeout")
 		get_tree().change_scene("res://Scenes/Won.tscn")
+		
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group("green_lightning") and !$"/root/Global".test_mode:
+		game_over()
 		

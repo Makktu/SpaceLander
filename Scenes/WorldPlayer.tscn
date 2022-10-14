@@ -47,9 +47,6 @@
 [ext_resource path="res://Assets/exhaust_animation/efecto_fuego_00011.png" type="Texture" id=238]
 [ext_resource path="res://Assets/eyelander.png" type="Texture" id=239]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23, 26.5 )
-
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
@@ -257,6 +254,9 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23, 26.5 )
+
 [node name="Player" type="KinematicBody2D"]
 self_modulate = Color( 1, 1, 1, 0.95 )
 position = Vector2( 968, 4034 )
@@ -264,10 +264,6 @@ script = ExtResource( 128 )
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, -0.5 )
-shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2, -1 )
@@ -383,5 +379,9 @@ pitch_scale = 1.52
 [node name="RocketWhoosh" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 volume_db = -15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, -0.5 )
+shape = SubResource( 1 )
 
 [connection signal="finished" from="Boom" to="." method="_on_Boom_finished"]
