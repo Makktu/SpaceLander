@@ -95,7 +95,7 @@ material = SubResource( 4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "portal"
-frame = 51
+frame = 49
 playing = true
 
 [node name="NearingPortal" type="AudioStreamPlayer2D" parent="."]
@@ -120,6 +120,5 @@ one_shot = true
 position = Vector2( -6, -172 )
 shape = SubResource( 5 )
 
-[connection signal="body_entered" from="." to="." method="_on_Portal_body_entered"]
 [connection signal="body_entered" from="CentreOfPortal" to="." method="_on_CentreOfPortal_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
