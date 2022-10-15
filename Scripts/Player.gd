@@ -55,14 +55,6 @@ var velocity = Vector2.ZERO
 var friction = 0.0
 var max_speed = 50
 
-func change_lighting():
-#	$Light2D.energy = 0
-#	$Light2D.texture_scale = 0
-#	for n in amount:
-#		print(n)
-#		$Light2D.energy -= 1
-#		$Light2D.texture_scale -= 1
-	pass
 
 func game_over():
 	gameOver = true
@@ -424,7 +416,7 @@ func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
 	if body.name == "Player" and passed_zooms_levelOne[1] == false and passed_zooms_levelOne[0] == true:
 		passed_zooms_levelOne[1] = true
 		$Camera2D.zoom_in_or_out("OUT", 200, 0.01)
-#		change_lighting("down",600)
+
 
 
 func _on_EndLevel2_body_entered(body: Node) -> void:

@@ -50,7 +50,7 @@ position = Vector2( 361, 646 )
 current = true
 
 [node name="Back" type="Button" parent="Container"]
-margin_left = 623.0
+margin_left = 565.0
 margin_top = 1182.0
 margin_right = 692.0
 margin_bottom = 1251.0
@@ -118,23 +118,49 @@ margin_bottom = 1742.0
 rect_scale = Vector2( 0.941168, 1.09146 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
-text = "Music"
+text = "Original Soundtrack"
 fit_content_height = true
 scroll_active = false
 
 [node name="CreditsListing3-lower" type="RichTextLabel" parent="Container/CreditsContainer"]
-margin_left = 135.0
-margin_top = 1702.0
-margin_right = 753.0
-margin_bottom = 2002.0
+margin_left = 192.0
+margin_top = 1690.0
+margin_right = 810.0
+margin_bottom = 1990.0
 rect_scale = Vector2( 0.941168, 0.891458 )
 custom_colors/default_color = Color( 1, 0.913725, 0, 1 )
 custom_fonts/normal_font = SubResource( 1 )
-text = "original soundtrack
-by dmed
+text = "Brian Kavanagh
+lazy-gamer.net"
+scroll_active = false
 
-[Full track listing
-to be finalised]"
+[node name="CreditsListing4-upper" type="RichTextLabel" parent="Container/CreditsContainer"]
+margin_left = 91.0
+margin_top = 1837.0
+margin_right = 709.0
+margin_bottom = 1937.0
+rect_scale = Vector2( 0.941168, 1.09146 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "Track Listing:"
+fit_content_height = true
+scroll_active = false
+
+[node name="CreditsListing4-lower" type="RichTextLabel" parent="Container/CreditsContainer"]
+margin_left = 90.0
+margin_top = 1908.0
+margin_right = 540.0
+margin_bottom = 2333.0
+rect_scale = Vector2( 0.941168, 0.891458 )
+custom_colors/default_color = Color( 1, 0.913725, 0, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "\"Lander Zero\"
+\"Lander One\"
+\"Arc Lightning\"
+\"Lander III\"
+\"Lander March\"
+\"The SpaceLander\"
+\"Wonder\""
 scroll_active = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

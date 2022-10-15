@@ -5,9 +5,9 @@ onready var test_mode = false
 onready var current_level = 1
 var user_OS = OS.get_name()
 
-var music_tracks_list = ["res://Assets/Music/LANDER_DUB1.ogg","res://Assets/Music/lander0.ogg","res://Assets/Music/orc.ogg","res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/lander_march.ogg", "res://Assets/Music/lander_menu.ogg", "res://Assets/Music/wonder.ogg"]
+var music_tracks_list = ["res://Assets/Music/lander0.ogg","res://Assets/Music/LANDER_DUB1.ogg","res://Assets/Music/orc.ogg","res://Assets/Music/LANDER_DUB3.ogg","res://Assets/Music/lander_march.ogg", "res://Assets/Music/lander_menu.ogg", "res://Assets/Music/wonder.ogg"]
 
-var music_track_name = ["Lander One", "Lander Zero", "Orc Lightning", "Lander III", "Lander March", "The SpaceLander", "Wonder"]
+var music_track_name = ["Lander Zero", "Lander One", "Arc Lightning", "Lander III", "Lander March", "The SpaceLander", "Wonder"]
 
 var current_music_track = 0
 
