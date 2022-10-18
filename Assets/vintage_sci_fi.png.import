@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Makktu_vintage.png-327aa6d6f609d77850bd2affb34b6727.stex"
+path="res://.import/vintage_sci_fi.png-0d4ed8e6d8df54e3e9c67203985191d1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Makktu_vintage.png"
-dest_files=[ "res://.import/Makktu_vintage.png-327aa6d6f609d77850bd2affb34b6727.stex" ]
+source_file="res://Assets/vintage_sci_fi.png"
+dest_files=[ "res://.import/vintage_sci_fi.png-0d4ed8e6d8df54e3e9c67203985191d1.stex" ]
 
 [params]
 

@@ -1,12 +1,6 @@
 extends KinematicBody2D
 
-onready var Collision_Sound = $AudioStreamPlayer2D
 onready var Swipe = $Camera2D/SwipeScreenButton
-
-
-var passed_zooms = [false, false, false, false, false, false]
-var passed_zooms_levelOne = [false, false, false, false, false]
-var transitioning_to_new = false
 
 var just_starting = true
 var shake_amount = 1
@@ -32,7 +26,7 @@ var input_dir = 0
 var y_input_dir = 0
 
 var FUEL = 3000
-var FUEL_POD = 6000
+var FUEL_POD = 5000
 var fuel_base_usage = 5
 var fuel_alarm_threshold = 500
 var fuel_alert_played = false
@@ -56,9 +50,11 @@ var friction = 0.0
 var max_speed = 50
 
 
+
 func game_over():
 	gameOver = true
 	$Light2D/AnimationPlayer.play("a_thousand-suns")
+	$Camera2D.game_over_zoom_out()
 	$ThrustersOther.stop()
 	$Thrusters.stop()
 	$TopThrusters.stop()
@@ -75,9 +71,10 @@ func game_over():
 	$Sprite.visible = false
 	$GUI/Fuel.text = "LANDER\nDESTROYED!"
 	$GUI/Fuel/Value.text = ""
-#	yield(get_tree().create_timer(1), "timeout")
-	if $"/root/Global".current_level == 1:
-		$Camera2D.game_over_zoom_out()				
+#	if $"/root/Global".current_level == 1:
+#		$Camera2D.game_over_zoom_out()				
+
+
 
 func _on_Boom_finished() -> void:
 	$"/root/Global".blank_screen(3)
@@ -90,12 +87,16 @@ func update_GUI():
 	FUEL += FUEL_POD
 	$GUI/Fuel.adjust(FUEL)
 	
+
+
+# warning-ignore:shadowed_variable
 func camera_shake(shake_amount):
 	$Camera2D.set_offset(Vector2( \
 		rand_range(-3.0, 3.0) * shake_amount, \
 		rand_range(-3.0, 3.0) * shake_amount \
 	))
 	
+
 func fuel_alert_beep():
 	for n in 7:
 		yield(get_tree().create_timer(0.25), "timeout")
@@ -109,13 +110,13 @@ func get_input():
 	input_dir = 0
 	y_input_dir = 0
 	
-# developer cam
+	# developer cam
 	if Input.is_action_pressed("ui_page_down"):
 		$Camera2D.zoom_in_or_out("IN", 4, 0.1)
 	if Input.is_action_pressed("ui_page_up"):
 		$Camera2D.zoom_in_or_out("OUT", 4, 0.1)
 	
-# UI LEFT
+	# UI LEFT
 	if Input.is_action_pressed("ui_left") || swipe_right:
 		down_thrust += 1
 		if down_thrust > 60 and down_thrust < 110 and camera_shake_toggle == true and FUEL < 500:
@@ -241,17 +242,10 @@ func get_input():
 		$ThrustersOther.stop()
 		$TopThrusters.stop()
 		$TopThrusters.visible = false
-		
-#########################################################		
-#########################################################
-#########################################################
 	
 	# initial Lander movement at start of level
 	if just_starting:
-		if get_tree().get_current_scene().get_name() == "World":
-			velocity.y = move_toward(150, 0, friction)
-		if get_tree().get_current_scene().get_name() == "LevelOne":
-			velocity.x = move_toward(-150, 0, friction)
+		velocity.y = move_toward(150, 0, friction)
 		
 	if input_dir != 0 or y_input_dir != 0:
 		# accelerate when there's input
@@ -269,13 +263,6 @@ func get_input():
 
 
 func _physics_process(delta):
-	
-#	if transitioning_to_new:
-#		$"..".set_modulate(lerp(get_modulate(), Color(0,0,0,1), 0.2))
-	
-#	if position.y > 2027 and position.x > 5000:
-#		get_tree().change_scene("res://Scenes/Won.tscn")
-	
 	if gameOver:
 		return
 		
@@ -293,12 +280,9 @@ func _physics_process(delta):
 	input.y += float(Input.is_action_pressed('ui_up'))
 	input.y -= float(Input.is_action_pressed('ui_down'))	
 	
-	move_and_slide(input * speed * delta)
-	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "TileMap" && !$"/root/Global".test_mode:
-			Collision_Sound.play()
 			game_over()
 			
 	if FUEL < fuel_alarm_threshold:
@@ -308,7 +292,7 @@ func _physics_process(delta):
 			fuel_alert_beep()		
 
 
-func _on_FuelPickup_body_entered(body: Node) -> void:
+func _on_FuelPickup_body_entered(_body: Node) -> void:
 	FUEL += FUEL_POD
 	$GUI/Fuel/Value.pickup_fuel()
 	fuel_alert_played = false
@@ -338,6 +322,8 @@ func _input(event):
 		swipe_right_released = true
 		swipe_right = false	
 		
+
+
 func set_player_position():
 	var x
 	var y
@@ -346,88 +332,14 @@ func set_player_position():
 	position.x = x
 	position.y = y
 	$Camera2D.starting_camera_zoom()
-	if $"/root/Global".current_level == 2:
-		print($"/root/Global".current_level, " ELSE!")
-		$"..".complete_transfer()
-#		$Camera2D.zoom_in_or_out("OUT", 1000, 0.01)
+	$Sprite.visible = true
+	$GUI.visible = true
+	just_starting = true
+	if !$"..".dev_transfer:
+		$"..".dev_transfer = false
+	$"..".complete_transfer()
 
 	
 		
 func _ready():
 	set_player_position()
-	
-
-func _on_FuelPickup2_body_entered(body: Node) -> void:
-	FUEL += FUEL_POD / 2
-	$GUI/Fuel/Value.pickup_fuel()
-	fuel_alert_played = false
-
-
-func _on_OutOfBounds_body_entered(body):
-	if !$"/root/Global".test_mode:
-		game_over()
-
-
-func _on_3rdCameraZoom_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms[0] == false:
-		passed_zooms[0] = true
-		$Camera2D.zoom_in_or_out("IN", 200, 0.03)
-
-
-func _on_ZoomOutMiddle2_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms[1] == false:
-		passed_zooms[1] = true
-		$Camera2D.zoom_in_or_out("OUT", 200, 0.09)
-
-
-func _on_ZoomOutMiddle_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms[2] == false:
-		passed_zooms[2] = true
-		$Camera2D.zoom_in_or_out("OUT", 300, 0.02)
-
-
-func _on_ZoomBackInMiddle2_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms[3] == false:
-		passed_zooms[3] = true
-		$Camera2D.zoom_in_or_out("IN", 250, 0.01)
-
-
-func _on_ZoomOut_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms[4] == false:
-		passed_zooms[4] = true
-		$Camera2D.zoom_in_or_out("OUT", 550, 0.05)
-
-
-func _on_FuelPickup3_body_entered(body: Node) -> void:
-	FUEL += FUEL_POD
-	$GUI/Fuel/Value.pickup_fuel()
-	fuel_alert_played = false
-
-
-func _on_ZoomLevel1_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms_levelOne[0] == false:
-		passed_zooms_levelOne[0] = true
-		$Camera2D.zoom_in_or_out("IN", 350, 0.01)
-		if passed_zooms_levelOne[1] == true:
-			passed_zooms_levelOne[1] = false
-
-
-func _on_ZoomLevel2_2_body_entered(body: Node) -> void:
-	if body.name == "Player" and passed_zooms_levelOne[1] == false and passed_zooms_levelOne[0] == true:
-		passed_zooms_levelOne[1] = true
-		$Camera2D.zoom_in_or_out("OUT", 200, 0.01)
-
-
-
-func _on_EndLevel2_body_entered(body: Node) -> void:
-	if body.name == "Player":
-		yield(get_tree().create_timer(3), "timeout")
-		yield(get_tree().create_timer(2), "timeout")
-		get_tree().change_scene("res://Scenes/Won.tscn")
-		
-
-
-func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group("green_lightning") and !$"/root/Global".test_mode:
-		game_over()
-		

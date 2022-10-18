@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/TexturedSpaceStation/SS1-normal.png" type="Texture" id=1]
-[ext_resource path="res://Assets/TexturedSpaceStation/SS1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/TexturedSpaceStation/station-normal.png" type="Texture" id=1]
+[ext_resource path="res://Assets/TexturedSpaceStation/station1.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Station1.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Starfield7.png" type="Texture" id=4]
 [ext_resource path="res://Assets/light.png" type="Texture" id=5]

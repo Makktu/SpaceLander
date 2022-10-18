@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/bending_lightning/09.png" type="Texture" id=1]
 [ext_resource path="res://Assets/bending_lightning/06.png" type="Texture" id=2]
@@ -30,7 +30,6 @@
 [ext_resource path="res://Assets/rings/d_0003.png" type="Texture" id=28]
 [ext_resource path="res://Assets/rings/d_0008.png" type="Texture" id=29]
 [ext_resource path="res://Assets/bending_lightning/04.png" type="Texture" id=30]
-[ext_resource path="res://Scripts/EnemyStar.gd" type="Script" id=31]
 [ext_resource path="res://Assets/hum.wav" type="AudioStream" id=32]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -59,14 +58,13 @@ extents = Vector2( 508, 243.5 )
 
 [node name="EnemyStar" type="Area2D"]
 position = Vector2( 195, 185 )
-script = ExtResource( 31 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "star"
-frame = 5
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Assets/portal/portal12.png" type="Texture" id=1]
 [ext_resource path="res://Assets/portal/portal13.png" type="Texture" id=2]
 [ext_resource path="res://Assets/portal/portal53.png" type="Texture" id=3]
 [ext_resource path="res://Assets/portal/portal59.png" type="Texture" id=4]
 [ext_resource path="res://Assets/portal/portal50.png" type="Texture" id=5]
-[ext_resource path="res://Assets/dust1.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Assets/portal/portal57.png" type="Texture" id=7]
 [ext_resource path="res://Assets/portal/portal51.png" type="Texture" id=8]
 [ext_resource path="res://Assets/portal/portal64.png" type="Texture" id=9]
@@ -82,9 +81,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 261, 49.5 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 263, 120 )
-
 [node name="Portal" type="Area2D"]
 script = ExtResource( 66 )
 
@@ -95,13 +91,8 @@ material = SubResource( 4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "portal"
-frame = 49
+frame = 51
 playing = true
-
-[node name="NearingPortal" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
-max_distance = 1100.0
-attenuation = 4.14106
 
 [node name="EnteringPortal" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 67 )
@@ -115,10 +106,6 @@ shape = SubResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
-
-[node name="NearingThePortal" type="CollisionShape2D" parent="."]
-position = Vector2( -6, -172 )
-shape = SubResource( 5 )
 
 [connection signal="body_entered" from="CentreOfPortal" to="." method="_on_CentreOfPortal_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

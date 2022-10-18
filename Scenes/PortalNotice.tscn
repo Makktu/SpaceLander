@@ -1,6 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/PortalNotice.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	$AnimationPlayer.play()
+
+"
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -35,7 +42,7 @@ tracks/0/keys = {
 }
 
 [node name="PortalNotice" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }

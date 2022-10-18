@@ -5,7 +5,9 @@ class_name SwipeScreenButton
 var on_area = false
 
 func _ready():
+# warning-ignore:return_value_discarded
 	self.connect("pressed", self, "_on_self_pressed")
+# warning-ignore:return_value_discarded
 	self.connect("released", self, "_on_self_released")
 	
 func get_swipe_direction(swipe, swipe_margin):

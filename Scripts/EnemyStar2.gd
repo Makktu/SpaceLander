@@ -20,7 +20,7 @@ func _on_EnemyStar_body_entered(body: Node) -> void:
 		if !$"/root/Global".test_mode:
 			$"../Player".game_over()
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	position.x += init_direction_x
 	position.y += init_direction_y
 	if position.x > max_x:

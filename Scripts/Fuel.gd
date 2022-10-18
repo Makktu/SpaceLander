@@ -18,11 +18,7 @@ func adjust(adjustment):
 	
 func update():
 	if value <= 0:
-
-#		$Value.add_color_override("red", Color(1,0,0,1))
 		$Value.text = "EMPTY"
 		get_node("Value").add_color_override("red", Color(1,0,0,1))
 		return
 	$Value.text = ("%0*d" % [paddingLength, value])
-#	if value <= 1000:
-#		$Alert.play()

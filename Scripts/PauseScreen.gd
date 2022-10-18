@@ -15,6 +15,7 @@ func _on_Pause_pressed() -> void:
 func _on_StartScreen_pressed() -> void:
 	get_tree().paused = false
 	$"/root/Global".current_level = 1
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _on_Toggle_Music_pressed() -> void:

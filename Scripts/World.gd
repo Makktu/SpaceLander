@@ -22,19 +22,15 @@ func _unhandled_input(event):
 			
 
 # END OF LEVEL 0 / TRANSFER TO LEVEL 1 & PLAYER SETUP THERE
-func transfer_player(fuel_amount = 3000):
-	fuel_carried_over = fuel_amount
+func transfer_player():
+# warning-ignore:return_value_discarded
+
 	get_tree().change_scene("res://Scenes/World.tscn")	
 	
 func complete_transfer():
-	if $"/root/Global".current_level == 2:		
-		$Player/Light2D.energy = 1
-		$Player/Light2D.texture_scale = 3
-		$Player/Camera2D.zoom_in_or_out("OUT", 200, 1)
-
-	yield(get_tree().create_timer(3), "timeout")
 	$Player/Sprite.visible = true
 	$"Player/GUI".visible = true
 	$"Player".just_starting = true	
 	if !dev_transfer:
 		dev_transfer = false
+

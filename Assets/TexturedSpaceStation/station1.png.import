@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Turret09.png-f26c707d0cef9f3ff2f2a8f7bbbc7a49.stex"
+path="res://.import/station1.png-20d283647a74569d33fe3694cbb44d78.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Turret09.png"
-dest_files=[ "res://.import/Turret09.png-f26c707d0cef9f3ff2f2a8f7bbbc7a49.stex" ]
+source_file="res://Assets/TexturedSpaceStation/station1.png"
+dest_files=[ "res://.import/station1.png-20d283647a74569d33fe3694cbb44d78.stex" ]
 
 [params]
 
