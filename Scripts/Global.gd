@@ -5,7 +5,7 @@ onready var test_mode = false
 onready var current_level = 1
 var user_OS = OS.get_name()
 
-var music_tracks_list = ["res://Assets/Music/lander0.ogg","res://Assets/Music/landerdub1.ogg","res://Assets/Music/orc.ogg","res://Assets/Music/landerdub3.ogg","res://Assets/Music/lander_march.ogg", "res://Assets/Music/lander_menu.ogg", "res://Assets/Music/wonder.ogg"]
+var music_tracks_list = ["res://Assets/Music/lander0.ogg","res://Assets/Music/landerdub1.ogg","res://Assets/Music/orc.ogg","res://Assets/Music/landerdub3.ogg","res://Assets/Music/lander_march.ogg", "res://Assets/Music/lander_menu.ogg"]
 
 var music_track_name = ["Lander Zero", "Lander One", "Arc Lightning", "Lander III", "Lander March", "The SpaceLander", "Wonder"]
 
@@ -14,8 +14,8 @@ var current_music_track = 0
 var now_playing = music_tracks_list[current_music_track]
 
 func _ready() -> void:
-	pass
-#	play_next_track()
+#	pass
+	play_next_track()
 
 func blank_screen(time_blank):
 	$CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer.play("fade")
@@ -36,8 +36,11 @@ func _on_BGMusic_finished() -> void:
 	play_next_track()
 	
 		
-func play_next_track():
-	now_playing = music_tracks_list[current_music_track]
+func play_next_track(finale = false):
+	if !finale:
+		now_playing = music_tracks_list[current_music_track]
+	if finale:
+		now_playing = "res://Assets/Music/wonder.ogg"
 	$BGMusic.stream = load(now_playing)
 	$BGMusic.play()
 	$CanvasLayer.visible = true

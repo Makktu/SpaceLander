@@ -20,7 +20,7 @@ var swipe_left_released = false
 var swipe_right_released = false
 #####################################
 
-var level_coords = [[665, -1182], [8045, -3239]]
+var level_coords = [[665, -1182], [8045, -3239], [9858, 306]]
 
 var input_dir = 0
 var y_input_dir = 0
@@ -244,8 +244,11 @@ func get_input():
 		$TopThrusters.visible = false
 	
 	# initial Lander movement at start of level
-	if just_starting:
+	if just_starting and $"/root/Global".current_level != 3:
 		velocity.y = move_toward(150, 0, friction)
+	if just_starting and $"/root/Global".current_level == 3:
+		velocity.y = move_toward(25, 0, friction)
+		
 		
 	if input_dir != 0 or y_input_dir != 0:
 		# accelerate when there's input
@@ -343,3 +346,13 @@ func set_player_position():
 		
 func _ready():
 	set_player_position()
+
+
+# FINAL LANDING AREA
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		print("WELCOME HOME, SPACELANDER...")
+
+
+func _on_FinalLevelDetect_body_entered(_body):
+	$"/root/Global".current_level = 3

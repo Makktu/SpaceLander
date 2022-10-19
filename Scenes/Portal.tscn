@@ -91,7 +91,7 @@ material = SubResource( 4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "portal"
-frame = 51
+frame = 5
 playing = true
 
 [node name="EnteringPortal" type="AudioStreamPlayer2D" parent="."]
