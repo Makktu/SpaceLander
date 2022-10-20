@@ -19,6 +19,9 @@ func _ready() -> void:
 	
 func won_the_game():
 	print("Welcome Home, SpaceLander...")
+	yield(get_tree().create_timer(10), "timeout")
+	$CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer.play("fade")
+
 
 func blank_screen(time_blank):
 	$CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer.play("fade")

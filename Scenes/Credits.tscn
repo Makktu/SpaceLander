@@ -58,8 +58,7 @@ margin_bottom = 1251.0
 custom_colors/font_color = Color( 0.890196, 0.776471, 0.0666667, 1 )
 custom_fonts/font = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
-text = "<BACK"
-flat = true
+text = "<<<"
 
 [node name="CreditsContainer" type="Node2D" parent="Container"]
 position = Vector2( 2, -10 )

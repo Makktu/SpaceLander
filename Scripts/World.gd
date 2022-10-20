@@ -37,4 +37,12 @@ func complete_transfer():
 
 
 func _on_EndGameTrigger_body_entered(body: Node) -> void:
-	$"/root/Global".won_the_game()
+	if body.name == "Player":
+	#	$"../Player/GUI".visible = false
+		print("Welcome Home, SpaceLander...")
+		yield(get_tree().create_timer(10), "timeout")
+		$"/root/Global/CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer".play("fade")
+		yield(get_tree().create_timer(3), "timeout")
+		$"/root/Global".current_level = 1
+		get_tree().change_scene("res://Scenes/Credits.tscn")	
+		$"/root/Global/CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer".play_backwards("fade")
