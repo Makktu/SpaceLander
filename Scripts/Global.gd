@@ -16,6 +16,9 @@ var now_playing = music_tracks_list[current_music_track]
 func _ready() -> void:
 #	pass
 	play_next_track()
+	
+func won_the_game():
+	print("Welcome Home, SpaceLander...")
 
 func blank_screen(time_blank):
 	$CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer.play("fade")
@@ -39,12 +42,18 @@ func _on_BGMusic_finished() -> void:
 func play_next_track(finale = false):
 	if !finale:
 		now_playing = music_tracks_list[current_music_track]
+		$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = " " + music_track_name[current_music_track]
 	if finale:
+		# fade down current track
+		# silence for a bit
+		# then play 'Wonder'
+		$BGMusic.stop()
+		yield(get_tree().create_timer(5), "timeout")
 		now_playing = "res://Assets/Music/wonder.ogg"
+		$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = "Wonder"
 	$BGMusic.stream = load(now_playing)
 	$BGMusic.play()
 	$CanvasLayer.visible = true
-	$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = " " + music_track_name[current_music_track]
 	$CanvasLayer/ShowCurrentlyPlayingTrack/Label.visible = true
 	$CanvasLayer/ShowCurrentlyPlayingTrack/Label/MusicNote.visible = true
 	$CanvasLayer/ShowCurrentlyPlayingTrack/AnimationPlayer.play_backwards("fadetext")

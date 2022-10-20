@@ -34,3 +34,7 @@ func complete_transfer():
 	if !dev_transfer:
 		dev_transfer = false
 
+
+
+func _on_EndGameTrigger_body_entered(body: Node) -> void:
+	$"/root/Global".won_the_game()

@@ -73,7 +73,7 @@ position = Vector2( 95, 217 )
 material = SubResource( 12 )
 frames = SubResource( 11 )
 animation = "pad_l_r"
-frame = 4
+frame = 2
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -81,6 +81,6 @@ material = SubResource( 13 )
 position = Vector2( 147, 0 )
 frames = SubResource( 11 )
 animation = "pad_l_r"
-frame = 4
+frame = 2
 playing = true
 flip_h = true
