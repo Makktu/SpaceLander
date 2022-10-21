@@ -50,10 +50,14 @@ func play_next_track(finale = false):
 		# fade down current track
 		# silence for a bit
 		# then play 'Wonder'
+		for n in 30:
+			yield(get_tree().create_timer(0.4), "timeout")
+			$BGMusic.volume_db -= 2
 		$BGMusic.stop()
-		yield(get_tree().create_timer(5), "timeout")
+		$BGMusic.volume_db = -15
+#		yield(get_tree().create_timer(5), "timeout")
 		now_playing = "res://Assets/Music/wonder.ogg"
-		$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = "Wonder"
+		$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = " Wonder"
 	$BGMusic.stream = load(now_playing)
 	$BGMusic.play()
 	$CanvasLayer.visible = true

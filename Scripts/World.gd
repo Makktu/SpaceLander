@@ -40,7 +40,7 @@ func _on_EndGameTrigger_body_entered(body: Node) -> void:
 	if body.name == "Player":
 	#	$"../Player/GUI".visible = false
 		print("Welcome Home, SpaceLander...")
-		yield(get_tree().create_timer(10), "timeout")
+		yield(get_tree().create_timer(15), "timeout")
 		$"/root/Global/CanvasLayer/GlobalSceneTransitionRect/AnimationPlayer".play("fade")
 		yield(get_tree().create_timer(3), "timeout")
 		$"/root/Global".current_level = 1

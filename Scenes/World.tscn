@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://Scenes/WorldPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnemyStar4.gd" type="Script" id=2]
@@ -522,6 +522,37 @@ extents = Vector2( 87.5, 63.5 )
 size = 80
 font_data = ExtResource( 60 )
 
+[sub_resource type="Animation" id=83]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "fade_up"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=81]
 extents = Vector2( 88.5, 10 )
 
@@ -537,7 +568,7 @@ show_behind_parent = true
 color = Color( 0.160784, 0.184314, 0.172549, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 12877, 7218 )
+position = Vector2( 710, -1326 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -826,7 +857,7 @@ script = ExtResource( 42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "rings"
-frame = 6
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/TeleportRings"]
@@ -843,6 +874,7 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "star"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar"]
@@ -864,7 +896,6 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 66 )
 animation = "star"
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar2"]
@@ -886,7 +917,7 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 66 )
 animation = "star"
-frame = 2
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar3"]
@@ -997,14 +1028,20 @@ position = Vector2( -7.5, -105.5 )
 shape = SubResource( 80 )
 
 [node name="FinalMessage" type="Label" parent="FinalLanding/TheSpaceLanding"]
-visible = false
+self_modulate = Color( 1, 1, 1, 0 )
 margin_left = -334.0
 margin_top = 49.0
 margin_right = 345.0
 margin_bottom = 128.0
 custom_colors/font_color = Color( 0.588235, 1, 0, 1 )
 custom_fonts/font = SubResource( 82 )
-text = "Welcome Home, SpaceLander"
+text = "Welcome Home,
+SpaceLander"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FinalLanding/TheSpaceLanding/FinalMessage"]
+anims/RESET = SubResource( 83 )
+anims/fade_up = SubResource( 84 )
 
 [node name="EndGameTrigger" type="Area2D" parent="FinalLanding"]
 
