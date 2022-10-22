@@ -356,3 +356,15 @@ func _on_Area2D_body_entered(body):
 
 func _on_FinalLevelDetect_body_entered(_body):
 	$"/root/Global".current_level = 3
+
+
+func _on_OutOfBounds_body_entered(body):
+	game_over()
+
+
+func _on_OutOfBounds2_body_entered(body):
+	game_over()
+
+
+func _on_OutOfBounds3_body_entered(body):
+	game_over()

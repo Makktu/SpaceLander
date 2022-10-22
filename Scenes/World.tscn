@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://Scenes/WorldPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnemyStar4.gd" type="Script" id=2]
@@ -58,7 +58,10 @@
 [ext_resource path="res://Scenes/Instructions.tscn" type="PackedScene" id=56]
 [ext_resource path="res://Scripts/TheSpaceLanding.gd" type="Script" id=57]
 [ext_resource path="res://Scenes/FinalLevelDetect.gd" type="Script" id=58]
+[ext_resource path="res://Scenes/OutOfBounds3.gd" type="Script" id=59]
 [ext_resource path="res://Assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=60]
+[ext_resource path="res://Scenes/OutOfBounds.gd" type="Script" id=61]
+[ext_resource path="res://Scenes/OutOfBounds2.gd" type="Script" id=62]
 
 [sub_resource type="ConvexPolygonShape2D" id=53]
 points = PoolVector2Array( 256, 64, 0, 64, 0, 0, 256, 0 )
@@ -568,7 +571,7 @@ show_behind_parent = true
 color = Color( 0.160784, 0.184314, 0.172549, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 710, -1326 )
+position = Vector2( 12935, 270 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -684,17 +687,27 @@ position = Vector2( 526, 1225 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="OutOfBounds" type="Area2D" parent="."]
+position = Vector2( -1512, -1877 )
+script = ExtResource( 61 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( -1974, -1935 )
 scale = Vector2( 20.4, 8.68 )
 shape = SubResource( 54 )
 
 [node name="OutOfBounds2" type="Area2D" parent="."]
-position = Vector2( 7029, 228 )
+position = Vector2( 2401, -1705 )
+script = ExtResource( 62 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds2"]
-position = Vector2( -1974, -1935 )
+scale = Vector2( 20.4, 8.68 )
+shape = SubResource( 54 )
+
+[node name="OutOfBounds3" type="Area2D" parent="."]
+position = Vector2( 471, -3695 )
+rotation = 1.5708
+script = ExtResource( 59 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds3"]
 scale = Vector2( 20.4, 8.68 )
 shape = SubResource( 54 )
 
@@ -857,7 +870,6 @@ script = ExtResource( 42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "rings"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/TeleportRings"]
@@ -874,7 +886,7 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "star"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar"]
@@ -896,6 +908,7 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 66 )
 animation = "star"
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar2"]
@@ -917,7 +930,7 @@ modulate = Color( 0.0745098, 0.811765, 0.835294, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 66 )
 animation = "star"
-frame = 4
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStar3"]
@@ -1067,6 +1080,9 @@ shape = SubResource( 73 )
 
 [connection signal="body_entered" from="FuelPickup" to="Player" method="_on_FuelPickup_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Pause" to="CanvasLayer/PauseScreen" method="_on_Pause_pressed"]
+[connection signal="body_entered" from="OutOfBounds" to="Player" method="_on_OutOfBounds_body_entered"]
+[connection signal="body_entered" from="OutOfBounds2" to="Player" method="_on_OutOfBounds2_body_entered"]
+[connection signal="body_entered" from="OutOfBounds3" to="Player" method="_on_OutOfBounds3_body_entered"]
 [connection signal="body_entered" from="Level1_NODES/TeleportRings" to="Level1_NODES/TeleportRings" method="_on_TeleportRings_body_entered"]
 [connection signal="body_entered" from="EnemyStar" to="EnemyStar" method="_on_EnemyStar_body_entered"]
 [connection signal="body_entered" from="EnemyStar2" to="EnemyStar2" method="_on_EnemyStar_body_entered"]
