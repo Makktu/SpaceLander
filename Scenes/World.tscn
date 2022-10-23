@@ -870,6 +870,7 @@ script = ExtResource( 42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
 animation = "rings"
+frame = 9
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_NODES/TeleportRings"]
