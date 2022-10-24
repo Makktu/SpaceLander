@@ -160,6 +160,7 @@ custom_styles/normal = SubResource( 3 )
 text = "CREDITS"
 
 [node name="TestModeButton" type="Button" parent="Container"]
+visible = false
 margin_left = 331.0
 margin_top = 849.0
 margin_right = 831.0
