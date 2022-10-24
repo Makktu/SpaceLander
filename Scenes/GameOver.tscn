@@ -187,7 +187,7 @@ margin_right = 1157.0
 margin_bottom = 934.0
 custom_colors/font_color = Color( 0.937255, 0.843137, 0.0235294, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "v0.7"
+text = "v1.0"
 
 [node name="Camera2D" type="Camera2D" parent="Container"]
 position = Vector2( 507, 298 )
