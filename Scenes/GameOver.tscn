@@ -93,7 +93,7 @@ outline_color = Color( 0.937255, 0.913725, 0.913725, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 42
+size = 50
 font_data = ExtResource( 1 )
 
 [sub_resource type="SpriteFrames" id=6]
@@ -182,10 +182,10 @@ custom_fonts/font = SubResource( 4 )
 text = "SpaceLander"
 
 [node name="VerNumber" type="Label" parent="Container"]
-margin_left = 805.0
+margin_left = 798.0
 margin_top = 892.0
-margin_right = 1157.0
-margin_bottom = 934.0
+margin_right = 1150.0
+margin_bottom = 942.0
 custom_colors/font_color = Color( 0.937255, 0.843137, 0.0235294, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "v1.0"
