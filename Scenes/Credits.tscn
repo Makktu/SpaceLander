@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Starfield7.png" type="Texture" id=1]
 [ext_resource path="res://Assets/vintage_sci_fi.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scripts/CreditScroll.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/CreditsListing.gd" type="Script" id=5]
 [ext_resource path="res://Assets/lg_btn.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/PrivacyPolicy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/PrivacyPolicy.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 size = 180
@@ -24,6 +26,13 @@ bg_color = Color( 0.733333, 0.0666667, 0.0470588, 1 )
 [sub_resource type="DynamicFont" id=1]
 size = 52
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0.866667, 0.00784314, 1 )
 
 [node name="Credits" type="Node2D"]
 
@@ -89,9 +98,9 @@ scroll_active = false
 
 [node name="CreditsListing2-upper" type="RichTextLabel" parent="Container/CreditsContainer"]
 margin_left = 75.0
-margin_top = 1436.0
+margin_top = 1404.0
 margin_right = 297.0
-margin_bottom = 1488.0
+margin_bottom = 1456.0
 custom_colors/default_color = Color( 1, 0.866667, 0.00784314, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "Sprite Assets"
@@ -100,9 +109,9 @@ scroll_active = false
 
 [node name="CreditsListing2-lower" type="RichTextLabel" parent="Container/CreditsContainer"]
 margin_left = 75.0
-margin_top = 1487.0
+margin_top = 1455.0
 margin_right = 343.0
-margin_bottom = 1541.0
+margin_bottom = 1509.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "OpenGameArt.org"
@@ -110,9 +119,9 @@ scroll_active = false
 
 [node name="CreditsListing3-upper" type="RichTextLabel" parent="Container/CreditsContainer"]
 margin_left = 75.0
-margin_top = 1620.0
+margin_top = 1543.0
 margin_right = 385.0
-margin_bottom = 1672.0
+margin_bottom = 1595.0
 custom_colors/default_color = Color( 1, 0.866667, 0.00784314, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "Original Soundtrack"
@@ -121,24 +130,24 @@ scroll_active = false
 
 [node name="CreditsListing3-lower" type="RichTextLabel" parent="Container/CreditsContainer"]
 margin_left = 75.0
-margin_top = 1669.0
+margin_top = 1592.0
 margin_right = 373.0
-margin_bottom = 1786.0
+margin_bottom = 1709.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "Brian Kavanagh"
 scroll_active = false
 
-[node name="lazy_gamer_logo" type="Sprite" parent="Container/CreditsContainer"]
-position = Vector2( 207, 1746 )
+[node name="lazy_gamer_logo" type="Sprite" parent="Container/CreditsContainer/CreditsListing3-lower"]
+position = Vector2( 135, 90 )
 scale = Vector2( 1.59999, 1.51548 )
 texture = ExtResource( 6 )
 
 [node name="CreditsListing4-upper" type="RichTextLabel" parent="Container/CreditsContainer"]
-margin_left = 74.0
-margin_top = 1817.0
-margin_right = 331.0
-margin_bottom = 1869.0
+margin_left = 75.0
+margin_top = 1747.0
+margin_right = 332.0
+margin_bottom = 1799.0
 rect_scale = Vector2( 0.941168, 1.09146 )
 custom_colors/default_color = Color( 1, 0.866667, 0.00784314, 1 )
 custom_fonts/normal_font = SubResource( 1 )
@@ -147,10 +156,10 @@ fit_content_height = true
 scroll_active = false
 
 [node name="CreditsListing4-lower" type="RichTextLabel" parent="Container/CreditsContainer"]
-margin_left = 74.0
-margin_top = 1877.0
-margin_right = 524.0
-margin_bottom = 2302.0
+margin_left = 75.0
+margin_top = 1807.0
+margin_right = 525.0
+margin_bottom = 2232.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "Lander Zero
@@ -161,6 +170,20 @@ Lander March
 The SpaceLander
 Wonder"
 scroll_active = false
+
+[node name="PrivacyPolicy" type="Button" parent="Container/CreditsContainer"]
+margin_left = 152.0
+margin_top = 2194.0
+margin_right = 338.0
+margin_bottom = 2244.0
+custom_colors/font_color = Color( 0.733333, 0.0666667, 0.0470588, 1 )
+custom_fonts/font = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Privacy Policy"
+script = ExtResource( 8 )
+
+[node name="PrivacyPolicy" parent="Container" instance=ExtResource( 7 )]
+visible = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -179,3 +202,5 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 1024 )
 
 [connection signal="pressed" from="Container/Back" to="Container" method="_on_Back_pressed"]
+[connection signal="pressed" from="Container/CreditsContainer/PrivacyPolicy" to="Container" method="_on_PrivacyPolicy_pressed"]
+[connection signal="pressed" from="Container/CreditsContainer/PrivacyPolicy" to="Container/CreditsContainer" method="_on_PrivacyPolicy_pressed"]
