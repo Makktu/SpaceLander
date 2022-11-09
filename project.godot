@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="SpaceLander"
-run/main_scene="res://Scenes/GameOver.tscn"
+run/main_scene="res://Scenes/SplashIntro.tscn"
 run/delta_sync_after_draw=true
 config/icon="res://Assets/eyelander.png"
 

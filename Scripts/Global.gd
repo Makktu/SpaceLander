@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var BGplaying = true
+onready var just_starting = true
 onready var test_mode = false
 onready var current_level = 1
 var user_OS = OS.get_name()
@@ -14,7 +15,7 @@ var current_music_track = 0
 var now_playing = music_tracks_list[current_music_track]
 
 func _ready() -> void:
-#	pass
+	yield(get_tree().create_timer(2.5), "timeout")
 	play_next_track()
 	
 func won_the_game():
@@ -43,6 +44,11 @@ func _on_BGMusic_finished() -> void:
 	
 		
 func play_next_track(finale = false):
+	if just_starting:
+		yield(get_tree().create_timer(5), "timeout")
+		just_starting = false
+		play_next_track()
+		
 	if !finale:
 		now_playing = music_tracks_list[current_music_track]
 		$CanvasLayer/ShowCurrentlyPlayingTrack/Label.text = " " + music_track_name[current_music_track]
