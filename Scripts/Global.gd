@@ -15,7 +15,7 @@ var current_music_track = 0
 var now_playing = music_tracks_list[current_music_track]
 
 func _ready() -> void:
-	yield(get_tree().create_timer(2.5), "timeout")
+	yield(get_tree().create_timer(2), "timeout")
 	play_next_track()
 	
 func won_the_game():
