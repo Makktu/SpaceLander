@@ -345,7 +345,7 @@ animation = "rightThrust"
 
 [node name="TopThrusters" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -2, -59 )
+position = Vector2( -2, -58 )
 rotation = 1.5708
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 48 )
